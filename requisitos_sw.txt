@@ -1,0 +1,14 @@
+Visual Studio Comunity: https://visualstudio.microsoft.com/es/downloads
+
+En los detalles de la instalación tener en cuenta la versión de Windows 10 u 11
+
+
+vcpkg es un gestor de paquetes para C++
+
+(Esnecesario tener git instalado)
+
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+
+Al ejecutar el bat ya veremos el .exe
