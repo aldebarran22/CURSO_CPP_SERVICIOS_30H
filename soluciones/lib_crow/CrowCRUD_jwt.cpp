@@ -15,7 +15,7 @@ void CrowCRUD_jwt::run() {
     // Crear una peticion con un token en JWT:
     std::string jwt_secret = "mi clave secreta:123";
 
-    // Ruta para crear el token:
+    // Ruta para crear el Token:
     CROW_ROUTE(app, "/login").methods("POST"_method)
         ([jwt_secret](const crow::request& req)
             {
@@ -43,6 +43,7 @@ void CrowCRUD_jwt::run() {
                 return crow::response(respuesta);
             });
 
+    // Para comprobar el Token:
     CROW_ROUTE(app, "/protegido")
         ([jwt_secret](const crow::request& req) {
         try {
@@ -52,7 +53,7 @@ void CrowCRUD_jwt::run() {
 
             auto token = auth.substr(7);
             auto decoded = jwt::decode(token);
-
+            
             jwt::verify()
                 .allow_algorithm(jwt::algorithm::hs256{ jwt_secret })
                 .with_issuer("Antonio")
