@@ -125,12 +125,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CrowCRUD.cpp" />
+    <ClCompile Include="CrowCRUD_jwt.cpp" />
     <ClCompile Include="lib_crow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrowCRUD.h" />
+    <ClInclude Include="CrowCRUD_jwt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\openssl-vc141-static-x86_64.1.1.0\build\native\openssl-vc141-static-x86_64.targets" Condition="Exists('packages\openssl-vc141-static-x86_64.1.1.0\build\native\openssl-vc141-static-x86_64.targets')" />
+    <Import Project="packages\PicoJSON.1.3.0\build\native\picojson.targets" Condition="Exists('packages\PicoJSON.1.3.0\build\native\picojson.targets')" />
+    <Import Project="packages\jwt-cpp.0.7.0\build\native\jwt-cpp.targets" Condition="Exists('packages\jwt-cpp.0.7.0\build\native\jwt-cpp.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\openssl-vc141-static-x86_64.1.1.0\build\native\openssl-vc141-static-x86_64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\openssl-vc141-static-x86_64.1.1.0\build\native\openssl-vc141-static-x86_64.targets'))" />
+    <Error Condition="!Exists('packages\PicoJSON.1.3.0\build\native\picojson.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PicoJSON.1.3.0\build\native\picojson.targets'))" />
+    <Error Condition="!Exists('packages\jwt-cpp.0.7.0\build\native\jwt-cpp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\jwt-cpp.0.7.0\build\native\jwt-cpp.targets'))" />
+  </Target>
 </Project>

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <crow.h>
 #include "CrowCRUD.h"
+#include "CrowCRUD_jwt.h"
 
 
 void testCrow() {
@@ -38,11 +39,16 @@ void testJsonCRUD() {
     crowCRUD.run();
 }
 
+void testJsonCRUD_jwt() {
+    CrowCRUD_jwt crowCRUD_jwt;
+    crowCRUD_jwt.run();
+}
+
 int main()
 {
     //testCrow();
     //testJsonCrow();
-    testJsonCRUD();
-
+    //testJsonCRUD();
+    testJsonCRUD_jwt();
     return 0;
 }
