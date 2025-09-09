@@ -1,4 +1,6 @@
 ﻿#include <jwt-cpp/jwt.h>
+#include <chrono>
+#include <string>
 
 #include "CrowCRUD_jwt.h"
 
@@ -9,6 +11,60 @@ CrowCRUD_jwt::CrowCRUD_jwt()
 
 void CrowCRUD_jwt::run() {
     crow::SimpleApp app;
+
+    // Crear una peticion con un token en JWT:
+    std::string jwt_secret = "mi clave secreta:123";
+
+    // Ruta para crear el token:
+    CROW_ROUTE(app, "/login").methods("POST"_method)
+        ([jwt_secret](const crow::request& req)
+            {
+                // Recuperar el json enviado de la request:
+                auto datos = crow::json::load(req.body);
+
+                // Validar si viene con datos y con el campo usuario:
+                if (!datos || !datos.has("usuario"))
+                    // 400: Bad request
+                    return crow::response(400);
+
+                // Extraer el usuario:
+                std::string usuario = datos["usuario"].s();
+
+                // Constructor builder para crear el token jwt:
+                auto token = jwt::create()
+                    .set_issuer("Antonio")
+                    .set_payload_claim("usuario", jwt::claim(usuario))
+                    .set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 30 })
+                    .sign(jwt::algorithm::hs256{ jwt_secret });
+
+                // Montar la respuesta:
+                crow::json::wvalue respuesta;
+                respuesta["token"] = token;
+                return crow::response(respuesta);
+            });
+
+    CROW_ROUTE(app, "/protegido")
+        ([jwt_secret](const crow::request& req) {
+        try {
+            auto auth = req.get_header_value("Authorization");
+            if (auth.substr(0, 7) != "Bearer ")
+                return crow::response(401, "Token inválido");
+
+            auto token = auth.substr(7);
+            auto decoded = jwt::decode(token);
+
+            jwt::verify()
+                .allow_algorithm(jwt::algorithm::hs256{ jwt_secret })
+                .with_issuer("Antonio")
+                .verify(decoded);
+
+            std::string usuario = decoded.get_payload_claim("usuario").as_string();
+            return crow::response("Acceso concedido a " + usuario);
+        }
+        catch (const std::exception& e) {
+            return crow::response(403, std::string("Error: ") + e.what());
+        }
+            });
 
     // CREATE - POST /usuarios
     CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
