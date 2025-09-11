@@ -1,7 +1,7 @@
 #include <boost/asio.hpp>
 
 #include <iostream>
-#include "json_utils.hpp"
+#include "json_util.hpp"
 
 using namespace boost::asio;
 using ip::tcp;
@@ -27,7 +27,7 @@ int main() {
 	std::cout << "Auth response: " << auth_response << std::endl;
 
 	if (auth_response == "OK") {
-		std::string user_msg = build_user_request("42");
+		std::string user_msg = build_auth_request("42");
 		std::string user_response = send_request(io, "127.0.0.1", 9001, user_msg);
 		std::cout << "User response: " << user_response << std::endl;
 	}

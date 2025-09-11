@@ -21,3 +21,11 @@ void start_user_service(io_context& io) {
 		});
 	});
 }
+
+int main() {
+	boost::asio::io_context contexto;
+
+	std::cout << "Servidor asincrono: user_service, ejecutandose en el puerto 9001" << std::endl;
+	start_user_service(contexto);
+	contexto.run();
+}
