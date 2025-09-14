@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main_consumidor.cpp">
+    <ClCompile Include="main_mensaje.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
