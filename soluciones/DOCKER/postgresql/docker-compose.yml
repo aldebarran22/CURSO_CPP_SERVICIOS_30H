@@ -1,0 +1,17 @@
+services:
+  postgres_dev:
+    image: postgres:16
+    container_name: postgres_dev
+    restart: always
+    environment: 
+      POSTGRES_DB: empresa3
+      POSTGRES_USER: antonio
+      POSTGRES_PASSWORD: antonio
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./empresa3_pg.sql:/docker-entrypoint-initdb.d/empresa3_pg.sql
+      
+volumes:
+  pg_data:

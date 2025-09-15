@@ -1,0 +1,30 @@
+# Crear el contenedor:
+docker-compose up -d
+
+
+# comprobar si esta arrancado:
+docker ps
+
+
+# Conectar con el contenedor: 
+docker exec -it postgres_dev bash
+
+
+# Como el backup es binario, hay que ejecutarlo con pg_restore:
+# OJO meter el role, porque el backup se hizo con el user: postgre
+pg_restore -U antonio -d empresa3 --role=antonio /docker-entrypoint-initdb.d/empresa3_pg.sql
+de todas formas parece que dio error o warning y habia creado las tablas!!
+
+
+
+# Conectar con psql:
+psql -U antonio -d empresa3
+
+
+# Dentro del psql:
+\l  listar BDs
+\dt listar tablas
+\dt empresa3.*  listar tablas del esquema de empresa3
+select * from tbempleados;
+
+
