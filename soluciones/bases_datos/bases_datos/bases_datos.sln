@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "prc_sqlite3", "prc_sqlite3\prc_sqlite3.vcxproj", "{3751107C-5DD9-406A-B58B-E13D21625A66}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "soci_mysql", "soci_mysql\soci_mysql.vcxproj", "{188C635E-FA24-480A-A365-3F7B734448A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{3751107C-5DD9-406A-B58B-E13D21625A66}.Release|x64.Build.0 = Release|x64
 		{3751107C-5DD9-406A-B58B-E13D21625A66}.Release|x86.ActiveCfg = Release|Win32
 		{3751107C-5DD9-406A-B58B-E13D21625A66}.Release|x86.Build.0 = Release|Win32
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Debug|x64.ActiveCfg = Debug|x64
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Debug|x64.Build.0 = Debug|x64
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Debug|x86.ActiveCfg = Debug|Win32
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Debug|x86.Build.0 = Debug|Win32
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Release|x64.ActiveCfg = Release|x64
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Release|x64.Build.0 = Release|x64
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Release|x86.ActiveCfg = Release|Win32
+		{188C635E-FA24-480A-A365-3F7B734448A5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
