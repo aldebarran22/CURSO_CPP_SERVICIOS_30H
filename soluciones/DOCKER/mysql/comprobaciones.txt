@@ -1,0 +1,14 @@
+# Crear el contenedor:
+docker-compose up -d
+
+# Conectar con el contenedor:
+docker exec -it mysql_dev bash
+
+# Al conectar:
+mysql -u root -p
+antonio
+
+SHOW DATABASES;
+USE empresa3;
+SHOW TABLES;
+SELECT * FROM pedidos LIMIT 5;
