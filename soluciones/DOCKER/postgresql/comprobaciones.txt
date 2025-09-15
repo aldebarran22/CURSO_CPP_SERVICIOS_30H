@@ -16,7 +16,6 @@ pg_restore -U antonio -d empresa3 --role=antonio /docker-entrypoint-initdb.d/emp
 de todas formas parece que dio error o warning y habia creado las tablas!!
 
 
-
 # Conectar con psql:
 psql -U antonio -d empresa3
 
@@ -26,5 +25,21 @@ psql -U antonio -d empresa3
 \dt listar tablas
 \dt empresa3.*  listar tablas del esquema de empresa3
 select * from tbempleados;
+
+pg_data:/var/lib/postgresql/data
+Este es un volumen persistente.
+
+Guarda los datos reales de la base de datos PostgreSQL (tablas, índices, etc.).
+
+Aunque el contenedor se destruya, los datos permanecen en tu máquina.
+
+Se monta en la ruta interna del contenedor: /var/lib/postgresql/data.
+
+2. ./empresa3_pg.sql:/docker-entrypoint-initdb.d/empresa3_pg.sql
+Esto monta tu archivo de backup (que está en tu máquina host) dentro del contenedor.
+
+El archivo estará disponible en la ruta /docker-entrypoint-initdb.d/empresa3_pg.sql dentro del contenedor.
+
+Esta ruta es especial: el script de arranque de PostgreSQL (docker-entrypoint.sh) escanea esa carpeta al iniciar el contenedor por primera vez.
 
 
