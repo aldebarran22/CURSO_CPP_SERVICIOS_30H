@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "prc_postgres", "prc_postgre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mongo", "mongo\mongo.vcxproj", "{97C421E3-EB05-435D-8A8E-107F2CA547F7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "prc_redis", "prc_redis\prc_redis.vcxproj", "{C033FECE-59CA-4159-B52C-68E60DF8A19F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{97C421E3-EB05-435D-8A8E-107F2CA547F7}.Release|x64.Build.0 = Release|x64
 		{97C421E3-EB05-435D-8A8E-107F2CA547F7}.Release|x86.ActiveCfg = Release|Win32
 		{97C421E3-EB05-435D-8A8E-107F2CA547F7}.Release|x86.Build.0 = Release|Win32
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Debug|x64.ActiveCfg = Debug|x64
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Debug|x64.Build.0 = Debug|x64
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Debug|x86.ActiveCfg = Debug|Win32
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Debug|x86.Build.0 = Debug|Win32
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Release|x64.ActiveCfg = Release|x64
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Release|x64.Build.0 = Release|x64
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Release|x86.ActiveCfg = Release|Win32
+		{C033FECE-59CA-4159-B52C-68E60DF8A19F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
