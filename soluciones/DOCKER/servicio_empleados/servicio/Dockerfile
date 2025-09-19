@@ -8,8 +8,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 # libmysqlclient-dev: es el cliente de mysql
 
 RUN apt-get update && apt-get install -y \
-    g++ cmake git curl libssl-dev libmysqlclient-dev \
+    g++ git curl zip unzip tar make pkg-config libssl-dev libmysqlclient-dev \
     && rm -rf /var/lib/apt/lists/*
+	
+# Instalar CMake 3.30 manualmente
+WORKDIR /tmp
+RUN curl -LO https://github.com/Kitware/CMake/releases/download/v3.30.0/cmake-3.30.0-linux-x86_64.sh && \
+    chmod +x cmake-3.30.0-linux-x86_64.sh && \
+    ./cmake-3.30.0-linux-x86_64.sh --skip-license --prefix=/usr/local
 
 # Instalar vcpkg
 WORKDIR /opt

@@ -1,5 +1,12 @@
 {
 	"name": "microservicio-empleados",
 	"version": "1.0.0",
-	"dependencies": ["crow", "soci-core", "soci-mysql", "hiredis"]
+	"dependencies": [
+		{
+			"name": "soci",
+			"features": ["mysql"]
+		},
+		"hiredis",
+		"crow"
+	]
 }
