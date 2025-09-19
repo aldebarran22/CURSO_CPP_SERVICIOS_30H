@@ -16,13 +16,13 @@ add_executable(microservicio ${SOURCES})
 
 # Buscar las librerias instaladas por vcpkg
 find_package(Crow CONFIG REQUIRED)
-find_package(SOCI CONFIG REQUIRED)
+find_package(soci CONFIG REQUIRED)
 find_package(hiredis CONFIG REQUIRED)
 
 # Enlazar las librerias al ejecutable:
-target_link_libraries(microservicio PRIVATE
+target_link_libraries(microservicio PRIVATE	
+	soci_core
+	soci_mysql
 	Crow::Crow
-	SOCI::soci_core
-	SOCI::soci_mysql
-	hiredis::hireredis
+	hiredis::hiredis
 )

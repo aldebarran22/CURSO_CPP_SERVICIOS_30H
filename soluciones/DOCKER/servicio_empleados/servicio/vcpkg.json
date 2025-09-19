@@ -4,7 +4,7 @@
 	"dependencies": [
 		{
 			"name": "soci",
-			"features": ["mysql"]
+			"features": [ "mysql" ]
 		},
 		"hiredis",
 		"crow"
