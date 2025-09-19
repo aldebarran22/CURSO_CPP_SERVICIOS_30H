@@ -34,7 +34,11 @@ COPY CMakeLists.txt .
 COPY vcpkg.json .
 
 # Instalar dependencias con vcpkg
-RUN vcpkg install
+RUN vcpkg install && \
+    /opt/vcpkg/vcpkg remove soci && \
+    /opt/vcpkg/vcpkg install soci[mysql]
+
+
 
 # Compilar el proyecto
 RUN cmake -Bbuild -S. -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake && \

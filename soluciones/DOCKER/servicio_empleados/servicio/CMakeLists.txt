@@ -10,19 +10,34 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # cmake -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 # Añadir los ficheros del codigo fuente:
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+#file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-add_executable(microservicio ${SOURCES})
+add_executable(microservicio
+    src/main.cpp
+    src/EmpleadoCache.cpp
+    src/EmpleadoRepository.cpp
+    src/EmpleadoService.cpp
+    src/MicroServicioCROW.cpp
+)
+
+#add_executable(microservicio ${SOURCES})
 
 # Buscar las librerias instaladas por vcpkg
 find_package(Crow CONFIG REQUIRED)
-find_package(soci CONFIG REQUIRED)
 find_package(hiredis CONFIG REQUIRED)
 
 # Enlazar las librerias al ejecutable:
-target_link_libraries(microservicio PRIVATE	
-	soci_core
-	soci_mysql
+target_include_directories(microservicio PRIVATE
+    /opt/vcpkg/installed/x64-linux/include
+)
+
+target_link_directories(microservicio PRIVATE
+    /opt/vcpkg/installed/x64-linux/lib
+)
+
+target_link_libraries(microservicio PRIVATE
 	Crow::Crow
-	hiredis::hiredis
+    hiredis::hiredis
+    /opt/vcpkg/installed/x64-linux/lib/libsoci_core.a
+    /opt/vcpkg/installed/x64-linux/lib/libsoci_mysql.a   
 )
