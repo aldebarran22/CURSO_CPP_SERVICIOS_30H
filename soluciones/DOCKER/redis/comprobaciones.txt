@@ -1,7 +1,0 @@
-docker-compose up -d
-
-docker ps
-docker exec -it redis-cache redis-cli
-
-Entramos en el prompt de redis-cli -> set nombre antonio
-get nombre --> devuelve nombre
