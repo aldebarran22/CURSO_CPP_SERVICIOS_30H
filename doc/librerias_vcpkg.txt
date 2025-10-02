@@ -1,7 +1,0 @@
-vcpkg install boost-beast
-vcpkg install openssl
-vcpkg install zeromq cppzmq
-vcpkg install librabbitmq
-vcpkg install grpc protobuf
-
-vcpkg integrate install
