@@ -1,0 +1,15 @@
+- Práctica Servicios
+
+- Comunicación entre un Maestro (Servidor) / Esclavo (cliente), serán dos deployments.
+Para conectar los dos componentes necesitamos un servicio: de tipo ClusterIP (es el tipo
+por defecto), para que el cliente pueda solicitar algo al Servidor lo tiene que hacer
+a través de un servicio.
+La idea es tener los datos en el maestro (Servidor) y el cliente se conectará al maestro.
+
+Crear los dos deployments y el servicio y luego probar a conectar. El puerto que utiliza
+la base de datos redis es 6379 (el puerto habra que exponerlo en el servicio)
+
+Cuando tengamos creados los dos despliegues y el servicio, nos tenemos que conectar al POD del redis-cli
+Y en la BD redis tenemos un comando llamado redis-cli con la sintaxis: redis-cli -h redis-master
+-h es HOST y redis-master es el nombre del maestro (el servidor).
+redis-master es como el nombre de la máquina.
