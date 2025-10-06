@@ -22,15 +22,13 @@ void CrowCRUD::run() {
 		// Dar de alta el usuario en la coleccion:
 		std::lock_guard<std::mutex> lock(mtx);
 		int id = this->siguiente_id++;
-		usuarios[id] = body;
-		std::cout << "body " << body << std::endl;
-
+		usuarios[id] = std::move(body);
+		
 		// Montar la respuesta al cliente:
 		crow::json::wvalue res;
 		res["id"] = id;
 		res["mensaje"] = "usuario creado";
-		res["user"] = body;
-
+		
 		return crow::response(201, res);
 
 	});
@@ -53,6 +51,7 @@ void CrowCRUD::run() {
 			crow::json::wvalue res;
 
 			crow::json::rvalue user = usuarios[id];
+			std::cout << "usuarios[id]: " << usuarios[id] << std::endl;
 			res["id"] = id;
 			res["nombre"] = user["nombre"].s();
 			res["email"] = user["email"].s();

@@ -1,3 +1,4 @@
+#include "User.h"
 #include "Pedido.h"
 #include "Utils.h"
 
