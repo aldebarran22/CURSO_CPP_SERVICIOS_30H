@@ -8,8 +8,8 @@
 
 void Conversor::conversorCSVToJson(std::string path, std::string pathjson)
 {
-	std::ifstream fin;
-	std::ofstream fout;
+	std::ifstream fin(path);
+	std::ofstream fout(pathjson);
 
 
     std::string linea;
@@ -25,7 +25,7 @@ void Conversor::conversorCSVToJson(std::string path, std::string pathjson)
     }
 
     while (std::getline(fin, linea)) {
-        //std::cout << linea << std::endl;
+        std::cout << linea << std::endl;
 
         if (cabs) {
             cabs = false;
@@ -41,5 +41,8 @@ void Conversor::conversorCSVToJson(std::string path, std::string pathjson)
     fin.close();
 
     grupo = array;
-
+    fout << grupo.dump(4) << std::endl;
+    std::cout << grupo.dump(4) << std::endl;
+    fout.close();
+    fin.close();
 }
