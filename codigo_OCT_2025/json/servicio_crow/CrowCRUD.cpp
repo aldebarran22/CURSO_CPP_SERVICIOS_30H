@@ -25,11 +25,29 @@ void CrowCRUD::run() {
 		// Montar la respuesta al cliente:
 		crow::json::wvalue res;
 		res["id"] = id;
+		res["mensaje"] = "usuario creado";
 
 		return crow::response(201, res);
 
 	});
 	
+
+	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
+		std::lock_guard<std::mutex> lock(this->mtx);
+		int n = this->usuarios.count(id);
+
+		std::cout << "Numero de usuarios: " << n << " usuarios" << std::endl;
+
+		// Chequear si hemos encontrado la clave:
+		if (!n) {
+			// Si no lo encontramos:
+			crow::response(404, "Usuario " + std::to_string(id) + " no encontrado");
+		}
+
+		// Los hemos encontrado:
+		crow::json:wvalue res;
+
+	});
 	
 	
 
