@@ -129,8 +129,10 @@ void CrowCRUD::run() {
 
 	});
 
-	std::cout << "Servicio funcionando en el puerto: " << PORT << std::endl;
-	app.port(PORT).multithreaded().run();
+	//std::cout << "Servicio funcionando en el puerto: " << PORT << std::endl;
+	
+	//app.port(PORT).multithreaded().run();
+	app.port(PORT).multithreaded().concurrency(4).run();
 }
 CrowCRUD::~CrowCRUD() {
 
