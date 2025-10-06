@@ -5,7 +5,7 @@ Pedido::Pedido()
 {
 }
 
-Pedido::Pedido(std::string linea, char sep)
+Pedido::Pedido(const std::string linea, char sep)
 {
 	std::vector<std::string> campos;
 

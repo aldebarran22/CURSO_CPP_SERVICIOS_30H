@@ -4,6 +4,6 @@
 class Utils
 {
 public:
-	void split(const std::string& s, char delim, std::vector<std::string>& elems);
+	static void split(const std::string& s, char delim, std::vector<std::string>& elems);
 };
 

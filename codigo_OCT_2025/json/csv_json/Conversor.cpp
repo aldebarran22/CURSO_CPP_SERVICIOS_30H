@@ -32,7 +32,7 @@ void Conversor::conversorCSVToJson(std::string path, std::string pathjson)
 
         }
         else {   
-
+            std::cout << linea << std::endl;
             Pedido p(linea);
             array.push_back(p.to_json());
             campos.clear();

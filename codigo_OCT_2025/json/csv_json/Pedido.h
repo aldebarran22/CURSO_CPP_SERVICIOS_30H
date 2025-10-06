@@ -13,7 +13,7 @@ public:
 	std::string pais;
 
 	Pedido();
-	Pedido(std::string = "", char = ';');
+	Pedido(const std::string, char = ';');
 	nlohmann::json to_json() const;
 	static Pedido from_json(const nlohmann::json& j);
 	~Pedido();
