@@ -1,5 +1,7 @@
 #include "CrowCRUD.h"
 
+#define PORT 8080
+
 
 CrowCRUD::CrowCRUD() {
 	this->siguiente_id = 1;
@@ -94,6 +96,9 @@ void CrowCRUD::run() {
 		return crow::response(res);
 
 	});
+
+	std::cout << "Servicio funcionando en el puerto: " << PORT << std::endl;
+	app.port(PORT).multithreaded().run();
 }
 CrowCRUD::~CrowCRUD() {
 
