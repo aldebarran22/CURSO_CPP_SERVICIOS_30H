@@ -32,6 +32,29 @@ void CrowCRUD::run() {
 		return crow::response(201, res);
 
 	});
+
+	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
+
+		// Recoger del cuerpo de la peticion el json (usuario)
+		auto body = crow::json::load(req.body);
+		if (!body) {
+			return crow::response(400, "Json incorrecto");
+		}
+
+		// Dar de alta el usuario en la coleccion:
+		std::lock_guard<std::mutex> lock(mtx);
+
+		// Machacar el usuario en la misma clave:
+		usuarios[id] = std::move(body);
+
+		// Montar la respuesta al cliente:
+		crow::json::wvalue res;
+		res["id"] = id;
+		res["mensaje"] = "usuario actualizado";
+
+		return crow::response(201, res);
+
+	});
 	
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
