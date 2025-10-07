@@ -26,13 +26,17 @@ void HttpServer::handle_request(tcp::socket& socket) {
 	std::cout << "Peticion: " << target << std::endl;
 
 	// Buscar el parametro de la url:
+	auto pos = target.find("?msg=");
 
+	if (pos != std::string::npos) {
+		mensaje = target.substr(pos + 5);
+	}
 
 	// Montar la respuesta al cliente:
 	http::response<http::string_body> response{ http::status::ok, request.version() };
 	response.set(http::field::server, "Beast/1.0");
 	response.set(http::field::content_type, "text/plain");
-	response.body() = "Respuesta del servidor";
+	response.body() = "Respuesta del servidor. Mensaje: " + mensaje;
 
 	// Escribir la respuesta:
 	http::write(socket, response);

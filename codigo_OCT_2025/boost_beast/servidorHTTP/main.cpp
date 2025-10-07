@@ -2,9 +2,15 @@
 //
 
 #include <iostream>
+#include "HttpServer.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Objeto principal del contexto:
+	boost::asio::io_context ioc;
+	HttpServer servidor(ioc, 8080);
+	servidor.run();
+
+	return 0;
 }
 
