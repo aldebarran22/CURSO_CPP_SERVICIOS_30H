@@ -1,0 +1,100 @@
+sol 1) Para mysql volumen anónimo:
+==================================
+
+docker run -d --rm --name mysql_c \
+-e MYSQL_ROOT_PASSWORD=root 
+-p 3306:3306
+mysql:8.0
+
+lista:
+docker volume ls
+
+inspeccionar:
+docker inspect mysql_c
+(mirar donde lo deja dentro del contenedor, se pueden comprobar en /var/lib/mysql
+
+parar:
+docker stop mysql_c
+
+Borrar:
+docker volume prune
+
+##################################################################
+
+sol 2) Para mysql crear un volumen con nombre:
+
+docker volume create mysql_data
+
+docker run -d --rm --name mysql_c \
+-e MYSQL_ROOT_PASSWORD=root \
+-p 3306:3306 \
+-v mysql_data:/var/lib/mysql \
+mysql:8.0
+
+
+inspeccionar:
+docker inspect mysql_c
+
+##################################################################
+
+sol 3) Crear un nuevo contenedor con los mismo parámetros y conectar con la BD
+
+docker run -d --rm --name mysql_c2 \
+-e MYSQL_ROOT_PASSWORD=root \
+-p 3306:3306 \
+-v mysql_data:/var/lib/mysql \
+mysql:8.0
+
+docker exec -it mysql_c2 bash
+
+mysql -u root -p
+:>...
+
+
+##################################################################
+
+sol 4) Crear un nuevo contenedor con los mismo parámetros y conectar con la BD
+
+cd $HOME
+mkdir sql
+generar el fichero de sql
+
+
+
+docker run -d --rm --name mysql_c3 \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_DATA
+-p 3306:3306 \
+-v mysql_data:/var/lib/mysql \
+-v $HOME/sql:/docker-entrypoint-initdb.d 
+mysql:8.0
+
+docker exec -it mysql_c2 bash
+
+mysql -u root -p
+:>...
+
+
+
+##################################################################
+
+SQL:
+drop database if exists tienda;
+create database tienda charset utf8mb4;
+use tienda;
+
+create table fabricantes (
+id int unsigned auto_increment primary key,
+nombre varchar(100) not null
+);
+
+insert into fabricantes values('Axus');
+insert into fabricantes values('HP');
+insert into fabricantes values('Dell');
+
+show tables;
+select * from fabricantes;
+
+
+
+
