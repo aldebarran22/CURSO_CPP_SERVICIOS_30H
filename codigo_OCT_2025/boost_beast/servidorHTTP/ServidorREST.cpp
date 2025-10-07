@@ -73,3 +73,24 @@ void ServidorREST::handle_request(tcp::socket& socket) {
 	http::write(socket, response);
 }
 
+std::string ServidorREST::peticionGet()
+{
+	json resp;
+
+	for (const auto& [id, value] : this->items) {
+		resp.push_back({ {"id", id}, {"value", value} });
+	}
+
+	return std::string();
+}
+
+std::string ServidorREST::peticionPost(const std::string body)
+{
+	return std::string();
+}
+
+std::string ServidorREST::peticionDelete(int id)
+{
+	return std::string();
+}
+

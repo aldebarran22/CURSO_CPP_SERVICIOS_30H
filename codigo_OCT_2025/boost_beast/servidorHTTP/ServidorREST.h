@@ -27,6 +27,9 @@ public:
 
 private:
 	void handle_request(tcp::socket& socket);
+	std::string peticionGet();
+	std::string peticionPost(const std::string);
+	std::string peticionDelete(int);
 
 	net::io_context& ioc_;
 	tcp::acceptor acceptor_;
