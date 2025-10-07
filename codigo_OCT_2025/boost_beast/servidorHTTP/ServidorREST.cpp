@@ -75,22 +75,62 @@ void ServidorREST::handle_request(tcp::socket& socket) {
 
 std::string ServidorREST::peticionGet()
 {
+	// Convertir el mapa en un array de objetos json:
 	json resp;
 
 	for (const auto& [id, value] : this->items) {
 		resp.push_back({ {"id", id}, {"value", value} });
 	}
 
-	return std::string();
+	return resp.dump();
 }
 
 std::string ServidorREST::peticionPost(const std::string body)
 {
-	return std::string();
+	json req = json::parse(body);
+
+	// Validacion que viene el campo value y es de tipo string:
+	if (!req.contains("value") || !req["value"].is_string()) {
+
+		json resp = {
+			{"error", "Campo value obligatorio y debe ser string"}
+		};
+
+		return resp.dump();
+	}
+
+	// Recuperar el value y cargarlo en la coleccion:
+	std::string value = req["value"];
+	int id = this->next_id++;
+	items[id] = value;
+
+	json resp = {
+		{"id", id},
+		{"value", value}
+	};
+
+	return resp.dump();
 }
 
 std::string ServidorREST::peticionDelete(int id)
 {
-	return std::string();
+	if (this->items.find(id) != this->items.end()) {
+		items.erase(id);
+
+		json resp = {
+			{"mensaje", "Elemento eliminado" },
+			{"id", id}
+		};
+		return resp.dump();
+
+	}
+	else {
+		json resp = {
+					{"mensaje", "No existe el elemento" },
+					{"id", id}
+		};
+		return resp.dump();
+	}
+
 }
 
