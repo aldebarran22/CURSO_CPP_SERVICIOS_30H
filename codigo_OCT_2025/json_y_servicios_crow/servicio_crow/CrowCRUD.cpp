@@ -62,7 +62,7 @@ void CrowCRUD::run() {
 			std::lock_guard<std::mutex> lock(this->mtx);
 			int n = this->usuarios.count(id);
 
-			std::cout << "Numero de usuarios: " << n << " usuarios" << std::endl;
+			CROW_LOG_INFO << "Numero de usuarios: " << n << " usuarios";
 
 			// Chequear si hemos encontrado la clave:
 			if (!n) {
@@ -74,7 +74,7 @@ void CrowCRUD::run() {
 			crow::json::wvalue res;
 
 			crow::json::rvalue user = usuarios[id];
-			std::cout << "usuarios[id]: " << usuarios[id] << std::endl;
+			CROW_LOG_INFO << "usuarios[id]: " << usuarios[id];
 			res["id"] = id;
 			res["nombre"] = user["nombre"].s();
 			res["email"] = user["email"].s();
@@ -132,7 +132,7 @@ void CrowCRUD::run() {
 	//std::cout << "Servicio funcionando en el puerto: " << PORT << std::endl;
 	
 	//app.port(PORT).multithreaded().run();
-	app.port(PORT).multithreaded().concurrency(4).run();
+	app.port(PORT).multithreaded().concurrency(4).loglevel(crow::LogLevel::Debug).run();
 }
 CrowCRUD::~CrowCRUD() {
 
