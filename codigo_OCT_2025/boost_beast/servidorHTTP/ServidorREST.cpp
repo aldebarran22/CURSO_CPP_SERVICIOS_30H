@@ -79,6 +79,7 @@ std::string ServidorREST::peticionGet()
 	json resp;
 
 	for (const auto& [id, value] : this->items) {
+		std::cout << "id: " << id << " value: " << value << std::endl;
 		resp.push_back({ {"id", id}, {"value", value} });
 	}
 
