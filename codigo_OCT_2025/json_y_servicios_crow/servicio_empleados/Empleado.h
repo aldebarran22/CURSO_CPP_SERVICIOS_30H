@@ -10,7 +10,7 @@ public:
 	std::string cargo;
 
 	Empleado();
-	Empleado(int, std::string, std::string);
+	Empleado(int, const std::string&, const std::string&);
 	nlohmann::json to_json() const;
 	static Empleado from_json(const nlohmann::json& j);
 	~Empleado();

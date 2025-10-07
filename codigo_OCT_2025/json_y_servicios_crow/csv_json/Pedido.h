@@ -5,11 +5,11 @@
 class Pedido
 {
 public:
-	std::string idpedido;
-	std::string cliente;
+	std::string idpedido;	
+	float importe;
 	std::string empresa;
 	std::string empleado;
-	float importe;
+	std::string cliente;
 	std::string pais;
 
 	Pedido();
