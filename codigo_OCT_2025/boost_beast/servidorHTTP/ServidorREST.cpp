@@ -43,7 +43,7 @@ void ServidorREST::handle_request(tcp::socket& socket) {
 	}
 	else if (request.method() == http::verb::get && request.target() == "/items") {
 		// GET
-		request.body() = this->peticionGet();
+		response.body() = this->peticionGet();
 
 	}
 	else if (request.method() == http::verb::delete_ && request.target().starts_with("/items/")) {
@@ -80,7 +80,8 @@ std::string ServidorREST::peticionGet()
 
 	for (const auto& [id, value] : this->items) {
 		std::cout << "id: " << id << " value: " << value << std::endl;
-		resp.push_back({ {"id", id}, {"value", value} });
+		json aux = { {"id", id}, {"value", value} };
+		resp.push_back(aux);
 	}
 
 	return resp.dump();
