@@ -205,9 +205,9 @@ void testTransacciones() {
 
 int main()
 {   
-    testMySQL();
+    //testMySQL();
     //testRecuperarConsulta();
     //testInsertar();
-    //testTransacciones();
+    testTransacciones();
     return 0;
 }
