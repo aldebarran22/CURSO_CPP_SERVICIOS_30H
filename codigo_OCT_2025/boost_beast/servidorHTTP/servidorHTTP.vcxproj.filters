@@ -21,9 +21,15 @@
     <ClCompile Include="HttpServer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="ServidorREST.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpServer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ServidorREST.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

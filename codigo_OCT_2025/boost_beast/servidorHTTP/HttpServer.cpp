@@ -1,5 +1,6 @@
 #include "HttpServer.h"
 #include "boost/exception/diagnostic_information.hpp"
+#include "ServidorREST.h"
 
 
 HttpServer::HttpServer(net::io_context& ioc, unsigned short port):ioc_(ioc), acceptor_(ioc, tcp::endpoint(tcp::v4(), port)){}
@@ -13,6 +14,8 @@ void HttpServer::run() {
 		handle_request(socket);
 	}
 }
+
+
 
 void HttpServer::handle_request(tcp::socket& socket) {
 	beast::flat_buffer buffer;
@@ -45,6 +48,7 @@ void HttpServer::handle_request(tcp::socket& socket) {
 
 	}
 	catch (const std::exception& e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
 		std::cerr << boost::diagnostic_information(e) << std::endl;
 	}
 }
