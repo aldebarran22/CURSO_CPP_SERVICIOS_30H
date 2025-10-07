@@ -52,6 +52,23 @@ void testMySQL() {
         return;
     }
 
+    // Obtener resultados
+    MYSQL_BIND result[1];
+    char nombre[100];
+    unsigned long nombre_length;
+    memset(result, 0, sizeof(result));
+    result[0].buffer_type = MYSQL_TYPE_STRING;
+    result[0].buffer = nombre;
+    result[0].buffer_length = sizeof(nombre);
+    result[0].length = &nombre_length;
+
+    mysql_stmt_bind_result(stmt, result);
+    while (mysql_stmt_fetch(stmt) == 0) {
+        std::cout << "nombre: " << std::string(nombre, nombre_length) << std::endl;
+    }
+
+    mysql_stmt_close(stmt);
+
     // Cerrar conexion:
     mysql_close(con);
 
