@@ -12,7 +12,7 @@
 namespace beast = boost::beast;
 namespace http = beast::http;
 namespace net = boost::asio;
-namespace tcp = net::ip::tcp;
+using tcp = net::ip::tcp;
 
 
 class HttpServer
@@ -23,6 +23,9 @@ public:
 
 private:
 	void handle_request(tcp::socket& socket);
+
+	net::io_context& ioc_;
+	tcp::acceptor acceptor_;
 
 };
 
