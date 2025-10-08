@@ -13,6 +13,7 @@ void testRepositorio() {
     EmpleadoRepositorio repo(sql);
 
     // Recuperar un empleado:
+    
     auto emp = repo.read(1);
     if (emp) {
         std::cout << emp->nombre << " " << emp->cargo << std::endl;

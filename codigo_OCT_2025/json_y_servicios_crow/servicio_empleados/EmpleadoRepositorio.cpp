@@ -39,6 +39,7 @@ std::vector<Empleado> EmpleadoRepositorio::select()
 {
 	std::vector<Empleado> empleados;
 
+	
 	soci::rowset<soci::row> rs = sql_.prepare << "select id, nombre, cargo from empleados";
 	for (const auto& r : rs) {
 		Empleado e;
