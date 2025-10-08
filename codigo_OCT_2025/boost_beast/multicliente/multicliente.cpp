@@ -103,6 +103,7 @@ int main()
 	do_accept(acceptor);
 
 	std::cout << "Servidor esperando en el puerto 8080" << std::endl;
+	std::cout << "Num hilos: " << std::thread::hardware_concurrency();
    
 	// Ejecutar:
 	ioc.run();
