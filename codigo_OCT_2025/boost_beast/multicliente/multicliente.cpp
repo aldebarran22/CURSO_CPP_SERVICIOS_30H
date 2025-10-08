@@ -75,6 +75,23 @@ private:
 
 };
 
+void do_accept(tcp::acceptor& acceptor) {
+	// Aceptar al cliente de forma asincrona:
+	acceptor.async_accept([&acceptor](beast::error_code ec, tcp::socket socket) {
+
+		// Si no hay error creamos una nueva instancia de la clase session:
+		// La session se encarga de leer, procesar y escribir
+		if (!ec) {
+
+			// Se crea y se arranca:
+			std::make_shared<session>(std::move(socket))->start();
+		}
+
+		// Hace una llamada recursiva para acceptar otras conexiones:
+		do_accept(acceptor);
+	});
+}
+
 int main()
 {
    
