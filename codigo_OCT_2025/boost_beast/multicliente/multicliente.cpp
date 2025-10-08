@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <vector>
+#include <thread>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -105,7 +107,19 @@ int main()
 	std::cout << "Servidor esperando en el puerto 8080" << std::endl;
 	std::cout << "Num hilos: " << std::thread::hardware_concurrency();
    
-	// Ejecutar:
-	ioc.run();
+	std::vector<std::thread> hilos;
+	for (int i = 0; i < std::thread::hardware_concurrency(); i++) {
+
+		// Crea el hilo dentro de la coleccion vector: no hace una copia como push_back
+		hilos.emplace_back([&ioc] { ioc.run(); });
+	}
+
+	// Hacemos join de todos los hilos del vector:
+	for (auto& t : hilos) {
+		t.join();
+	}
+
+	// Ejecutar con un solo hilo:
+	//ioc.run();
 }
 
