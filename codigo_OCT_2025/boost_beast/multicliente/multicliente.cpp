@@ -39,6 +39,7 @@ private:
 
 	void handler_request() {
 		// Analizar la peticion, ... operaciones ...
+
 		
 		// Montar la respuesta al cliente:
 		// La respuesta se copia, misma version del protocolo que la peticion:
@@ -47,11 +48,29 @@ private:
 		res_.result(http::status::ok); // Codigo 200
 
 		// Configurar las cabeceras de la respuesta:
+		res_.set(http::field::server, "Boost.asio");
+		res_.set(http::field::content_type, "text/plain");
+
+		// El cuerpo de la respuesta para el cliente:
+		res_.body() = "mensaje del servidor";
+
+		// Calcular automaticamente el tamaño de la respuesta:
+		res_.prepare_payload();
+
+		// Escribir la respuesta al cliente:
+		write_response();
 
 	}
 
 	void write_response() {
+		// Obtiene un std::shared_ptr que apunta a la clase actual:
+		auto self = shared_from_this();
 
+		// Cuando termina la escritura cierra la conexion:
+		http::async_write(socket_, res_,
+			[self](beast::error_code ec, std::size_t) {
+				self->socket_.shutdown(tcp::socket::shutdown_send, ec);
+			});
 	}
 
 };
