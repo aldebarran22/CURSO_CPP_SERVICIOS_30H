@@ -17,7 +17,7 @@ nlohmann::json Empleado::to_json() const {
 Empleado Empleado::from_json(const nlohmann::json& j) {
 	Empleado e;
 
-	e.id = j.at("id").get<std::string>();
+	e.id = j.at("id").get<int>();
 	e.nombre = j.at("nombre").get<std::string>();
 	e.cargo = j.at("cargo").get<std::string>();
 	return e;

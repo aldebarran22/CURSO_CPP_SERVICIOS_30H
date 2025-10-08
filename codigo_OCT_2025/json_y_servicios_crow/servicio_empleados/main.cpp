@@ -28,6 +28,7 @@ void testRepositorio() {
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    testRepositorio();
+    return 0;
 }
 
