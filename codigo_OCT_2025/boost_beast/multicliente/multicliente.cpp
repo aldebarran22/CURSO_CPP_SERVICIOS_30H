@@ -41,7 +41,9 @@ private:
 
 	void handler_request() {
 		// Analizar la peticion, ... operaciones ...
+		std::string respuesta;
 
+		respuesta = std::string(req_.target()) + " " + std::string(req_.method_string());
 		
 		// Montar la respuesta al cliente:
 		// La respuesta se copia, misma version del protocolo que la peticion:
@@ -54,7 +56,7 @@ private:
 		res_.set(http::field::content_type, "text/plain");
 
 		// El cuerpo de la respuesta para el cliente:
-		res_.body() = "mensaje del servidor";
+		res_.body() = respuesta;
 
 		// Calcular automaticamente el tamaño de la respuesta:
 		res_.prepare_payload();
