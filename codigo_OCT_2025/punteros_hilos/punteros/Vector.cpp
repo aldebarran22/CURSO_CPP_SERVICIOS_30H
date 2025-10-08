@@ -8,6 +8,15 @@ Vector::Vector(int n)
 	this->numeros = new int[n];
 }
 
+Vector::Vector(const Vector&)
+{
+}
+
+Vector& Vector::operator=(const Vector&)
+{
+	// TODO: Insertar una instrucción "return" aquí
+}
+
 bool Vector::add(int num)
 {
 	if (ocupacion + 1 < n) {
