@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bb228782-cfab-45e3-85b4-134f6d1d6c41}</ProjectGuid>
-    <RootNamespace>servicioempleados</RootNamespace>
+    <ProjectGuid>{e92e392d-ab9f-4403-b98d-aca1638d144f}</ProjectGuid>
+    <RootNamespace>ServicioCache</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -124,19 +124,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Empleado.cpp" />
-    <ClCompile Include="EmpleadoCache.cpp" />
-    <ClCompile Include="EmpleadoRepositorio.cpp" />
-    <ClCompile Include="EmpleadoService.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ServicioCrow.cpp" />
+    <ClInclude Include="Empleado.hpp" />
+    <ClInclude Include="EmpleadoCache.hpp" />
+    <ClInclude Include="EmpleadoRepository.hpp" />
+    <ClInclude Include="EmpleadoService.hpp" />
+    <ClInclude Include="MicroServicioCROW.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Empleado.h" />
-    <ClInclude Include="EmpleadoCache.h" />
-    <ClInclude Include="EmpleadoRepositorio.h" />
-    <ClInclude Include="EmpleadoService.h" />
-    <ClInclude Include="ServicioCrow.h" />
+    <ClCompile Include="EmpleadoCache.cpp" />
+    <ClCompile Include="EmpleadoRepository.cpp" />
+    <ClCompile Include="EmpleadoService.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MicroServicioCROW.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
