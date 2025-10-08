@@ -98,7 +98,9 @@ int main()
 
 	// Crear el endpoint y el acceptor:
 	tcp::endpoint endpoint(tcp::v4(), 8080);
-	tcp::acceptor(ioc, endpoint);
+	tcp::acceptor acceptor(ioc, endpoint);
+
+	do_accept(acceptor);
 
 	std::cout << "Servidor esperando en el puerto 8080" << std::endl;
    
