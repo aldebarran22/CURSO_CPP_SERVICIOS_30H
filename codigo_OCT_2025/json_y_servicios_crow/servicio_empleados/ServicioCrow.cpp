@@ -25,9 +25,7 @@ void ServicioCrow::iniciar()
 		j["nombre"] = emp->nombre;
 		j["cargo"] = emp->cargo;
 
-		crow::response(j);
-		
-			//json j2 = Empleado(emp->id, emp->nombre, emp->cargo);
+		crow::response(j);				
 
 	});
 
