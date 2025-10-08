@@ -23,6 +23,23 @@ Empleado Empleado::from_json(const nlohmann::json& j) {
 	return e;
 }
 
+std::string Empleado::serialize() const
+{
+	return std::to_string(id) + "|" + nombre + "|" + cargo;
+}
+
+Empleado Empleado::deserialize(const std::string& data)
+{
+	int p1 = data.find("|");
+	int p2 = data.find("|", p1+1);
+
+	Empleado e;
+	e.id = std::stoi(data.substr(0, p1));
+	e.nombre = data.substr(p1 + 1, p2 - p1 - 1);
+	e.cargo = data.substr(p2 + 1);
+	return e;
+}
+
 Empleado::~Empleado()
 {
 }

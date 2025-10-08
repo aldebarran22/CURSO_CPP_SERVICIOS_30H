@@ -125,12 +125,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Empleado.cpp" />
+    <ClCompile Include="EmpleadoCache.cpp" />
     <ClCompile Include="EmpleadoRepositorio.cpp" />
+    <ClCompile Include="EmpleadoService.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Empleado.h" />
+    <ClInclude Include="EmpleadoCache.h" />
     <ClInclude Include="EmpleadoRepositorio.h" />
+    <ClInclude Include="EmpleadoService.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
