@@ -98,7 +98,7 @@ void do_accept(tcp::acceptor& acceptor) {
 
 int main()
 {
-	asio::io_context ioc{ 1 }; // El número de hilos que lo ejecutan
+	asio::io_context ioc; // Se puede indicar el numero de hilos como una sugerencia!
 
 	// Crear el endpoint y el acceptor:
 	tcp::endpoint endpoint(tcp::v4(), 8080);
