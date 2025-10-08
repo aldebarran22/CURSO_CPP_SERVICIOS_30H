@@ -94,6 +94,15 @@ void do_accept(tcp::acceptor& acceptor) {
 
 int main()
 {
+	asio::io_context ioc{ 1 }; // El número de hilos que lo ejecutan
+
+	// Crear el endpoint y el acceptor:
+	tcp::endpoint endpoint(tcp::v4(), 8080);
+	tcp::acceptor(ioc, endpoint);
+
+	std::cout << "Servidor esperando en el puerto 8080" << std::endl;
    
+	// Ejecutar:
+	ioc.run();
 }
 
