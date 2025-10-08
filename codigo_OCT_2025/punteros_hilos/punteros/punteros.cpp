@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <memory>
 #include "Vector.h"
 
 void testC() {
@@ -53,9 +54,15 @@ void testVector() {
 }
 
 
+void testSP() {
+    auto a_ptr = std::unique_ptr<int>(new int);
+    //auto b_ptr = a_ptr; No te deja hacer la copia!
+}
+
 int main()
 {
-    testVector();
+    //testVector();
+    testSP();
     return 0;
 }
 
