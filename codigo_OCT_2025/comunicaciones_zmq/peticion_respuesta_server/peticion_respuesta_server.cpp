@@ -6,6 +6,18 @@
 #include <nlohmann/json.hpp>
 #include "persona.hpp"
 
+/*
+
+auto response = cpr::Get(cpr::Url{"http://localhost:8080/empleados"});
+	if (response.status_code == 200) {
+		auto json = nlohmann::json::parse(response.text);
+		std::cout << "Respuesta JSON: " << json.dump(2) << std::endl;
+	} else {
+		std::cerr << "Error: " << response.status_code << std::endl;
+	}
+
+*/
+
 int main()
 {
 	zmq::context_t contexto(1);
