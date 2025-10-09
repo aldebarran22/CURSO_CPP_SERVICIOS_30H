@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="zqm_worker_pull.cpp">
+    <ClCompile Include="pull.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
