@@ -31,6 +31,33 @@ void productor() {
         return;
     }
 
+    std::cout << "Guest Conectado ... " << std::endl;
+
+    // Abrir el canal
+    amqp_channel_open(con, 1);
+    amqp_rpc_reply_t channel_reply = amqp_get_rpc_reply(con);
+    if (channel_reply.reply_type != AMQP_RESPONSE_NORMAL) {
+        std::cerr << " error en el canal" << std::endl;
+        return;
+    }
+
+    // Abrir la cola, si no existe la crea:
+    amqp_bytes_t queue = amqp_cstring_bytes("test_queue");
+    amqp_queue_declare(con, 1, queue, 0, 0, 0, 1, amqp_empty_table);
+    amqp_get_rpc_reply(con);
+
+    // Crear el mensaje:
+    amqp_bytes_t message = amqp_cstring_bytes("mensaje desde el productor");
+
+    // publicar el mensaje:
+    amqp_basic_publish(con, 1, amqp_empty_bytes, queue, 0, 0, nullptr, message);
+
+    std::cout << "mensaje enviado " << std::endl;
+
+    // liberar recursos:
+    amqp_channel_close(con, 1, AMQP_REPLY_SUCCESS);
+    amqp_connection_close(con, AMQP_REPLY_SUCCESS);
+    amqp_destroy_connection(con);
 }
 
 void consumidor() {
