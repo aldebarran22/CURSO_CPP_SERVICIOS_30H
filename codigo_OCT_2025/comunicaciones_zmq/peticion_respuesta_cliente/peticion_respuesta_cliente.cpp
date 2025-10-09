@@ -2,6 +2,8 @@
 #include <iostream>
 #include <zmq.hpp>
 #include <string>
+#include <nlohmann/json.hpp>
+#include "persona.hpp"
 
 int main()
 {
@@ -12,8 +14,15 @@ int main()
 		zmq::socket_t socket(contexto, zmq::socket_type::req);
 		socket.connect("tcp://localhost:5555");
 
+		// Definir la persona:
+		Persona p{ "Jose",59, true };
+
+		// Convertir a json:
+		nlohmann::json j = p;
+		std::string mensaje = j.dump();
+
 		// Enviar un mensaje al servidor:
-		socket.send(zmq::buffer("mensaje del cliente"), zmq::send_flags::none);
+		socket.send(zmq::buffer(mensaje), zmq::send_flags::none);
 
 		zmq::message_t respuesta;
 		socket.recv(respuesta, zmq::recv_flags::none);
