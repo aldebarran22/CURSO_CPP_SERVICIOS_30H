@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pub_sub_receptor.cpp">
+    <ClCompile Include="pub_sub_subcriptor.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

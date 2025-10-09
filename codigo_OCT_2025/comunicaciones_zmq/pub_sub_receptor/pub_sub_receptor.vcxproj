@@ -24,6 +24,7 @@
     <ProjectGuid>{1c68bbf4-bc66-44ad-876e-d2a895820ddb}</ProjectGuid>
     <RootNamespace>pubsubreceptor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>pub_sub_subcriptor</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,7 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="pub_sub_receptor.cpp" />
+    <ClCompile Include="pub_sub_subcriptor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
