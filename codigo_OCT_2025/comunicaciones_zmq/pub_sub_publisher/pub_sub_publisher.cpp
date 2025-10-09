@@ -27,10 +27,11 @@ int main()
             mensaje = m + " " + std::to_string(valor);
 
             socket.send(zmq::buffer(m+ " " + mensaje));
-            std::cout << "Publicando: " << mensaje;
-
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::cout << "Publicando: " << mensaje << std::endl;
+            
         }
+
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
     return 0;    
