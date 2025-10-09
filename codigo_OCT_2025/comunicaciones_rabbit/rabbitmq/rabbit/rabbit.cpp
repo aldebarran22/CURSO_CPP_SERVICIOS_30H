@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include <amqp.h>
 #include <amqp_tcp_socket.h>
 
@@ -46,13 +47,18 @@ void productor() {
     amqp_queue_declare(con, 1, queue, 0, 0, 0, 1, amqp_empty_table);
     amqp_get_rpc_reply(con);
 
-    // Crear el mensaje:
-    amqp_bytes_t message = amqp_cstring_bytes("mensaje desde el productor");
+    std::string mensaje;
+    for (int i = 0; i < 5; i++) {
+        mensaje = "mensaje desde el productor " + std::to_string((i+1));
 
-    // publicar el mensaje:
-    amqp_basic_publish(con, 1, amqp_empty_bytes, queue, 0, 0, nullptr, message);
+        // Crear el mensaje:
+        amqp_bytes_t message = amqp_cstring_bytes(mensaje.c_str());
 
-    std::cout << "mensaje enviado " << std::endl;
+        // publicar el mensaje:
+        amqp_basic_publish(con, 1, amqp_empty_bytes, queue, 0, 0, nullptr, message);
+
+        std::cout << "mensaje enviado " << std::endl;
+    }
 
     // liberar recursos:
     amqp_channel_close(con, 1, AMQP_REPLY_SUCCESS);
