@@ -18,5 +18,19 @@
     <ClCompile Include="cliente.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="saludo.grpc.pb.cc">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="saludo.pb.cc">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="saludo.grpc.pb.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="saludo.pb.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
