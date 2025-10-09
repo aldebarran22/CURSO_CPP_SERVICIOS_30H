@@ -1,0 +1,14 @@
+syntax = "proto3"; // Versión del lenguaje de Protobuf
+package saludo; // Nombre del paquete (opcional pero recomendable)
+
+service Saludo { // Definición del servicio gRPC
+rpc DiHola (Solicitud) returns (Respuesta); // Método RPC
+}
+
+message Solicitud { // Mensaje de entrada
+string nombre = 1;
+}
+
+message Respuesta { // Mensaje de salida
+string mensaje = 1;
+}
