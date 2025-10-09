@@ -14,6 +14,29 @@ using tcp = net::ip::tcp;
 
 void do_sesion(tcp::socket socket) {
 
+	try {
+		websocket::stream<tcp::socket> ws(std::move(socket));
+		ws.accept();
+
+		for (;;) {
+			beast::flat_buffer buffer;
+			ws.read(buffer);
+			ws.text(ws.got_text());
+			ws.write(buffer.data()); // Hace un echo de la cadena recibida.
+		}
+
+	}
+	catch (const beast::system_error& se) {
+		if (se.code() != websocket::error::closed) {
+			std::cerr << "Error en session: " << se.what() << std::endl;
+		}
+		else {
+			std::cout << "Cliente desconectado" << std::endl;
+		}
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Error inesperado " << e.what() << std::endl;
+	}
 }
 
 int main()
