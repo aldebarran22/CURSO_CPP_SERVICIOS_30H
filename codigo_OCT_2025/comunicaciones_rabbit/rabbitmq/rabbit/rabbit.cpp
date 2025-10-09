@@ -75,26 +75,26 @@ void consumidor() {
 
     if (!socket) {
         std::cerr << "Error creando socket\n";
-        return 1;
+        return;
     }
 
     int status = amqp_socket_open(socket, hostname, port);
     if (status != AMQP_STATUS_OK) {
         std::cerr << "Error abriendo socket: " << amqp_error_string2(status) << "\n";
-        return 1;
+        return;
     }
 
     amqp_rpc_reply_t login = amqp_login(conn, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN, "guest", "guest");
     if (login.reply_type != AMQP_RESPONSE_NORMAL) {
         std::cerr << "Error en login\n";
-        return 1;
+        return;
     }
 
     amqp_channel_open(conn, 1);
     amqp_rpc_reply_t channel_reply = amqp_get_rpc_reply(conn);
     if (channel_reply.reply_type != AMQP_RESPONSE_NORMAL) {
         std::cerr << "Error abriendo canal\n";
-        return 1;
+        return;
     }
 
     amqp_bytes_t queue = amqp_cstring_bytes("test_queue");
