@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <zmq.hpp>
+#include <nlohmann/json.hpp>
+#include "persona.hpp"
 
 int main()
 {
@@ -18,7 +20,11 @@ int main()
 
 		// Esperamos el mensaje del cliente:
 		socket.recv(request, zmq::recv_flags::none);
-		std::cout << "Recibido: " << request.to_string() << std::endl;
+
+		nlohmann::json j = nlohmann::json::parse(request.to_string());
+		Persona p = j.get<Persona>();
+
+		std::cout << "Recibido Persona: " << p.nombre << " " << p.edad << std::endl;
 
 		// Enviamos el mensaje al cliente:
 		std::string respuesta = "mensaje del server";
