@@ -1,19 +1,29 @@
-// RL_dealer.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
 #include <iostream>
+#include <zmq.hpp>
+#include <string>
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	zmq::context_t contexto(1);
+	zmq::socket_t dealer(contexto, zmq::socket_type::dealer);
+
+	// Asignar el id al cliente: 
+	dealer.set(zmq::sockopt::routing_id, "cliente_1");
+
+	dealer.connect("tcp://localhost:5555");
+	std::cout << "Conectado a 5555" << std::endl;
+
+	std::string mensaje = "soy el cliente 1";
+	dealer.send(zmq::message_t(mensaje), zmq::send_flags::none);
+	std::cout << "mensaje enviado " << std::endl;
+
+	// esperar la respuesta:
+	zmq::message_t respuesta;
+	dealer.recv(respuesta);
+
+	std::cout << "respuesta del servidor: " << respuesta.to_string() << std::endl;
+
+
+	return 0;
 }
 
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
