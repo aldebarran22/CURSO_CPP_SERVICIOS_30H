@@ -26,7 +26,7 @@ int main()
             valor = std::rand() % 100;
             mensaje = m + " " + std::to_string(valor);
 
-            socket.send(zmq::buffer(mensaje));
+            socket.send(zmq::buffer(m+ " " + mensaje));
             std::cout << "Publicando: " << mensaje;
 
             std::this_thread::sleep_for(std::chrono::seconds(1));
