@@ -97,7 +97,7 @@ void consumidor() {
         return;
     }
 
-    amqp_bytes_t queue = amqp_cstring_bytes("test_queue");
+    amqp_bytes_t queue = amqp_cstring_bytes("test_queue2");
     amqp_queue_declare(conn, 1, queue, 0, 0, 0, 1, amqp_empty_table);
     amqp_get_rpc_reply(conn);
 
@@ -131,7 +131,7 @@ void consumidor() {
 
 int main()
 {
-    productor();
+    //productor();
     consumidor();
     return 0;
 
