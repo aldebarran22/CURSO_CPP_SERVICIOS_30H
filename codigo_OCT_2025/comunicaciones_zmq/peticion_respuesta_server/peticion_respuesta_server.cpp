@@ -27,7 +27,7 @@ int main()
 		std::cout << "Recibido Persona: " << p.nombre << " " << p.edad << std::endl;
 
 		// Enviamos el mensaje al cliente:
-		std::string respuesta = "mensaje del server";
+		std::string respuesta = request.to_string();
 		socket.send(zmq::buffer(respuesta), zmq::send_flags::none);
 	}
 
