@@ -18,7 +18,7 @@ int main()
 {
 	try {
 		net::io_context ioc;
-		ssl::context ctx(ssl::context::tlsv12_server);
+		ssl::context ctx(ssl::context::tlsv12_client);
 
 		// Para pruebas locales:
 		ctx.set_verify_mode(ssl::verify_none);
