@@ -3,7 +3,7 @@ services:
     image: mysql:8.0
     container_name: mysql_dev
     restart: always
-    enviroment:
+    environment:
       MYSQL_ROOT_PASSWORD: antonio
       MYSQL_DATABASE: empresa3
       MYSQL_USER: antonio
