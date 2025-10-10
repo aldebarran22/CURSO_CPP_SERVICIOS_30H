@@ -23,6 +23,15 @@ services:
       - redis-data:/data
     command: redis-server --appendonly yes
     
+  microservicio:
+    build:
+      context: ./servicio
+    container_name: microservicio-empleados
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - mysql        
 
 volumes:
   mysql_data:
