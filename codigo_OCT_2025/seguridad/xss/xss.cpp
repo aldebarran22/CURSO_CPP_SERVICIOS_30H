@@ -15,8 +15,10 @@ using json = nlohmann::json;
 std::string sanitizer(const std::string& in) {
     // Limpiar caracteres especiales:
 
-    std::string out;
+    std::string out = "";
     for (char c : in) {
+        //std::cout << "c de in: " << c << std::endl << " out: " << out << std::endl;
+
         switch (c) {
         case '&': out += "&amp;"; break;
         case '<': out += "&lt;"; break;
@@ -25,7 +27,7 @@ std::string sanitizer(const std::string& in) {
         case '\'': out += "&#x27;"; break;
         case '/': out += "&#x2F;"; break;
 
-        defaukt:
+        default:
             out += c;
         }
     }
