@@ -24,7 +24,7 @@ int main()
                 // Si es correcto podemos generar el token
                 auto token = jwt::create().
                     set_issuer("curso C++").
-                    set_payload_claim("usuario", jwt::claim(USER)).
+                    //set_payload_claim("usuario", jwt::claim(json(USER))).
                     set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 30 }).
                     sign(jwt::algorithm::hs256{ PWD });
 
