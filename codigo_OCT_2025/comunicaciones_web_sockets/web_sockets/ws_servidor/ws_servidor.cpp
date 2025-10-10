@@ -12,7 +12,7 @@ namespace websocket = beast::websocket;
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
 
-void do_sesion(tcp::socket socket) {
+void do_session(tcp::socket socket) {
 
 	try {
 		websocket::stream<tcp::socket> ws(std::move(socket));
@@ -39,6 +39,40 @@ void do_sesion(tcp::socket socket) {
 	}
 }
 
+int main() {
+	net::io_context ioc;
+	tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), 80));
+	unsigned int num_threads = std::thread::hardware_concurrency();
+	boost::asio::thread_pool pool(num_threads);
+
+	try {
+
+		std::cout << "Numero de hilos soportado: " << num_threads << std::endl;
+		std::cout << "Servidor ok en el puerto 80 " << std::endl;
+
+		for (;;) {			
+
+			// Definir un socket (1 por cada cliente)
+			tcp::socket socket(ioc);
+
+			std::cout << "Esperando clientes ...";
+			acceptor.accept(socket);
+
+			boost::asio::post(pool, [s = std::move(socket)]() mutable {
+				do_session(std::move(s));
+			});
+		}
+
+	}
+	catch (const std::exception& e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
+	}
+}
+
+/*
+* 
+ojo, podemos reventar la maquina:
+
 int main()
 {
 	net::io_context ioc;
@@ -64,6 +98,6 @@ int main()
 		std::cerr << "ERROR: " << e.what() << std::endl;
 	}
    
-}
+}*/
 
 
