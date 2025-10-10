@@ -47,17 +47,27 @@ void do_session(tcp::socket socket, ssl::context& ctx) {
 
 int main()
 {
-	net::io_context ioc;
-	ssl::context ctx(ssl::context::tlsv12_server);
+	try {
+		net::io_context ioc;
+		ssl::context ctx(ssl::context::tlsv12_server);
 
-	// Pasar los dos ficheros generados con openssl:
-	ctx.use_certificate_chain_file("cert.pem");
-	ctx.use_private_key_file("key.pem", ssl::context::file_format::pem);
+		// Pasar los dos ficheros generados con openssl:
+		ctx.use_certificate_chain_file("cert.pem");
+		ctx.use_private_key_file("key.pem", ssl::context::file_format::pem);
 
-	tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), PORT));
-	std::cout << "Servidor WSS escuchando en puerto: " << PORT << std::endl;
+		tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), PORT));
+		std::cout << "Servidor WSS escuchando en puerto: " << PORT << std::endl;
 
+		for (;;) {
+			tcp::socket socket(ioc);
+			acceptor.accept(socket);
+			std::thread{ do_session, std::move(socket), std::ref(ctx) }.detach();
+		}
 
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Error inesperado " << e.what() << std::endl;
+	}
 
-
+	return 0;
 }
