@@ -43,8 +43,12 @@ int main()
         }
     });
 
-    // Poner el servidor a la escucha!
-    app.port(8000).multithreaded().run();
+    // Poner el servidor a la escucha para http:
+    //app.port(8000).multithreaded().run();
+
+    // Poner el servidor a la escucha para https:
+    // Ir --> propiedades --> C/C++ Preprocesador --> Definiciones del preprocesador: CROW_ENABLE_SSL
+    app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(8443).multithreaded().run();
     return 0;
 
 }
