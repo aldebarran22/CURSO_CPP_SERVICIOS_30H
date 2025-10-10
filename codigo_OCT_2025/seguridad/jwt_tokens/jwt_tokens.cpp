@@ -32,6 +32,10 @@ int main()
                 crow::json::wvalue respuesta;
                 respuesta["token"] = token;
                 return crow::response(respuesta);
+
+            }
+            else {
+                return crow::response(400, "Credenciales incorrectas");
             }
         }
         catch (const std::exception& e) {
