@@ -23,6 +23,11 @@ int main()
 		// Para pruebas locales:
 		ctx.set_verify_mode(ssl::verify_none);
 
+		// En produccion:
+		//ctx.set_verify_mode(ssl::verify_peer);
+		//ctx.load_verify_file("ca.pem");
+
+
 		tcp::resolver resolver(ioc);
 		websocket::stream<beast::ssl_stream<tcp::socket>> ws(ioc, ctx);
 
