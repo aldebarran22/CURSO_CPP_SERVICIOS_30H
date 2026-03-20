@@ -1,5 +1,0 @@
-Construir contenedores: docker-compose up -d
-
-Borrar todo incluidos los volúmenes: docker-compose down -v
-
-Reconstruir las imagenes y crear de nuevo los contenedores: docker-compose up --build

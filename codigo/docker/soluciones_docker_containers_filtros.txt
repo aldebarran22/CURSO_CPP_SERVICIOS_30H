@@ -1,3 +1,0 @@
-Filtro por la imagen:
-
-docker ps -a --filter ancestor=hello-world
