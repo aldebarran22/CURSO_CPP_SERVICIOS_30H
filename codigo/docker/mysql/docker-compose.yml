@@ -1,0 +1,16 @@
+# Desplegar un contenedor de mysql por el puerto 3307
+# 3307:3306 -> puerto externo del host: 3307, interno del contenedor: 3306
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_dev
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql 
+      - ./empresa3_mysql.sql:/docker-entrypoint-initdb.d/empresa3_mysql.sql
+      
+volumes:
+  mysql_data:
