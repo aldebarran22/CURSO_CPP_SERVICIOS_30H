@@ -11,7 +11,7 @@ services:
     image: postgres:16
     container_name: postgres_dev
     restart: always
-    enviroment:
+    environment:
       POSTGRES_DB: empresa3
       POSTGRES_USER: antonio
       POSTGRES_PASSWORD: antonio
