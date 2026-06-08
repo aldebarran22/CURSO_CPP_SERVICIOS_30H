@@ -6,6 +6,8 @@
 
 # Para conectar con el contenedor: docker exec -it redis-cache redis-cli
 # redis-cli es la herramienta cliente para interactuar con Redis.
+# Borrados: del clave
+# listar claves: keys *
 
 services:
   redis:
