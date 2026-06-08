@@ -14,5 +14,5 @@ services:
       - redis-data: /data
     command: redis-server --appendonly yes 
     
-  volumes:
-    redis-data:
+volumes:
+  redis-data:
