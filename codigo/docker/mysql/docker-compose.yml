@@ -8,6 +8,11 @@ services:
     restart: always
     ports:
       - "3307:3306"
+    environment: docker ps
+      MYSQL_ROOT_PASSWORD: antonio
+      MYSQL_DATABASE: empresa3
+      MYSQL_USER: antonio
+      MYSQL_PASSWORD: antonio
     volumes:
       - mysql_data:/var/lib/mysql 
       - ./empresa3_mysql.sql:/docker-entrypoint-initdb.d/empresa3_mysql.sql
