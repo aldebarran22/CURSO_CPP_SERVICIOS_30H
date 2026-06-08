@@ -4,6 +4,9 @@
 # Permite persistencia aunque se reinicie el contenedor
 # Al declarar el servicio: el modo aof se indica con la etiqueta command
 
+# Para conectar con el contenedor: docker exec -it redis-cache redis-cli
+# redis-cli es la herramienta cliente para interactuar con Redis.
+
 services:
   redis:
     image: redis:latest
@@ -11,7 +14,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - redis-data: /data
+      - redis-data:/data
     command: redis-server --appendonly yes 
     
 volumes:
