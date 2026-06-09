@@ -76,10 +76,33 @@ void CrowCRUD::run()
 		return crow::response(resp);
 		});
 
+	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
+
+		std::lock_guard<std::mutex> lock(this->mtx);
+
+		// Recoger el json que viene de la Request: el tipo es: crow::json::rvalue
+		auto body = crow::json::load(req.body);
+		if (!body) {
+			// 400 Bad Request, el json no coincide con el json esperado:
+			return crow::response(400, "Json incorrecto");
+		}
+
+		// Controlar si existe o no el id en la coleccion:
+		if (usuarios.count(id) == 0) {
+			return crow::response(404, "Usuario con el id: " + std::to_string(id) + " no existe");
+		}
+		
+		// Todo ok, actualizamos el usuario:
+		usuarios[id] = std::move(body);
+		return crow::response(200, "Usuario actualizado");
+		});
+
 	// Puesta en marcha del servidor
 	app.port(8080).concurrency(std::thread::hardware_concurrency()).multithreaded().run();
 
+
 }
+
 
 CrowCRUD::~CrowCRUD()
 {
