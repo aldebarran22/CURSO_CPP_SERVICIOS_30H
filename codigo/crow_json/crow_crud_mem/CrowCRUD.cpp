@@ -64,6 +64,9 @@ void CrowCRUD::run()
 		return crow::response(resp);
 		});
 
+	// Puesta en marcha del servidor
+	app.port(8080).concurrency(std::thread::hardware_concurrency()).multithreaded().run();
+
 }
 
 CrowCRUD::~CrowCRUD()
