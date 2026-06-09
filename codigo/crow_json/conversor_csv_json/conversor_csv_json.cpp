@@ -9,8 +9,8 @@
 
 #include "Pedido.h"
 
-int main()
-{
+int main(){
+
     std::string pathIn = "..\\..\\..\\practicas\\ficheros\\pedidos_final.csv";
     std::string pathOut = "..\\..\\..\\practicas\\ficheros\\out\\pedidos.json";
 
@@ -21,30 +21,36 @@ int main()
     std::vector<std::string> campos;
     bool cabs = true;
 
+    // Una coleccion para almacenar los json de cada pedido:
+    std::vector<nlohmann::json> array;
+    nlohmann::json doc;
+
 
     if (!fin) {
         std::cerr << "No se ha encontrado el fichero: " << pathIn << std::endl;
-        return;
+        return 1;
     }
 
     while (std::getline(fin, linea)) {
-        std::cout << linea << std::endl;
+        //std::cout << linea << std::endl;
 
         if (cabs) {
             cabs = false;
 
         }
-        else {            
+        else {
             Pedido p(linea);
-
+            array.push_back(p.to_json());
         }
     }
     fin.close();
 
     // Convertir y tabular;
+    doc = array;
 
     // Imprimir a consola:
-
+    std::cout << doc << std::endl;
+    fout << doc.dump(4);
 
     fout.close();
     return 0;
