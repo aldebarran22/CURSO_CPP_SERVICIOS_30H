@@ -29,6 +29,8 @@ void CrowCRUD::run()
 		crow::json::wvalue resp;
 		resp["id"] = id;
 
+		CROW_LOG_DEBUG << "Numero de usuarios " << std::to_string(this->usuarios.size());
+
 		return crow::response(201, resp);
 
 		});
@@ -114,7 +116,10 @@ void CrowCRUD::run()
 		});
 
 	// Puesta en marcha del servidor
-	app.port(8080).concurrency(std::thread::hardware_concurrency()).multithreaded().run();
+	app.port(8080).concurrency(std::thread::hardware_concurrency()).
+		multithreaded().
+		loglevel(crow::LogLevel::Debug).
+		run();
 
 
 }
