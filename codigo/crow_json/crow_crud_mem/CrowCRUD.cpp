@@ -20,15 +20,48 @@ void CrowCRUD::run()
 		}
 
 		// Guardar el json en el mapa:
+		std::lock_guard<std::mutex> lock(mtx);
+		// Se ejecuta en exclusión mutua, solo modifica 1 hilo
 		int id = this->siguiente_id++;
-		this->usuarios[id] = body; // OJO la copia no funciona, tiene que ser std::move
+		this->usuarios[id] = std::move(body); // OJO la copia no funciona, tiene que ser std::move
 
 		// Montar la respuesta al cliente:
 		crow::json::wvalue resp;
 		resp["id"] = id;
 
+		return crow::response(201, resp);
+
+		});
+
+	// Get - GET /usuarios
+	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
+
+		std::lock_guard<std::mutex> lock(this->mtx);
+
+		// Definimos una estructura lista que se convierte a un array de json
+		crow::json::wvalue lista = crow::json::wvalue::list();
+		int i = 0;
+
+		for (const auto& [id, usuario] : this->usuarios) {
+			crow::json::wvalue item;
+			item["id"] = id;
+
+			if (usuario.has("nombre"))
+				item["nombre"] = usuario["nombre"].s();
+			else
+				item["nombre"] = "";
+
+			item["edad"] = usuario["edad"].i();
+
+			// Cargar en la lista:
+			lista[i++] = std::move(item);
+		}
 
 
+		// Definir la respuesta:
+		crow::json::wvalue  resp;
+		resp["usuarios"] = std::move(lista);
+		return crow::response(resp);
 		});
 
 }
