@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_basico", "crow_basico\crow_basico.vcxproj", "{6821A052-119C-4BD5-B892-7C5C6E2C6646}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_crud_mem", "crow_crud_mem\crow_crud_mem.vcxproj", "{BECCD495-0C10-4B2B-B8C5-AA9390215C35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{6821A052-119C-4BD5-B892-7C5C6E2C6646}.Release|x64.Build.0 = Release|x64
 		{6821A052-119C-4BD5-B892-7C5C6E2C6646}.Release|x86.ActiveCfg = Release|Win32
 		{6821A052-119C-4BD5-B892-7C5C6E2C6646}.Release|x86.Build.0 = Release|Win32
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Debug|x64.ActiveCfg = Debug|x64
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Debug|x64.Build.0 = Debug|x64
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Debug|x86.ActiveCfg = Debug|Win32
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Debug|x86.Build.0 = Debug|Win32
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Release|x64.ActiveCfg = Release|x64
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Release|x64.Build.0 = Release|x64
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Release|x86.ActiveCfg = Release|Win32
+		{BECCD495-0C10-4B2B-B8C5-AA9390215C35}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
