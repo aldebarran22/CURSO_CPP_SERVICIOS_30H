@@ -1,7 +1,6 @@
 #include <vector>
 
 #include "Pedido.h"
-#include "CSVJson.h"
 #include "utilidades.h"
 
 Pedido::Pedido(){}
@@ -42,20 +41,6 @@ Pedido Pedido::from_json(const nlohmann::json& j)
 	p.pais = j.at("pais").get<std::string>();
 
 	return p;
-}
-
-xmlNodePtr Pedido::to_xml() const 
-{
-	xmlNodePtr nodo = xmlNewNode(nullptr, BAD_CAST "pedido");
-
-	xmlNewChild(nodo, nullptr, BAD_CAST "idpedido", BAD_CAST this->idpedido.c_str());
-	xmlNewChild(nodo, nullptr, BAD_CAST "cliente", BAD_CAST this->cliente.c_str());
-	xmlNewChild(nodo, nullptr, BAD_CAST "empresa", BAD_CAST this->empresa.c_str());
-	xmlNewChild(nodo, nullptr, BAD_CAST "empleado", BAD_CAST this->empleado.c_str());
-	xmlNewChild(nodo, nullptr, BAD_CAST "empleado", BAD_CAST std::to_string(this->importe).c_str());
-	xmlNewChild(nodo, nullptr, BAD_CAST "pais", BAD_CAST this->pais.c_str());
-
-	return nodo;
 }
 
 Pedido::~Pedido()

@@ -2,7 +2,6 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
-#include <libxml/tree.h>
 
 
 class Pedido
@@ -19,7 +18,7 @@ public:
 	Pedido(std::string, char =';');
 	nlohmann::json to_json() const;
 	static Pedido from_json(const nlohmann::json& j);
-	xmlNodePtr to_xml() const;
+	
 	~Pedido();
 };
 
