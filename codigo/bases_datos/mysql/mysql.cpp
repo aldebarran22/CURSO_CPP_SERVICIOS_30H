@@ -14,7 +14,7 @@
 #include "EmpleadoRepositorio.h"
 
 
-void test2Repo() {
+void testEmpleado() {
     soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
 
     EmpleadoRepository repo(sql);
@@ -54,29 +54,36 @@ void test2Repo() {
 }
 
 
+void testPedido() {
+    try {
+        soci::session sql(soci::mysql, "db=empresa3 user=root password=antonio host=127.0.0.1 port=3307");
+        PedidoRepositorio repo(sql);
+
+        int id = 99;
+        auto pedido = repo.read(id);
+
+        if (pedido) {
+            std::cout << pedido->idpedido << " " << pedido->cliente << " " << pedido->importe << std::endl;
+        }
+        else {
+            std::cout << "No exite el pedido: " << id << std::endl;
+        }
+
+        std::vector<Pedido> pedidos = repo.select();
+        for (const auto& p : pedidos) {
+            std::cout << p.idpedido << " " << p.cliente << " " << p.importe << std::endl;
+        }
+
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
 int main()
 {
-	try {
-		soci::session sql(soci::mysql, "db=empresa3 user=root password=antonio host=127.0.0.1 port=3307");
-		PedidoRepositorio repo(sql);
+    testEmpleado();
+    //testPedido();
 
-		int id = 99;
-		auto pedido = repo.read(id);
-
-		if (pedido) {
-			std::cout << pedido->idpedido << " " << pedido->cliente << " " << pedido->importe << std::endl;
-		}
-		else {
-			std::cout << "No exite el pedido: " << id << std::endl;
-		}
-
-		std::vector<Pedido> pedidos = repo.select();
-		for (const auto& p : pedidos) {
-			std::cout << p.idpedido << " " << p.cliente << " " << p.importe << std::endl;
-		}
-
-	}
-	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-   }
+    return 0;
 }
