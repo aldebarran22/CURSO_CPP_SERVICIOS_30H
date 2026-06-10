@@ -28,7 +28,24 @@ int main()
 
     std::cout << "Servidor ok, con " << num_hilos << " hilos" << std::endl;
 
+    // Bucle infinito del servidor para recibir a los clientes:
+    for (;;) {
 
+        // Definir un socket por cada conexion:
+        tcp::socket socket(ioc);
+
+        std::cout << "esperando clientes " << std::endl;
+
+        // Esperar a que se conecten los clientes: accept --> acepta un cliente
+        acceptor.accept(socket);
+
+        // Lanzar un hilo con boost para atender al cliente conectado:
+        // Al lanzar el hilo se le indica la tarea a realizar a través de una funcion
+        boost::asio::post(pool, [s = std::move(socket)]() {
+            // Es la tarea que tiene que realizar el thread, le enviamos el socket con el que se conecto
+            do_session(std::move(s));
+        });
+    }
 
 }
 
