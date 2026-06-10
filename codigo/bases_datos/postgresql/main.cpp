@@ -1,5 +1,7 @@
+
 #include <iostream>
 #include <libpq-fe.h>
+#include "EmpleadoRepository.hpp"
 
 int testConexion() {
     const char* conninfo = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";
@@ -17,9 +19,6 @@ int testConexion() {
     PQfinish(conn);
 }
 
-#include <iostream>
-#include <libpq-fe.h>
-#include "EmpleadoRepository.hpp"
 
 void testPostgresRepo() {
     const char* conninfo = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";

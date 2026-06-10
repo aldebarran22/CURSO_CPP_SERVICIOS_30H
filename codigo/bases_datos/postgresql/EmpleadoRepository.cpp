@@ -34,7 +34,8 @@ void EmpleadoRepository::insertar(const Empleado& emp) {
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         PQclear(res);
-        throw std::runtime_error("Error al insertar empleado");
+        std::string errorMsg = PQerrorMessage(conn_);
+        throw std::runtime_error("Error al insertar empleado: "+errorMsg);
     }
 
     PQclear(res);
@@ -117,5 +118,10 @@ std::vector<Empleado> EmpleadoRepository::listarTodos() {
 
     PQclear(res);
     return empleados;
+}
+
+EmpleadoRepository::~EmpleadoRepository()
+{
+    PQfinish(this->conn_);
 }
 

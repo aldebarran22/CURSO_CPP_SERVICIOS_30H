@@ -12,6 +12,7 @@ public:
     void actualizar(const Empleado& emp);
     void eliminar(int id);
     std::vector<Empleado> listarTodos();
+    ~EmpleadoRepository();
 
 private:
     PGconn* conn_;
