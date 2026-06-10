@@ -20,7 +20,7 @@ int main()
 		auto pedido = repo.read(id);
 
 		if (pedido) {
-			std::cout << pedido->idpedido << " " << pedido->importe << std::endl;
+			std::cout << pedido->idpedido << " " << pedido->cliente << std::endl;
 		}
 		else {
 			std::cout << "No exite el pedido: " << id << std::endl;
