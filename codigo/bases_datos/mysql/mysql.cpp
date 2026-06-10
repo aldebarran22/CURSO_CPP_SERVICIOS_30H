@@ -29,7 +29,7 @@ int main()
 		}
 
 		std::vector<Pedido> pedidos = repo.select();
-		for (auto p : pedidos) {
+		for (const auto& p : pedidos) {
 			std::cout << p.idpedido << " " << p.cliente << " " << p.importe << std::endl;
 		}
 

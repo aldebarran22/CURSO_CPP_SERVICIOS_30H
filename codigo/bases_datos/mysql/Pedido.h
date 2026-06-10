@@ -8,7 +8,7 @@ class Pedido
 {	
 
 public:
-	std::string idpedido;
+	int idpedido;
 	std::string cliente;
 	std::string empresa;
 	std::string empleado;
