@@ -25,8 +25,8 @@ int main()
 	ssl::context ctx(ssl::context::tlsv12_server);
 
 	// Indicar las rutas de los certificados:
-	ctx.use_certificate_chain_file("cert.pem");
-	ctx.use_private_key_file("key.pem", ssl::context::file_format::pem);
+	ctx.use_certificate_chain_file("..\\..\\certificados\\cert.pem");
+	ctx.use_private_key_file("..\\..\\certificados\\key.pem", ssl::context::file_format::pem);
 
 	tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), PUERTO));
 	std::cout << "Servidor WSS en el puerto: " << PUERTO << std::endl;
