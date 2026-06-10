@@ -14,6 +14,21 @@ using tcp = net::ip::tcp;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Crear el contexto de comunicacion:
+    net::io_context ioc;
+
+    // Definir el endpoint: 
+    tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), 80));
+
+    // Definir un pool de hilos y el numero total se obtiene del HW:
+    unsigned int num_hilos = std::thread::hardware_concurrency();
+
+    // Inicializar el pool de hilos:
+    boost::asio::thread_pool pool(num_hilos);
+
+    std::cout << "Servidor ok, con " << num_hilos << " hilos" << std::endl;
+
+
+
 }
 
