@@ -124,12 +124,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmpleadoRepositorio.cpp" />
     <ClCompile Include="mysql.cpp" />
     <ClCompile Include="Pedido.cpp" />
     <ClCompile Include="PedidoRepositorio.cpp" />
     <ClCompile Include="utilidades.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Empleado.h" />
+    <ClInclude Include="EmpleadoRepositorio.h" />
     <ClInclude Include="Pedido.h" />
     <ClInclude Include="PedidoRepositorio.h" />
     <ClInclude Include="utilidades.h" />
