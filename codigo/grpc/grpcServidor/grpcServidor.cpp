@@ -33,10 +33,31 @@ class SaludoServiceImpl final : public Saludo::Service {
 
 };
 
+void ejecutarServidor() {
+    std::string direccion = "0.0.0.0:50001";
+    SaludoServiceImpl servicio;
 
+    // Tenemos que construir y poner en marcha el servidor y registrar el servicio:
+    ServerBuilder builder;
+
+    // Indicar la direccion donde va a estar escuchando
+    builder.AddListeningPort(direccion, grpc::InsecureServerCredentials());
+
+    // Registrar el servicio:
+    builder.RegisterService(&servicio);
+
+    // Ponerlo en marcha:
+    std::unique_ptr<Server> server(builder.BuildAndStart());
+
+    std::cout << "Servidor escuchando en la dirección: " << direccion << std::endl;
+    
+    // Esperar conexiones:
+    server->Wait();
+}
 
 int main()
 {
-    
+    ejecutarServidor();
+    return 0;
 }
 
