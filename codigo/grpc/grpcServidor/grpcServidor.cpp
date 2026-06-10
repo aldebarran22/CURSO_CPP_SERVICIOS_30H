@@ -49,7 +49,7 @@ void ejecutarServidor() {
     // Ponerlo en marcha:
     std::unique_ptr<Server> server(builder.BuildAndStart());
 
-    std::cout << "Servidor escuchando en la dirección: " << direccion << std::endl;
+    std::cout << "Servidor escuchando en la direccion: " << direccion << std::endl;
     
     // Esperar conexiones:
     server->Wait();

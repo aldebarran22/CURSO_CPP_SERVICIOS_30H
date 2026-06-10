@@ -2,18 +2,44 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <string>
+#include <grpcpp/grpcpp.h>
+#include "saludo.grpc.pb.h"
+
+using grpc::Channel;
+using grpc::ClientContext;
+using grpc::Status;
+
+using saludo::Saludo;
+using saludo::Solicitud;
+using saludo::Respuesta;
+
+// La clase del cliente mantiene un att que representa el _stub y añadimos un metodo para facilitar la comunicacion con el servidor
+class SaludoClient { 
+
+public:
+    SaludoClient(std::shared_ptr<Channel> canal) : stub_(Saludo::NewStub(canal)){}
+
+    std::string DiHola(const std::string& nombre) {
+        Solicitud solicitud;
+        Respuesta respuesta;
+        ClientContext contexto;
+
+        solicitud.set_nombre(nombre);
+
+        // Hacemos la llamada al rcp: status representa el resultado de la peticion
+        Status estado = stub_->DiHola(&contexto, solicitud, &respuesta);
+
+
+
+    }
+
+private:
+    std::unique_ptr<Saludo::Stub> stub_;
+};
 
 int main()
 {
     std::cout << "Hello World!\n";
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
