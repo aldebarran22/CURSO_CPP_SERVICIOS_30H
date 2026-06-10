@@ -21,7 +21,7 @@ class SaludoServiceImpl final : public Saludo::Service {
     // Hereda de Service y sobrescribe el metodo virtual DiHola, aqui implementamos 
     // la logica de lo que queremos hacer dentro del metodo rpc:
     Status DiHola(ServerContext* context, const Solicitud* request, Respuesta* reply) override {
-        
+                
         // El nombre de la peticion
         std::string nombre = request->nombre();
 
