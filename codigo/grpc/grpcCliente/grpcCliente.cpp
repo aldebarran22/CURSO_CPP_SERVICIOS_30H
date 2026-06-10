@@ -31,7 +31,12 @@ public:
         // Hacemos la llamada al rcp: status representa el resultado de la peticion
         Status estado = stub_->DiHola(&contexto, solicitud, &respuesta);
 
-
+        if (estado.ok()) {
+            return respuesta.mensaje();
+        }
+        else {
+            return "Error: " + estado.error_message();
+        }
 
     }
 
@@ -41,5 +46,9 @@ private:
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Crear el canal de comunicacion con el servidor:
+    SaludoClient cliente(grpc::CreateChannel("localhost:50001", grpc::InsecureChannelCredentials()));
+    std::string respuesta = cliente.DiHola("Mundo");
+    std::cout << "Respuesta del servidor: " << respuesta << std::endl;
+    return 0;
 }
