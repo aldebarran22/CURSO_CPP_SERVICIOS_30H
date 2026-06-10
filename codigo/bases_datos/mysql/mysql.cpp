@@ -7,6 +7,8 @@
 #include <soci/mysql/soci-mysql.h>
 
 #include "Pedido.h"
+#include <vector>
+
 #include "PedidoRepositorio.h"
 
 
@@ -16,7 +18,7 @@ int main()
 		soci::session sql(soci::mysql, "db=empresa3 user=root password=antonio host=127.0.0.1 port=3307");
 		PedidoRepositorio repo(sql);
 
-		int id = 10250;
+		int id = 99;
 		auto pedido = repo.read(id);
 
 		if (pedido) {
@@ -24,6 +26,11 @@ int main()
 		}
 		else {
 			std::cout << "No exite el pedido: " << id << std::endl;
+		}
+
+		std::vector<Pedido> pedidos = repo.select();
+		for (auto p : pedidos) {
+			std::cout << p.idpedido << " " << p.cliente << " " << p.importe << std::endl;
 		}
 
 	}
