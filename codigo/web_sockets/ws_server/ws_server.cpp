@@ -74,7 +74,7 @@ int main()
 
         // Lanzar un hilo con boost para atender al cliente conectado:
         // Al lanzar el hilo se le indica la tarea a realizar a través de una funcion
-        boost::asio::post(pool, [s = std::move(socket)]() {
+        boost::asio::post(pool, [s = std::move(socket)]() mutable {
             // Es la tarea que tiene que realizar el thread, le enviamos el socket con el que se conecto
             do_session(std::move(s));
         });
