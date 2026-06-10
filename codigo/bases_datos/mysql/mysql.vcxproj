@@ -126,10 +126,12 @@
   <ItemGroup>
     <ClCompile Include="mysql.cpp" />
     <ClCompile Include="Pedido.cpp" />
+    <ClCompile Include="PedidoRepositorio.cpp" />
     <ClCompile Include="utilidades.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pedido.h" />
+    <ClInclude Include="PedidoRepositorio.h" />
     <ClInclude Include="utilidades.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

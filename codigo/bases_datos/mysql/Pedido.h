@@ -5,7 +5,9 @@
 
 
 class Pedido
-{
+{	
+
+public:
 	std::string idpedido;
 	std::string cliente;
 	std::string empresa;
@@ -13,7 +15,6 @@ class Pedido
 	float importe;
 	std::string pais;
 
-public:
 	Pedido();
 	Pedido(std::string, char =';');
 	nlohmann::json to_json() const;
