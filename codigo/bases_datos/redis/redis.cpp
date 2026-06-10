@@ -6,6 +6,7 @@
 int main() {
     // Conexión al servidor Redis en localhost:6379
     redisContext* context = redisConnect("127.0.0.1", 6379);
+
     if (context == nullptr || context->err) {
         if (context) {
             std::cerr << "Error de conexión: " << context->errstr << std::endl;
