@@ -48,7 +48,7 @@ void do_session(tcp::socket socket) {
 int main()
 {
     // Crear el contexto de comunicacion:
-    net::io_context ioc;
+    net::io_context ioc;   
 
     // Definir el endpoint: 
     tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), 80));
@@ -58,7 +58,7 @@ int main()
 
     // Inicializar el pool de hilos:
     boost::asio::thread_pool pool(num_hilos);
-
+    
     std::cout << "Servidor ok, con " << num_hilos << " hilos" << std::endl;
 
     // Bucle infinito del servidor para recibir a los clientes:
