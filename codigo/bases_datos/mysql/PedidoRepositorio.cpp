@@ -41,5 +41,26 @@ bool PedidoRepositorio::delete_(int id)
 
 std::vector<Pedido> PedidoRepositorio::select()
 {
-	return std::vector<Pedido>();
+	std::vector<Pedido> pedidos;
+
+	std::string sql = std::string("select p.idpedido, p.idcliente, e.nombre as empleado, ") +
+		std::string("emp.nombre as empresa, p.importe, p.pais from pedidos p inner join empresasenvios emp ") +
+		std::string("on p.idempresaenvio = emp.id inner join empleados e on p.idempleado = e.id");
+
+	soci::rowset<soci::row> rs = sql_.prepare << sql;
+
+	for (const auto& r : rs) {
+		Pedido p;
+
+		p.idpedido = r.get<int>(0);
+		p.cliente = r.get<std::string>(1);
+		p.empleado = r.get<std::string>(2);
+		p.empresa = r.get<std::string>(3);
+		p.importe = r.get<double>(4);
+		p.pais = r.get<std::string>(5);
+
+		pedidos.push_back(p);
+	}
+
+	return pedidos;
 }
