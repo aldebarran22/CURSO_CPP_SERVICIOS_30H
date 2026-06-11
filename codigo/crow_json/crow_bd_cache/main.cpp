@@ -30,15 +30,15 @@ int main()
 		PedidoService service(cache, repositorio);
 
 		
-		std::optional<Pedido> p = service.read(10250);
+		std::optional<Pedido> p = service.read(10251);
 		if (p) {
 			std::cout << p->cliente << " " << p->empleado << std::endl;
 		}
 
-		/*
+		
 		// Crear el servicio crow e inyectar service:
 		PedidoCROW servicioCrow(service);
-		servicioCrow.run();*/
+		servicioCrow.run();
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what();
