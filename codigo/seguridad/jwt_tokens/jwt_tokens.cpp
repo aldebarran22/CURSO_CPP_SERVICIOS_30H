@@ -59,6 +59,15 @@ int main()
         try {
             auto auth_header = request.get_header_value("Authorization");
             std::cout << "Authorization: " << auth_header << std::endl;
+           
+            // Verificar que el encabezado exista y comience con "Bearer "
+            if (auth_header.substr(0, 7) != "Bearer ") {
+                return crow::response(401, "Token no proporcionado o mal formado");
+            }
+
+            // Extraer el token
+            std::string token = auth_header.substr(7);
+            std::cout << "Token: " << token << std::endl;
 
             crow::json::wvalue respuesta;
             respuesta["resul"] = "ok";
