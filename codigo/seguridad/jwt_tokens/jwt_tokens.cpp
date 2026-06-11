@@ -24,7 +24,18 @@ int main()
         auto j = json::parse(request.body);
 
         // Validar que vienes los campos que necesitamos:
+        if (!j.contains("user") || !j.contains("pwd")) {
+            return crow::response(400, "json: incorrecto, se esperaban campos");
+        }
 
+        // Comprobar si existe o no el usuario:
+        if (USER == j.at("user") && PWD == j.at("pwd")) {
+            // Generar el token
+
+        }
+        else {
+            return crow::response(400, "No existe el usuario");
+        }
     });
 
     // Arrancar el servidor:
