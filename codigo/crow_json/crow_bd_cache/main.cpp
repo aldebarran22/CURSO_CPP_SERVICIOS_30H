@@ -13,35 +13,30 @@
 #include "PedidoService.h"
 #include "PedidoCROW.h"
 
+
 int main()
 {
-	try {
-		// Crear la sesion con soci:
-		soci::session sql(soci::mysql, "db=empresa3 user=root password=antonio host=127.0.0.1 port=3307");
+    try {
+        // Crear la sesión con soci (en heap, gestionada por shared_ptr)
+        auto sql = std::make_shared<soci::session>(
+            soci::mysql,
+            "db=empresa3 user=root password=antonio host=127.0.0.1 port=3307"
+        );
 
-		// Crear el repositorio e inyectar la sesion de soci:
-		PedidoRepositorio repositorio(sql);
+        // Crear el repositorio e inyectar la sesión
+        auto repositorio = std::make_shared<PedidoRepositorio>(sql);
 
-				
-		// Crear la cache:
-		PedidoCache cache;
+        // Crear la cache
+        auto cache = std::make_shared<PedidoCache>();
 
-		// Crear el servicio (logica de negocio) e inyectar cache y repositorio
-		PedidoService service(cache, repositorio);
+        // Crear el servicio (lógica de negocio)
+        auto service = std::make_shared<PedidoService>(cache, repositorio);
 
-		
-		std::optional<Pedido> p = service.read(10251);
-		if (p) {
-			std::cout << p->cliente << " " << p->empleado << std::endl;
-		}
-
-		
-		// Crear el servicio crow e inyectar service:
-		PedidoCROW servicioCrow(service);
-		servicioCrow.run();
-	}
-	catch (const std::exception& e) {
-		std::cerr << e.what();
-	}
+        // Crear el servicio Crow e inyectar service
+        PedidoCROW servicioCrow(service);
+        servicioCrow.run();
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what();
+    }
 }
-

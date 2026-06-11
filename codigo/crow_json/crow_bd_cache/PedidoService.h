@@ -10,13 +10,20 @@
 class PedidoService
 {
 private:
-	PedidoCache& cache;
-	PedidoRepositorio& repositorio;
+    std::shared_ptr<PedidoCache> cache;
+    std::shared_ptr<PedidoRepositorio> repositorio;
 
 public:
-	PedidoService(PedidoCache&, PedidoRepositorio&);
-	std::optional<Pedido> read(int);
-	std::vector<Pedido> selectAll();
-	~PedidoService();
-};
+    PedidoService(std::shared_ptr<PedidoCache> cache,
+        std::shared_ptr<PedidoRepositorio> repositorio)
+        : cache(cache), repositorio(repositorio)
+    {
+    }
 
+    PedidoService(const PedidoService&) = delete;
+    PedidoService& operator=(const PedidoService&) = delete;
+
+    std::optional<Pedido> read(int);
+    std::vector<Pedido> selectAll();
+    ~PedidoService() = default;
+};

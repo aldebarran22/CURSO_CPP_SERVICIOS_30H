@@ -125,7 +125,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="EmpleadoRepositorio.cpp" />
     <ClCompile Include="Pedido.cpp" />
     <ClCompile Include="PedidoCache.cpp" />
     <ClCompile Include="PedidoCROW.cpp" />
@@ -134,8 +133,6 @@
     <ClCompile Include="utilidades.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Empleado.h" />
-    <ClInclude Include="EmpleadoRepositorio.h" />
     <ClInclude Include="Pedido.h" />
     <ClInclude Include="PedidoCache.h" />
     <ClInclude Include="PedidoCROW.h" />

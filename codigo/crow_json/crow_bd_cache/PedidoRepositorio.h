@@ -8,15 +8,23 @@
 
 class PedidoRepositorio
 {
-public: 
-	PedidoRepositorio(soci::session& sql);
-	std::optional<Pedido> read(int id);
-	bool create(const Pedido& p);
-	bool update(const Pedido& p);
-	bool delete_(int id);
-	std::vector<Pedido> select();
+public:
+    // Ahora recibe un shared_ptr
+    PedidoRepositorio(std::shared_ptr<soci::session> sql)
+        : sql_(sql)
+    {
+    }
+
+    PedidoRepositorio(const PedidoRepositorio&) = delete;
+    PedidoRepositorio& operator=(const PedidoRepositorio&) = delete;
+
+    std::optional<Pedido> read(int id);
+    bool create(const Pedido& p);
+    bool update(const Pedido& p);
+    bool delete_(int id);
+    std::vector<Pedido> select();
 
 private:
-	soci::session& sql_;
+    // Ahora es un shared_ptr, no una referencia
+    std::shared_ptr<soci::session> sql_;
 };
-

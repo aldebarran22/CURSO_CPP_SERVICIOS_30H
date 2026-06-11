@@ -3,10 +3,6 @@
 
 #include "PedidoCROW.h"
 
-PedidoCROW::PedidoCROW(PedidoService&):service(service)
-{
-}
-
 void PedidoCROW::run()
 {
 	
@@ -17,7 +13,7 @@ void PedidoCROW::run()
 
 		try {
 			// Verificar que existe:
-			auto pedido = this->service.read(id);
+			auto pedido = this->service->read(id);
 
 			if (!pedido.has_value()) {
 				// No hemos encontrado el pedido (ni en la cache ni en mysql)
@@ -39,7 +35,7 @@ void PedidoCROW::run()
 
 		//std::lock_guard<std::mutex> lock(this->mtx);
 		try {
-			auto pedidos = this->service.selectAll();
+			auto pedidos = this->service->selectAll();
 			json j = pedidos;
 			return crow::response(j.dump());
 
@@ -51,11 +47,7 @@ void PedidoCROW::run()
 	});
 
 	// Puesta en marcha del servidor
-	app.port(8082).concurrency(std::thread::hardware_concurrency()).
-		multithreaded().
-		run();
-}
+	app.port(8082).concurrency(std::thread::hardware_concurrency()).multithreaded().run();
 
-PedidoCROW::~PedidoCROW()
-{
+	//app.port(8082).run();
 }

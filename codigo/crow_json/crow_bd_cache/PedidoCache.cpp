@@ -14,6 +14,7 @@ PedidoCache::PedidoCache()
 	}
 }
 
+/*
 std::optional<Pedido> PedidoCache::getPedido(int id)
 {
 	std::string key = "pedido" + std::to_string(id);
@@ -34,6 +35,39 @@ std::optional<Pedido> PedidoCache::getPedido(int id)
 	freeReplyObject(reply);
 	return std::nullopt;
 }
+*/
+
+std::optional<Pedido> PedidoCache::getPedido(int id)
+{
+	std::string key = "pedido" + std::to_string(id);
+
+	redisReply* reply = (redisReply*)redisCommand(this->contexto, "GET %s", key.c_str());
+
+	if (!reply) {
+		// La conexión puede haberse caído, marcamos el contexto en error
+		// o lanzamos excepción para ver claramente el problema.
+		throw std::runtime_error("redisCommand devolvió nullptr (posible desconexión de Redis)");
+	}
+
+	std::optional<Pedido> resultado;
+
+	if (reply->type == REDIS_REPLY_STRING) {
+		try {
+			std::string cadJson = reply->str;
+			json j = json::parse(cadJson);
+			Pedido p = j.get<Pedido>();
+			resultado = p;
+		}
+		catch (const std::exception& e) {
+			// log si quieres
+			// std::cerr << "Error parseando JSON desde Redis: " << e.what() << std::endl;
+		}
+	}
+
+	freeReplyObject(reply);
+	return resultado;
+}
+
 
 void PedidoCache::savePedido(Pedido p)
 {

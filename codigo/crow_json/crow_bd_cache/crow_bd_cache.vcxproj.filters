@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="EmpleadoRepositorio.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Pedido.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -41,12 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Empleado.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="EmpleadoRepositorio.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Pedido.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
