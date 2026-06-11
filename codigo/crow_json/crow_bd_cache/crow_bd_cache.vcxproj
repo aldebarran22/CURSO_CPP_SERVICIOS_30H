@@ -127,6 +127,7 @@
     <ClCompile Include="crow_bd_cache.cpp" />
     <ClCompile Include="EmpleadoRepositorio.cpp" />
     <ClCompile Include="Pedido.cpp" />
+    <ClCompile Include="PedidoCache.cpp" />
     <ClCompile Include="PedidoRepositorio.cpp" />
     <ClCompile Include="utilidades.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="Empleado.h" />
     <ClInclude Include="EmpleadoRepositorio.h" />
     <ClInclude Include="Pedido.h" />
+    <ClInclude Include="PedidoCache.h" />
     <ClInclude Include="PedidoRepositorio.h" />
     <ClInclude Include="utilidades.h" />
   </ItemGroup>

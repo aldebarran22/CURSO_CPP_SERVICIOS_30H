@@ -19,6 +19,7 @@ Pedido::Pedido(std::string linea, char sep)
 	this->pais = campos.at(5);
 }
 
+/*
 nlohmann::json Pedido::to_json() const
 {
 	return nlohmann::json{ {"idpedido", this->idpedido},
@@ -41,7 +42,7 @@ Pedido Pedido::from_json(const nlohmann::json& j)
 	p.pais = j.at("pais").get<std::string>();
 
 	return p;
-}
+}*/
 
 Pedido::~Pedido()
 {
