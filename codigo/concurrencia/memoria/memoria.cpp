@@ -10,6 +10,7 @@ int main()
 	ptr = new int* [10];
 	for (int i = 0; i < 10; i++) {
 		ptr[i] = new int[10];
+		//delete[] ptr[i];
 
 	}
 
