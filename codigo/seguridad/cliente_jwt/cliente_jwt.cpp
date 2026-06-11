@@ -15,7 +15,6 @@ int main()
 
     // Peticion POST:
     try {
-
         auto response = cpr::Post(cpr::Url{ "http://localhost:8000/login" },
             cpr::Header{ {"Accept","application/json"} },
             cpr::Body{ datos });
@@ -26,8 +25,15 @@ int main()
 
         json j = json::parse(respuesta);
         std::string token = j["token"];
-        std::cout << "Token: " << token << std::endl;
+        std::cout << "\nToken: " << token << std::endl;
 
+        // Reenviar el token por una peticion GET:
+        std::string cadena = "Bearer " + token;
+
+        auto response2 = cpr::Get(cpr::Url{ "http://localhost:8000/app" },
+            cpr::Header{ {"Authorization",cadena} });
+        std::string respuesta2 = response2.text;
+        std::cout << "\nSegundo mensaje: " << respuesta2 << std::endl;
     }
     catch (const std::exception& e) {
         std::cerr << e.what();
