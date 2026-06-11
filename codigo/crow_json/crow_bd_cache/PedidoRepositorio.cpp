@@ -1,6 +1,7 @@
 #include <string>
 
 #include "PedidoRepositorio.h"
+#include "PedidoService.h"
 
 PedidoRepositorio::PedidoRepositorio(soci::session& sql):sql_(sql)
 {
