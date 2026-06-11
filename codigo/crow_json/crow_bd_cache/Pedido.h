@@ -12,7 +12,7 @@ public:
 	std::string cliente;
 	std::string empresa;
 	std::string empleado;
-	float importe;
+	double importe;
 	std::string pais;
 
 	Pedido();
