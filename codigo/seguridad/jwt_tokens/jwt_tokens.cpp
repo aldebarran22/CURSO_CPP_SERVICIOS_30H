@@ -35,11 +35,14 @@ int main()
                 // Generar el token
                 auto token = jwt::create().
                     set_issuer("curso C++").
-
+                    set_payload_claim("usuario", jwt::claim(std::string(USER))).
                     set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 30 }).
                     sign(jwt::algorithm::hs256{ PWD });
 
-
+                // Devolver el token:
+                crow::json::wvalue respuesta;
+                respuesta["token"] = token;
+                return crow::response(respuesta);
             }
             else {
                 return crow::response(401, "No existe el usuario");
@@ -51,5 +54,7 @@ int main()
     });
 
     // Arrancar el servidor:
+    app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
+
 }
 
