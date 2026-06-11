@@ -41,18 +41,23 @@ int main() {
 	std::srand(time(0));
 	Hilo obj(10, 2);
 	int suma;
+	
 	std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
-
+	
 	std::thread hiloObjeto(obj);
+	
 
 	std::thread hiloLambda([it, ml]() {
 		for (int i = 0; i < it; i++) {
 			std::cout << "mensaje lambda: " << (i + 1) << std::endl;
 			std::this_thread::sleep_for(std::chrono::milliseconds(ml));
 		}
-		});
+		});		
+	
+
 	hiloFuncion.join();
 	hiloObjeto.join();
 	hiloLambda.join();
+
 	std::cout << "La suma de aleatorios es: " << suma << std::endl;
 }
