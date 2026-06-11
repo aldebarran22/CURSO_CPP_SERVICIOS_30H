@@ -42,8 +42,14 @@ int main()
 	std::thread h1{ suma };
 	std::thread h2{ resta };
 
+	std::thread h3{ suma_mtx, std::ref(mtx) };
+	std::thread h4{ resta_mtx, std::ref(mtx) };
+
 	h1.join();
 	h2.join();
+	h3.join();
+	h4.join();
 
 	std::cout << "Contador: " << contador << std::endl;
+	std::cout << "Contador mutex: " << contador_mutex << std::endl;
 }
