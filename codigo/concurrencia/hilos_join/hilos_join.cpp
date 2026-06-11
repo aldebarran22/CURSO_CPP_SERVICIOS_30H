@@ -42,7 +42,9 @@ int main() {
 	Hilo obj(10, 2);
 	int suma;
 	std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
+
 	std::thread hiloObjeto(obj);
+
 	std::thread hiloLambda([it, ml]() {
 		for (int i = 0; i < it; i++) {
 			std::cout << "mensaje lambda: " << (i + 1) << std::endl;
