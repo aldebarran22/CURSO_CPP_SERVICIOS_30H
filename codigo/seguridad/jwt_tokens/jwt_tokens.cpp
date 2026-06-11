@@ -53,6 +53,18 @@ int main()
         }
     });
 
+    CROW_ROUTE(app, "/info").methods("GET"_method)([]() {
+
+        try {
+            crow::json::wvalue respuesta;
+            respuesta["resul"] = "ok";
+            return crow::response(respuesta);
+        }
+        catch (const std::exception& e) {
+            return crow::response(500, "Error: " + std::string(e.what()));
+        }
+
+    });
     
     CROW_ROUTE(app, "/app").methods("GET"_method)([](const crow::request& request) {
 
@@ -64,10 +76,12 @@ int main()
             if (auth_header.substr(0, 7) != "Bearer ") {
                 return crow::response(401, "Token no proporcionado o mal formado");
             }
+           
 
             // Extraer el token
             std::string token = auth_header.substr(7);
             std::cout << "Token: " << token << std::endl;
+
 
             crow::json::wvalue respuesta;
             respuesta["resul"] = "ok";
@@ -79,8 +93,11 @@ int main()
         });
         
 
-    // Arrancar el servidor:
-    app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
+    // Arrancar el servidor por HTTP:
+    //app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
+
+    // Arrancar el servidor por HTTPS:
+    app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(443).run();
 
 }
 
