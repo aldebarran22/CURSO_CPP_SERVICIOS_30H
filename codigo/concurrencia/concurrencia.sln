@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hilos_join", "hilos_join\hi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mutex", "mutex\mutex.vcxproj", "{FB68FCCB-9BC8-4BD9-B445-84592D305BAC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "memoria", "memoria\memoria.vcxproj", "{BD06EA63-732D-4D3F-B053-7D974CD59739}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{FB68FCCB-9BC8-4BD9-B445-84592D305BAC}.Release|x64.Build.0 = Release|x64
 		{FB68FCCB-9BC8-4BD9-B445-84592D305BAC}.Release|x86.ActiveCfg = Release|Win32
 		{FB68FCCB-9BC8-4BD9-B445-84592D305BAC}.Release|x86.Build.0 = Release|Win32
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Debug|x64.ActiveCfg = Debug|x64
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Debug|x64.Build.0 = Debug|x64
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Debug|x86.ActiveCfg = Debug|Win32
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Debug|x86.Build.0 = Debug|Win32
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Release|x64.ActiveCfg = Release|x64
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Release|x64.Build.0 = Release|x64
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Release|x86.ActiveCfg = Release|Win32
+		{BD06EA63-732D-4D3F-B053-7D974CD59739}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
