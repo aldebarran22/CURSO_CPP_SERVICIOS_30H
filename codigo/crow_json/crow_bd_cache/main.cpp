@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <optional>
 #include <soci/soci.h>
 #include <soci/mysql/soci-mysql.h>
 
@@ -20,15 +22,23 @@ int main()
 		// Crear el repositorio e inyectar la sesion de soci:
 		PedidoRepositorio repositorio(sql);
 
+				
 		// Crear la cache:
 		PedidoCache cache;
 
 		// Crear el servicio (logica de negocio) e inyectar cache y repositorio
 		PedidoService service(cache, repositorio);
 
+		
+		std::optional<Pedido> p = service.read(10250);
+		if (p) {
+			std::cout << p->cliente << " " << p->empleado << std::endl;
+		}
+
+		/*
 		// Crear el servicio crow e inyectar service:
 		PedidoCROW servicioCrow(service);
-		servicioCrow.run();
+		servicioCrow.run();*/
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what();

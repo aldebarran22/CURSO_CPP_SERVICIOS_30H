@@ -53,7 +53,7 @@ std::vector<Pedido> PedidoRepositorio::select()
 	for (const auto& r : rs) {
 		Pedido p;
 
-		p.idpedido = r.get<int>(0);
+		p.idpedido = r.get<std::string>(0);
 		p.cliente = r.get<std::string>(1);
 		p.empleado = r.get<std::string>(2);
 		p.empresa = r.get<std::string>(3);
