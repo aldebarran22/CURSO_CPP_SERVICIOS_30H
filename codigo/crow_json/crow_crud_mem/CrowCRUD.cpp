@@ -64,9 +64,9 @@ void CrowCRUD::run()
 		});
 
 	// Get - GET /usuarios
-	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
+	CROW_ROUTE(app, "/pedidos").methods(crow::HTTPMethod::GET)([this]() {
 
-		std::lock_guard<std::mutex> lock(this->mtx);
+		//std::lock_guard<std::mutex> lock(this->mtx);
 
 		// Definimos una estructura lista que se convierte a un array de json
 		crow::json::wvalue lista = crow::json::wvalue::list();

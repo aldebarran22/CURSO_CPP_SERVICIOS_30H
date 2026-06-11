@@ -30,41 +30,25 @@ void PedidoCROW::run()
 
 		}
 		catch (const std::exception& e) {
-			return crow::response(500, std::string("Error en el servicio: ") + e.what());
+			return crow::response(500, std::string("Error en el servicio (GET/id): ") + e.what());
 		}
 	});
 
-	// Get - GET /usuarios
-	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
+	// Get - GET /pedidos
+	CROW_ROUTE(app, "/pedidos").methods(crow::HTTPMethod::GET)([this]() {
 
-		std::lock_guard<std::mutex> lock(this->mtx);
+		//std::lock_guard<std::mutex> lock(this->mtx);
+		try {
+			auto pedidos = this->service.selectAll();
+			json j = pedidos;
+			return crow::response(j.dump());
 
-		// Definimos una estructura lista que se convierte a un array de json
-		crow::json::wvalue lista = crow::json::wvalue::list();
-		int i = 0;
-
-		for (const auto& [id, usuario] : this->usuarios) {
-			crow::json::wvalue item;
-			item["id"] = id;
-
-			if (usuario.has("nombre"))
-				item["nombre"] = usuario["nombre"].s();
-			else
-				item["nombre"] = "";
-
-			item["edad"] = usuario["edad"].i();
-
-			// Cargar en la lista:
-			lista[i++] = std::move(item);
 		}
-
-
-		// Definir la respuesta:
-		crow::json::wvalue  resp;
-		resp["usuarios"] = std::move(lista);
-		return crow::response(resp);
-		});
-	*/
+		catch (const std::exception& e) {
+			return crow::response(500, std::string("Error en el servicio (GET): ") + e.what());
+		}
+		
+	});
 }
 
 PedidoCROW::~PedidoCROW()

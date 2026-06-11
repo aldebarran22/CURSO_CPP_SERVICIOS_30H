@@ -23,6 +23,11 @@ std::optional<Pedido> PedidoService::read(int id)
 	return p;
 }
 
+std::vector<Pedido> PedidoService::selectAll()
+{
+	return this->repositorio.select();
+}
+
 PedidoService::~PedidoService()
 {
 }

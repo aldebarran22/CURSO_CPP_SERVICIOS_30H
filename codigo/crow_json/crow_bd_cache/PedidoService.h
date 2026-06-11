@@ -5,6 +5,7 @@
 #include "PedidoRepositorio.h"
 
 #include <optional>
+#include <vector>
 
 class PedidoService
 {
@@ -15,6 +16,7 @@ private:
 public:
 	PedidoService(PedidoCache&, PedidoRepositorio&);
 	std::optional<Pedido> read(int);
+	std::vector<Pedido> selectAll();
 	~PedidoService();
 };
 
