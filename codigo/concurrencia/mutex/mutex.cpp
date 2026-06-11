@@ -30,9 +30,9 @@ void suma_mtx(std::mutex& mtx) {
 
 void resta_mtx(std::mutex& mtx) {
 	for (int i = 0; i < IT; i++) {
-		mtx.lock();
+		std::lock_guard m{ mtx };
 		contador_mutex--;
-		mtx.unlock();
+		
 	}
 }
 
