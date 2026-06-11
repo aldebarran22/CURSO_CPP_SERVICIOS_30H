@@ -1,57 +1,32 @@
 // crow_bd_cache.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
 
-#include <crow.h>
 #include <iostream>
+#include <soci/soci.h>
+#include <soci/mysql/soci-mysql.h>
+
+#include "Pedido.h"
+#include "PedidoCache.h"
+#include "PedidoRepositorio.h"
+#include "PedidoService.h"
+#include "PedidoCROW.h"
 
 int main()
 {
-	// Configurar el servicio con las operaciones: GET / POST / PUT / DELETE
-	crow::SimpleApp app;
+	// Crear la sesion con soci:
+	soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
 
-	CROW_ROUTE(app, "/pedidos/<int>").methods(crow::HTTPMethod::GET)([](int id) {
+	// Crear el repositorio e inyectar la sesion de soci:
+	PedidoRepositorio repositorio(sql);
 
-		
+	// Crear la cache:
+	PedidoCache cache;
 
-		// El usuario existe hay que devolverlo:
-		crow::json::wvalue res;
-		res["id"] = id;
-		res["nombre"] = usuarios[id]["nombre"].s();
-		res["edad"] = usuarios[id]["edad"].i();
+	// Crear el servicio (logica de negocio) e inyectar cache y repositorio
+	PedidoService service(cache, repositorio);
 
-		return crow::response(res);
-		});
-
-	// Get - GET /usuarios
-	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
-
-		std::lock_guard<std::mutex> lock(this->mtx);
-
-		// Definimos una estructura lista que se convierte a un array de json
-		crow::json::wvalue lista = crow::json::wvalue::list();
-		int i = 0;
-
-		for (const auto& [id, usuario] : this->usuarios) {
-			crow::json::wvalue item;
-			item["id"] = id;
-
-			if (usuario.has("nombre"))
-				item["nombre"] = usuario["nombre"].s();
-			else
-				item["nombre"] = "";
-
-			item["edad"] = usuario["edad"].i();
-
-			// Cargar en la lista:
-			lista[i++] = std::move(item);
-		}
-
-
-		// Definir la respuesta:
-		crow::json::wvalue  resp;
-		resp["usuarios"] = std::move(lista);
-		return crow::response(resp);
-		});
-
+	// Crear el servicio crow e inyectar service:
+	PedidoCROW servicioCrow(service);
+	servicioCrow.run();
 }
 
