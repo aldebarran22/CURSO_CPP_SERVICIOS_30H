@@ -4,7 +4,10 @@
 #include <iostream>
 #include <string>
 
+#include <nlohmann/json.hpp>
 #include <cpr/cpr.h>
+
+using json = nlohmann::json;
 
 int main()
 {
@@ -20,6 +23,10 @@ int main()
         // Respuesta:
         std::string respuesta = response.text;
         std::cout << respuesta << std::endl;
+
+        json j = json::parse(respuesta);
+        std::string token = j["token"];
+        std::cout << "Token: " << token << std::endl;
 
     }
     catch (const std::exception& e) {

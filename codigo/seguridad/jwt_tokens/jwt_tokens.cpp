@@ -53,12 +53,12 @@ int main()
         }
     });
 
-    /*
+    
     CROW_ROUTE(app, "/app").methods("GET"_method)([](const crow::request& request) {
 
         try {
             auto auth_header = request.get_header_value("Authorization");
-            std::cout << "Autorization: " << auth_header << std::endl;
+            std::cout << "Authorization: " << auth_header << std::endl;
 
             crow::json::wvalue respuesta;
             respuesta["resul"] = "ok";
@@ -68,7 +68,7 @@ int main()
             return crow::response(500, "Error: " + std::string(e.what()));
         }
         });
-        */
+        
 
     // Arrancar el servidor:
     app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
