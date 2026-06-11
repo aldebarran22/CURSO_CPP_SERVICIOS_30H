@@ -15,8 +15,8 @@ std::optional<Pedido> PedidoRepositorio::read(int id)
 	std::string sql = std::string("select p.idpedido, p.idcliente, e.nombre as empleado, ") +
 		std::string("emp.nombre as empresa, p.importe, p.pais from pedidos p inner join empresasenvios emp ") +
 		std::string("on p.idempresaenvio = emp.id inner join empleados e on p.idempleado = e.id where idpedido = :id");
-	sql_ << sql, soci::use(id), soci::into(p.idpedido, ind), soci::into(p.cliente), soci::into(p.empresa),
-		soci::into(p.empleado), soci::into(p.importe), soci::into(p.pais);
+	sql_ << sql, soci::use(id), soci::into(p.idpedido, ind), soci::into(p.cliente), soci::into(p.empleado),
+		soci::into(p.empresa), soci::into(p.importe), soci::into(p.pais);
 
 	if (ind == soci::i_null) {
 		return std::nullopt;
@@ -53,7 +53,7 @@ std::vector<Pedido> PedidoRepositorio::select()
 	for (const auto& r : rs) {
 		Pedido p;
 
-		p.idpedido = r.get<std::string>(0);
+		p.idpedido = r.get<int>(0);
 		p.cliente = r.get<std::string>(1);
 		p.empleado = r.get<std::string>(2);
 		p.empresa = r.get<std::string>(3);

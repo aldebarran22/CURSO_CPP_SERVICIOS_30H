@@ -37,7 +37,7 @@ std::optional<Pedido> PedidoCache::getPedido(int id)
 
 void PedidoCache::savePedido(Pedido p)
 {
-	std::string key = "pedido" + p.idpedido;
+	std::string key = "pedido" + std::to_string(p.idpedido);
 
 	json j = p;
 	std::string strPedido = j.dump();

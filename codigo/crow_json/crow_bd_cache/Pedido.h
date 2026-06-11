@@ -8,7 +8,7 @@ class Pedido
 {
 
 public:
-	std::string idpedido;
+	int idpedido;
 	std::string cliente;
 	std::string empresa;
 	std::string empleado;
@@ -26,6 +26,7 @@ inline void to_json(json& j, const Pedido& p) {
 		{"idpedido", p.idpedido},
 		{"cliente", p.cliente },
 		{ "empleado", p.empleado },
+		{ "empresa", p.empresa },
 		{ "importe", p.importe },
 		{ "pais", p.pais }
 	};
@@ -34,6 +35,7 @@ inline void from_json(const nlohmann::json& j, Pedido& p) {
 	j.at("idpedido").get_to(p.idpedido);
 	j.at("cliente").get_to(p.cliente);
 	j.at("empleado").get_to(p.empleado);
+	j.at("empresa").get_to(p.empresa);
 	j.at("importe").get_to(p.importe);
 	j.at("pais").get_to(p.pais);
 }
