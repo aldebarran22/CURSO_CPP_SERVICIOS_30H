@@ -49,6 +49,11 @@ void PedidoCROW::run()
 		}
 		
 	});
+
+	// Puesta en marcha del servidor
+	app.port(8082).concurrency(std::thread::hardware_concurrency()).
+		multithreaded().
+		run();
 }
 
 PedidoCROW::~PedidoCROW()

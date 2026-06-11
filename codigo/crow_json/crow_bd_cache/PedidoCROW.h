@@ -4,6 +4,7 @@
 
 class PedidoCROW
 {
+public:
 	PedidoCROW(PedidoService&);
 	void run();
 	~PedidoCROW();
