@@ -18,6 +18,24 @@ namespace net = boost::asio;
 namespace http = beast::http;
 using tcp = net::ip::tcp;
 
+class session : public std::enable_shared_from_this<session> {
+
+	// Atributos de la session
+	tcp::socket socket_;
+	beast::flat_buffer buffer; // para almacenar y leer los datos
+	http::request<http::string_body> request;
+	http::response<http::string_body> response;
+
+public:
+	session(tcp::socket socket):socket_(std::move(socket)){}
+	void start() { read_request(); }
+
+private:
+	void read_request(){}
+	void handler_request(){}
+	void write_response(){}
+};
+
 void do_accept(tcp::acceptor& acceptor) {
 
 	// Aceptar un cliente de forma de asincrona:
