@@ -1,0 +1,14 @@
+# Crear un pod con un archivo manifest a partir de una
+# imagen nginx
+
+apiVersion: v1
+kind: Pod # El tipo de objeto que vamos a crear
+metadata:
+  name: pod-nginx-2 # Nombre del POD
+  labels:
+    tipo: web
+spec: # Se hace referencia al contenedor y su imagen
+  containers:
+    - name: contenedor-nginx # Nombre del contenedor
+      image: nginx:1.16
+      imagePullPolicy: Always # Fuerza a que se descarge siempre la imagen
