@@ -1,0 +1,33 @@
+# CREAR LA IMAGEN
+
+docker build -t practica5_crow_redis_mysql .
+
+Para ver errores en la creación de la imagen:
+docker build -t practica5_crow_redis_mysql . --progress=plain
+
+
+# LEVANTAR LOS 3 SERVICIOS:
+docker-compose up -d
+
+
+# COMPROBAR MYSQL / REDIS
+
+docker exec -it mysql bash
+
+mysql -u root -p
+
+
+docker exec -it redis redis-cli
+
+si falla el arranque de pedidos: docker start pedidos 
+o para ver los logs: docker logs pedidos
+
+Solo levantar pedidos:
+docker-compose up -d pedidos
+
+Para todos:
+docker-compose down
+
+Comandos desde postman:
+localhost:8082/pedidos/10255
+localhost:8082/pedidos
