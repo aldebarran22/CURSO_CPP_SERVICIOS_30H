@@ -18,5 +18,34 @@ services:
       - mysql_data:/var/lib/mysql
       - ./empresa3_mysql.sql:/docker-entrypoint-inidb.d/empresa3_mysql.sql
 
-   
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+
+  pedidos:
+    image: practica5_crow_redis_mysql
+    container_name: pedidos
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8082:8082"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: antonio
+      MYSQL_PASSWORD: antonio
+      MYSQL_DB: empresa3
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+volumes:
+  mysql-data:
+  redis-data:
+
     
