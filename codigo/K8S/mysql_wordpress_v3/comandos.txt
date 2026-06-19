@@ -1,5 +1,0 @@
-Lanzar los dos ficheros:
-kubectl apply -f mysql.yaml
-kubectl apply -f wordpress.yaml
-
-minikube service wordpress --url
