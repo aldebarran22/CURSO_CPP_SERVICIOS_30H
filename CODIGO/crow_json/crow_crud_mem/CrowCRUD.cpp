@@ -27,13 +27,15 @@ void CrowCRUD::run(){
     });
 
     CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
-
+        return crow::response("");
         });
 
     CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::Delete)([this](int id) {
+        return crow::response("");
         });
 
     CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
+        return crow::response("");
         });
     
     CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
