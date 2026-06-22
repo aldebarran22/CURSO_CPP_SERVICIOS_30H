@@ -8,7 +8,12 @@ CrowCRUD::CrowCRUD()
 void CrowCRUD::run(){
 
     crow::SimpleApp app;
+       
+    CROW_ROUTE(app, "/usuarios/stop").methods(crow::HTTPMethod::GET)([&app]() {
+        app.stop();
+        return crow::response{ "stop" };
 
+    });
 
     CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
 
