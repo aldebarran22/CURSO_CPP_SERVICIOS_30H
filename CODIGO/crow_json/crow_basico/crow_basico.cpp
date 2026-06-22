@@ -16,6 +16,21 @@ int main()
         return "Hello World";
     });
 
+    // Ejemplo para devolver una resp en json:
+    CROW_ROUTE(app, "/info")([]() {
+
+        crow::json::wvalue resp;
+
+        resp["mensaje"] = "todo ok";
+        resp["codigo"] = 200;
+
+        // Devolver la respuesta al cliente:
+        return crow::response{ resp }; // por defecto codigo HTTP es 200
+     });
+
+
+    // Recoger parámetros de la petición:
+
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
     app.run();
 }
