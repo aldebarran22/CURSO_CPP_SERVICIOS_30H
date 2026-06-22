@@ -4,7 +4,9 @@
 #include <iostream>
 #include <thread>
 #include <crow.h>
+#include <nlohmann/json.hpp>
 
+#include "Pedido.h"
 
 int main()
 {
@@ -42,6 +44,22 @@ int main()
         // Devolver la respuesta al cliente:
         return crow::response{ resp }; // por defecto codigo HTTP es 200
         });
+
+    CROW_ROUTE(app, "/pedidos").methods(crow::HTTPMethod::POST)([](const crow::request& req) {
+        // Recoger un pedido en formato json y imprimir algun dato del pedido:
+
+        try {
+            // Parsear el pedido en json con la libreria nlohmman:
+            nlohmann::json j = nlohmann::json::parse(req.body);
+            Pedido p = j.get<Pedido>();
+
+            return crow::response("Pedido: " + std::to_string(p.idpedido));
+
+        }
+        catch (const std::exception& e) {
+            return crow::response(500, "ERROR: " + std::string(e.what()));
+        }
+    });
 
 
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
