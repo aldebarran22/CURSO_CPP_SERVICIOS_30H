@@ -57,6 +57,7 @@ int main()
             }
             Pedido p = j.get<Pedido>();
             nlohmann::json j2 = p;
+            CROW_LOG_INFO << j2.dump();
 
             return crow::response(j2.dump());
 
