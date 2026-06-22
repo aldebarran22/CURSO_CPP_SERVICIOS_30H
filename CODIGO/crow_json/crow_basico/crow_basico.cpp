@@ -30,6 +30,19 @@ int main()
 
 
     // Recoger parámetros de la petición:
+    CROW_ROUTE(app, "/operacion/<int>/<int>").methods(crow::HTTPMethod::GET)([](const crow::request& req, int a, int b) {
+
+        crow::json::wvalue resp;
+
+        int suma = a + b;
+        resp["a"] = a;
+        resp["b"] = b;
+        resp["suma"] = suma;
+
+        // Devolver la respuesta al cliente:
+        return crow::response{ resp }; // por defecto codigo HTTP es 200
+        });
+
 
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
     app.run();
