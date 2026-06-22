@@ -51,6 +51,10 @@ int main()
         try {
             // Parsear el pedido en json con la libreria nlohmman:
             nlohmann::json j = nlohmann::json::parse(req.body);
+
+            if (!j.contains("idpedido")) {
+                return crow::response(400, "Falta el idpedido");
+            }
             Pedido p = j.get<Pedido>();
 
             return crow::response("Pedido: " + std::to_string(p.idpedido));
