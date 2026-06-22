@@ -125,6 +125,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="crow_basico.cpp" />
+    <ClCompile Include="Pedido.cpp" />
+    <ClCompile Include="utilidades.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pedido.h" />
+    <ClInclude Include="utilidades.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
