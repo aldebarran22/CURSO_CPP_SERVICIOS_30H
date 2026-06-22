@@ -11,8 +11,8 @@
 
 int main()
 {
-	std::string pathIn = "..\\..\\practicas\\ficheros\\pedidos_final.csv";
-	std::string pathOut = "..\\..\\practicas\\ficheros\\out\\pedidos.json";
+	std::string pathIn = "..\\..\\..\\practicas\\ficheros\\pedidos_final.csv";
+	std::string pathOut = "..\\..\\..\\practicas\\ficheros\\out\\pedidos.json";
 
 	// Ficheros:
 	std::ifstream fin(pathIn);
@@ -22,13 +22,31 @@ int main()
 	std::vector<std::string> campos;
 	std::vector<nlohmann::json> array;
 	nlohmann::json doc;
+	bool cabs = true;
 
 	if (!fin) {
 		std::cerr << "Fichero no encontrado: " << pathIn << std::endl;
 		return 1;
 	}
 
+	while (std::getline(fin, linea)) {
+		//std::cout << linea << std::endl;
+		if (cabs) {
+			cabs = false;
+		}
+		else {
+			Pedido p(linea);
+			array.push_back(p.to_json());
+		}
+	}
 
+	doc = array;
+
+	std::cout << doc.dump(4) << std::endl;
+	fout << doc.dump(4);
+
+	fin.close();
+	fout.close();
 
 }
 
