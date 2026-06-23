@@ -125,7 +125,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\proto\saludo.grpc.pb.cc" />
+    <ClCompile Include="..\proto\saludo.pb.cc" />
     <ClCompile Include="cliente.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\proto\saludo.grpc.pb.h" />
+    <ClInclude Include="..\proto\saludo.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
