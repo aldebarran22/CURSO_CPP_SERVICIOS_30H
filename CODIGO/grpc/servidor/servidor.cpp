@@ -41,7 +41,7 @@ void ejecutarServidor() {
     // Construir el servidor, ponerlo en marcha y registrar el servicio:
     ServerBuilder builder;
     SaludoServiceImpl servicio;
-
+   
     builder.AddListeningPort(direccion, grpc::InsecureServerCredentials());
 
     // Registra el servicio:
