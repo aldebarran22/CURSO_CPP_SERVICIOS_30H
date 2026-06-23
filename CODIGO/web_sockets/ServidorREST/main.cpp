@@ -2,8 +2,18 @@
 //
 
 #include <iostream>
+#include <boost/asio.hpp>
+
+#include "ServidorREST.h"
+
+namespace net = boost::asio;
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Crear el contexto de comunicación:
+    net::io_context ioc;
+
+    ServidorREST server(ioc, 8080);
+    server.run();
 }
