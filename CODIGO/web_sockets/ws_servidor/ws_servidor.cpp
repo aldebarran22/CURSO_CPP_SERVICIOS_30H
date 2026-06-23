@@ -13,6 +13,40 @@ namespace websocket = beast::websocket;
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
 
+void do_session(tcp::socket socket) {
+
+    try {
+        // Definir el Websocket:
+        websocket::stream<tcp::socket> ws(std::move(socket));
+        ws.accept();
+
+        for (;;) {
+            // Definir el buffer de L/E:
+            beast::flat_buffer buffer;
+
+            ws.read(buffer);
+            ws.text(ws.got_text());
+
+            // Devolver al cliente el mismo mensaje:
+            ws.write(buffer.data());
+        }
+    
+    }
+    catch (const beast::system_error& se) {
+        if (se.code() != websocket::error::closed) {
+            std::cerr << "Error en la sesion: " << se.what() << std::endl;
+        }
+        else {
+            std::cout << "Cliente desconectado" << std::endl;
+
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error inesperado: " << e.what() << std::endl;
+    }
+
+}
+
 int main()
 {
     // Crear el contexto de comunicación:
@@ -41,7 +75,7 @@ int main()
         acceptor.accept(socket);
 
         // Lanzar un hilo para atender el cliente conectado:
-        boost::asio::post(pool, [s = std::move(socket)]() {
+        boost::asio::post(pool, [s = std::move(socket)]() mutable {
             // Llamar a la tarea (función) que realiza el thread.
             do_session(std::move(s));
         });
