@@ -11,22 +11,25 @@
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
 namespace net = boost::asio;
+namespace http = boost::beast::http;
 using tcp = net::ip::tcp;
+
 
 void do_session(tcp::socket socket) {
 
     try {
+      
         // Definir el Websocket:
-        websocket::stream<tcp::socket> ws(std::move(socket));
+        websocket::stream<tcp::socket> ws(std::move(socket));       
         ws.accept();
 
         for (;;) {
             // Definir el buffer de L/E:
             beast::flat_buffer buffer;
-
+                       
             ws.read(buffer);
             ws.text(ws.got_text());
-
+            
             // Devolver al cliente el mismo mensaje:
             ws.write(buffer.data());
         }
