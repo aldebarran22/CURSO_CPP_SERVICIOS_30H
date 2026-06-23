@@ -57,7 +57,7 @@ int main()
             }
             Pedido p = j.get<Pedido>();
             nlohmann::json j2 = p;
-            CROW_LOG_INFO << j2.dump();
+            CROW_LOG_WARNING << j2.dump();
 
             return crow::response(j2.dump());
 
@@ -67,6 +67,8 @@ int main()
         }
     });
 
+    // Configurar el nivel de log:
+    crow::logger::setLogLevel(crow::LogLevel::Warning);
 
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
     app.run();
