@@ -72,7 +72,7 @@ void testService() {
     EmpleadoCache cache;
     EmpleadoService service(cache, repo);
 
-    auto e2 = service.read(7);
+    auto e2 = service.read(8);
     if (e2.has_value()) {
         std::cout << e2->nombre << " " << e2->cargo << std::endl;
     }
