@@ -23,7 +23,12 @@ std::optional<Empleado> EmpleadoRepositorio::read(int id)
 
 bool EmpleadoRepositorio::create(const Empleado& emp)
 {
-	return false;
+	soci::statement st = (sql_.prepare << "insert into empleados values(:id, :nombre, :cargo)",
+		soci::use(emp.id), soci::use(emp.nombre), soci::use(emp.cargo)
+	);
+	st.execute(true);
+
+	return st.get_affected_rows() == 1;
 }
 
 bool EmpleadoRepositorio::_delete(int id)
