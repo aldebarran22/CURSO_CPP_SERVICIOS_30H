@@ -15,6 +15,4 @@ services:
       - ./empresa3_mysql.sql:/docker-entrypoint-initdb.d/empresa3_mysql.sql
       
 volumes:
-  mysql_data:
-	
-      
+  mysql_data:   
