@@ -54,7 +54,7 @@ void testCache() {
 
     //cache.saveEmpleado(e);
 
-    auto e2 = cache.getEmpleado(1);
+    auto e2 = cache.getEmpleado(2);
     if (e2.has_value()) {
         std::cout << e2->nombre << " " << e2->cargo << std::endl;
     }
