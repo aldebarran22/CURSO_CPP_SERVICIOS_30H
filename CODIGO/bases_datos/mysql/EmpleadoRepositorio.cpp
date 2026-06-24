@@ -33,12 +33,20 @@ bool EmpleadoRepositorio::create(const Empleado& emp)
 
 bool EmpleadoRepositorio::_delete(int id)
 {
-	return false;
+	soci::statement st = (sql_.prepare << "delete from empleados where id= :id", soci::use(id));
+	st.execute(true);
+
+	return st.get_affected_rows() == 1;
 }
 
 bool EmpleadoRepositorio::update(const Empleado& emp)
 {
-	return false;
+	soci::statement st = (sql_.prepare << "update empleados set nombre=:nombre,cargo=:cargo where id=:id",
+		 soci::use(emp.nombre), soci::use(emp.cargo), soci::use(emp.id)
+	);
+	st.execute(true);
+
+	return st.get_affected_rows() == 1;
 }
 
 std::vector<Empleado> EmpleadoRepositorio::select()
