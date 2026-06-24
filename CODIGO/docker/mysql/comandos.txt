@@ -15,7 +15,8 @@ SHOW TABLES;
 SELECT * FROM pedidos LIMIT 5;
 
 
-# ojo si ya existe el volumen, dara error y no se creará la BD:
+# ojo si ya existe el volumen, dará error y no se creará la BD:
+docker-compose down      # Elimina contenedores pero NO borra el volumen
 docker-compose down -v   # elimina contenedores y volúmenes
 docker-compose up  -d    # vuelve a crear todo desde cero
 
