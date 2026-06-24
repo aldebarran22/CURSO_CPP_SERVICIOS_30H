@@ -23,8 +23,16 @@ psql -U antonio -d empresa3
 
 # Dentro del psql:
 \l  listar BDs
+\c nombre_bd   para conectar a otra bd
+
+Conectados a una BD
 \dt listar tablas
-\dt empresa3.*  listar tablas del esquema de empresa3
+\dt public.*  listar tablas del esquema de una BD
+\d nombre_tabla  listar las columnas y tipos
+\dt listar tablas de la BD conectada
+\dt+ listar tablas de la BD conectada (da más info)
+quit salir de psql
+
 select * from tbempleados;
 
 pg_data:/var/lib/postgresql/data
