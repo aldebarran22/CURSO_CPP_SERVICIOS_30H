@@ -25,7 +25,7 @@ int main()
 
     std::vector<Empleado> empleados = repo.select();
     for (const auto& e : empleados) {
-        std::cout << emp->nombre << " " << emp->cargo << std::endl;
+        std::cout << e.nombre << " " << e.cargo << std::endl;
     }
 
 }
