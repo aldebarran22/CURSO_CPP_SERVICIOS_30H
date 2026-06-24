@@ -10,6 +10,8 @@
 #include "Empleado.h"
 #include "EmpleadoRepositorio.h"
 #include "EmpleadoCache.h"
+#include "EmpleadoService.h"
+
 
 void testRepositorio() {
     soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
@@ -63,10 +65,26 @@ void testCache() {
     }
 }
 
+void testService() {
+    soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
+    EmpleadoRepositorio repo(sql);
+
+    EmpleadoCache cache;
+    EmpleadoService service(cache, repo);
+
+    auto e2 = service.read(7);
+    if (e2.has_value()) {
+        std::cout << e2->nombre << " " << e2->cargo << std::endl;
+    }
+    else {
+        std::cout << "No existe en la BD de mysql" << std::endl;
+    }
+}
+
 int main()
 {
     //testRepositorio();
-    testCache();
-
+    //testCache();
+    testService();
 }
 
