@@ -1,5 +1,7 @@
 #include <stdexcept>
 #include <string>
+#include <iostream>
+
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -26,6 +28,7 @@ std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 		json j = json::parse(cadjson);
 
 		Empleado e = j.get<Empleado>();
+		std::cout << "Recupera " << id << " de la cache" << std::endl;
 		freeReplyObject(reply);
 		return e;
 	}
