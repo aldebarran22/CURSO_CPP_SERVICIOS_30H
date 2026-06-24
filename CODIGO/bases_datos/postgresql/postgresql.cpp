@@ -37,6 +37,9 @@ int main()
 		}
 		PQclear(res);
 	}
+	else {
+		std::cout << PQerrorMessage(conn) << std::endl;
+	}
 
 	PQfinish(conn);
 	return 0;
