@@ -9,16 +9,16 @@
 
 #include "Empleado.h"
 #include "EmpleadoRepositorio.h"
+#include "EmpleadoCache.h"
 
-int main()
-{
+void testRepositorio() {
     soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
     EmpleadoRepositorio repo(sql);
 
     if (repo._delete(10)) {
         std::cout << "empleado borrado\n";
     }
-   
+
     // Crear un empleado:
     Empleado e{ 10, "Laura", "Comercial" };
     if (repo.create(e)) {
@@ -46,6 +46,16 @@ int main()
     for (const auto& e : empleados) {
         std::cout << e.nombre << " " << e.cargo << std::endl;
     }
+}
+
+void testCache() {
+
+}
+
+int main()
+{
+    //testRepositorio();
+    testCache();
 
 }
 
