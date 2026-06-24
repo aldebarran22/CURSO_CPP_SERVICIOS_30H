@@ -22,7 +22,7 @@ int main()
 	}
 
 	// Ejecutar una consultar:
-	PGresult* res = PQexec(conn, "select id, nombre, cargo from empleados");
+	PGresult* res = PQexec(conn, "select id, nombre, cargo from tbempleados");
 
 	if (PQresultStatus(res) == PGRES_TUPLES_OK) {
 		

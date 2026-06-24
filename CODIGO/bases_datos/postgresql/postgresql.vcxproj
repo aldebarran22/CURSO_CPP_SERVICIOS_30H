@@ -124,7 +124,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmpleadoRepository.cpp" />
     <ClCompile Include="postgresql.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Empleado.h" />
+    <ClInclude Include="EmpleadoRepository.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
