@@ -22,7 +22,7 @@ void EmpleadoCrow::run()
 			return crow::response(doc.dump());
 		}
 		else {
-			crow::response(404, std::string("El empleado con id: ") + std::to_string(id));
+			return crow::response(404, std::string("El empleado con id: ") + std::to_string(id));
 		}
 	});
 
