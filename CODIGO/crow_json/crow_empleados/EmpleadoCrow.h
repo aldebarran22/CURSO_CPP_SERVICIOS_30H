@@ -1,10 +1,13 @@
 #pragma once
+#include "EmpleadoService.h"
+
 class EmpleadoCrow
 {
 private:
+	EmpleadoService& service;
 
 public:
-	EmpleadoCrow();
+	EmpleadoCrow(EmpleadoService& service);
 	void run();
 	~EmpleadoCrow();
 };

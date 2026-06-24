@@ -1,6 +1,7 @@
 #include "EmpleadoCrow.h"
 
-EmpleadoCrow::EmpleadoCrow()
+
+EmpleadoCrow::EmpleadoCrow(EmpleadoService& service):service(service)
 {
 }
 
