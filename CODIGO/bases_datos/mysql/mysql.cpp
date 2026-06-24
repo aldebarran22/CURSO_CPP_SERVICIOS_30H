@@ -15,6 +15,9 @@ int main()
     soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
     EmpleadoRepositorio repo(sql);
 
+    if (repo._delete(10)) {
+        std::cout << "empleado borrado\n";
+    }
    
     // Crear un empleado:
     Empleado e{ 10, "Laura", "Comercial" };

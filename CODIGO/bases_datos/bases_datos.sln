@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mysql", "mysql\mysql.vcxproj", "{C8A2540B-A92B-41EC-ABFA-F92470A03C48}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "redis", "redis\redis.vcxproj", "{F80BEABB-799F-4E88-9F8E-43144F77804F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C8A2540B-A92B-41EC-ABFA-F92470A03C48}.Release|x64.Build.0 = Release|x64
 		{C8A2540B-A92B-41EC-ABFA-F92470A03C48}.Release|x86.ActiveCfg = Release|Win32
 		{C8A2540B-A92B-41EC-ABFA-F92470A03C48}.Release|x86.Build.0 = Release|Win32
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Debug|x64.ActiveCfg = Debug|x64
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Debug|x64.Build.0 = Debug|x64
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Debug|x86.Build.0 = Debug|Win32
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Release|x64.ActiveCfg = Release|x64
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Release|x64.Build.0 = Release|x64
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Release|x86.ActiveCfg = Release|Win32
+		{F80BEABB-799F-4E88-9F8E-43144F77804F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
