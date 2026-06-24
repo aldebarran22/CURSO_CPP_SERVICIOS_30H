@@ -25,10 +25,10 @@ void testPostgresRepo() {
         //repo.eliminar(10);
 
         // Insertar
-        repo.insertar({ 10, "Ana", "Directivo" });
+        repo.insertar({ 11, "Maria", "Directivo" });
 
         // Obtener
-        int id = 10;
+        int id = 11;
         auto e = repo.recuperarEmpleado(id);
         if (e) {
             std::cout << e->nombre << " - " << e->cargo << std::endl;
