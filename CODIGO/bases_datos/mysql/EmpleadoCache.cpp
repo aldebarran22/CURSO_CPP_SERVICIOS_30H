@@ -29,6 +29,7 @@ std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 
 		Empleado e = j.get<Empleado>();
 		std::cout << "Recupera " << id << " de la cache" << std::endl;
+
 		freeReplyObject(reply);
 		return e;
 	}
