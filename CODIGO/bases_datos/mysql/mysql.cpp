@@ -49,7 +49,18 @@ void testRepositorio() {
 }
 
 void testCache() {
+    EmpleadoCache cache;
+    Empleado e{ 1, "Juan", "Gerente" };
 
+    //cache.saveEmpleado(e);
+
+    auto e2 = cache.getEmpleado(1);
+    if (e2.has_value()) {
+        std::cout << e2->nombre << " " << e2->cargo << std::endl;
+    }
+    else {
+        std::cout << "No existe en la cache" << std::endl;
+    }
 }
 
 int main()
