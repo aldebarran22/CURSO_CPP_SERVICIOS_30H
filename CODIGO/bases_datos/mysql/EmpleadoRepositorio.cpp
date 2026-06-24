@@ -1,4 +1,5 @@
 #include "EmpleadoRepositorio.h"
+#include "EmpleadoService.h"
 
 EmpleadoRepositorio::EmpleadoRepositorio(soci::session& sql):sql_(sql)
 {
@@ -20,6 +21,7 @@ std::optional<Empleado> EmpleadoRepositorio::read(int id)
 	}
 	
 }
+
 
 bool EmpleadoRepositorio::create(const Empleado& emp)
 {
