@@ -25,7 +25,7 @@ void testPostgresRepo() {
         //repo.eliminar(10);
 
         // Insertar
-        repo.insertar({ 10, "Laura", "Directivo" });
+        repo.insertar({ 10, "Ana", "Directivo" });
 
         // Obtener
         int id = 10;
@@ -57,7 +57,7 @@ void testPostgresRepo() {
 }
 
 
-void testListado() {
+int testListado() {
     // DEfinir la cadena de conexion:
     const char* cadConex = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";
     PGconn* conn = PQconnectdb(cadConex);
