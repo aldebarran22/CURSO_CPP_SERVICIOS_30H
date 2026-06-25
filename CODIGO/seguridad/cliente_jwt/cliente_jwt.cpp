@@ -26,6 +26,9 @@ int main()
         std::string token = j["token"];
         std::cout << "\nToken: " << token << std::endl;
 
+
+        std::this_thread::sleep_for(std::chrono::minutes{ 2 });
+
         // Peticion GET enviando el token en un campo de la cabecera:
         std::string cadena = "Bearer " + token;
         auto response2 = cpr::Get(cpr::Url{ "http://localhost:8080/app" }, 
