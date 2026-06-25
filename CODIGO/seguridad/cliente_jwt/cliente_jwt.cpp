@@ -22,6 +22,10 @@ int main()
         std::string respuesta = response.text;
         std::cout << respuesta << std::endl;
 
+        json j = json::parse(respuesta);
+        std::string token = j["token"];
+        std::cout << "\nToken: " << token << std::endl;
+
     }
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
