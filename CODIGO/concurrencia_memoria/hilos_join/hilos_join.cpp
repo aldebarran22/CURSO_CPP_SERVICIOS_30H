@@ -7,6 +7,7 @@
 #include <thread>
 #include <vector>
 #include <mutex>
+#include <ctime>
 
 void generarAleatorios(int n, int limite, int mili, int& suma) {
 
@@ -46,6 +47,7 @@ class hilo2 : public std::thread {
 
 int main()
 {
+    std::srand(std::time(nullptr));
     int suma = 0;
     int nMensajes = 6;
     int ml = 350;
@@ -66,7 +68,7 @@ int main()
     std::vector<std::thread> hilos;
 
     for (int i = 0; i < 3; i++) {        
-        std::thread hiloObjeto(Hilo(i, std::ref(m), std::rand()%10, std::rand()%3));
+        std::thread hiloObjeto(Hilo(i, std::ref(m), 1+std::rand()%10, std::rand()%3));
         hilos.push_back(std::move(hiloObjeto));        
     }
 
