@@ -55,7 +55,7 @@ int main()
 			std::cout << "Authorization: " << auth_header << std::endl;
 
 			// Verificar el encabezado y que comience con Bearer:
-			if (auth_header.substr(0, 7) != "Bearer") {
+			if (auth_header.substr(0, 7) != "Bearer ") {
 				return crow::response(401, "Token no proporcionado o mal formado");
 			}
 
@@ -63,7 +63,24 @@ int main()
 			std::string token = auth_header.substr(7);
 			std::cout << "Token: " << token << std::endl;
 
-			return crow::response("Token ok");
+			// Realizar la verificación del token:
+
+			// 1) decodificar token
+			auto decoded = jwt::decode(token);
+
+			// 2) Verificar
+			auto verificado = jwt::verify().allow_algorithm(jwt::algorithm::hs256{ PWD }).with_issuer("Curso C++");
+			verificado.verify(decoded);
+
+			// 3) Extraer  algun campo
+			std::string usuario = decoded.get_payload_claim("usuario").as_string();
+			std::cout << "usuario : " << usuario << std::endl;
+
+			// 4) Si todo ok, responder al cliente:
+			crow::json::wvalue respuesta;
+			respuesta["usuario"] = usuario;
+
+			return crow::response(respuesta);
 
 		}catch (const std::exception& e) {
 			return crow::response(500, "Error: " + std::string(e.what()));
