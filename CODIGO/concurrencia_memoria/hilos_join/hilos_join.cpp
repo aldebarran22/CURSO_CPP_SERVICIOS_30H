@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <mutex>
 
 void generarAleatorios(int n, int limite, int mili, int& suma) {
 
@@ -22,13 +23,18 @@ class Hilo {
     int id;
     int n;
     int tiempo;
+    std::mutex& m;
 
 public:
-    Hilo(int id, int n=5, int tiempo=1):id(id), n(n), tiempo(tiempo){}
+    Hilo(int id, std::mutex& m, int n=5, int tiempo=1):id(id), m(m), n(n), tiempo(tiempo) {}
 
     void operator()() {
+        
         for (int i = 0; i < n; i++) {
-            std::cout << "Operador("<< id << ")" << " " << i << ": " << std::endl;
+            {
+                std::lock_guard<std::mutex> lock(m);
+                std::cout << "Operador(" << id << ")" << " " << i << ": " << std::endl;
+            }
             std::this_thread::sleep_for(std::chrono::seconds(tiempo));
         }
     }
@@ -56,12 +62,12 @@ int main()
         }
     });*/
 
+    std::mutex m;
     std::vector<std::thread> hilos;
 
-    for (int i = 0; i < 3; i++) {
-        Hilo hilo(i, i + 5);
-        std::thread hiloObjeto(hilo);
-        hilos.emplace_back(hiloObjeto);
+    for (int i = 0; i < 3; i++) {        
+        std::thread hiloObjeto(Hilo(i, std::ref(m), i + 5));
+        hilos.push_back(std::move(hiloObjeto));        
     }
 
     for (auto& h : hilos) {
