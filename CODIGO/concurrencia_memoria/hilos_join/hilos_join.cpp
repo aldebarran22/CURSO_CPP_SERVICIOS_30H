@@ -33,7 +33,7 @@ public:
         for (int i = 0; i < n; i++) {
             {
                 std::lock_guard<std::mutex> lock(m);
-                std::cout << "Operador(" << id << ")" << " " << i << ": " << std::endl;
+                std::cout << "Operador(" << id << ")" << " " << i << std::endl;
             }
             std::this_thread::sleep_for(std::chrono::seconds(tiempo));
         }
@@ -66,7 +66,7 @@ int main()
     std::vector<std::thread> hilos;
 
     for (int i = 0; i < 3; i++) {        
-        std::thread hiloObjeto(Hilo(i, std::ref(m), i + 5));
+        std::thread hiloObjeto(Hilo(i, std::ref(m), std::rand()%10, std::rand()%3));
         hilos.push_back(std::move(hiloObjeto));        
     }
 
