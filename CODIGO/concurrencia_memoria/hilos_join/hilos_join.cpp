@@ -18,18 +18,23 @@ void generarAleatorios(int n, int limite, int mili, int& suma) {
 }
 
 class Hilo {
+    int id;
     int n;
     int tiempo;
 
 public:
-    Hilo(int n=5, int tiempo=1): n(n), tiempo(tiempo){}
+    Hilo(int id, int n=5, int tiempo=1):id(id), n(n), tiempo(tiempo){}
 
     void operator()() {
         for (int i = 0; i < n; i++) {
-            std::cout << "Operador(): " << i << ": " << std::endl;
+            std::cout << "Operador(): id: " << id << " " << i << ": " << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(tiempo));
         }
     }
+};
+
+class hilo2 : public std::thread {
+
 };
 
 int main()
@@ -37,8 +42,7 @@ int main()
     int suma = 0;
     int nMensajes = 6;
     int ml = 350;
-    Hilo hilo;
-
+    
     // Crear un hilo a partir de una función, pasando parámetros por copia y por referencia:
     std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
     
@@ -50,13 +54,16 @@ int main()
         }
     });
 
-    std::thread hiloObjeto(hilo);
+
+    for (int i = 0; i < 3; i++) {
+        std::thread hiloObjeto(Hilo(i, i+5));
+    }
 
 
     // Esperar a que terminen los hilos
     hiloFuncion.join();
     hiloLambda.join();
-    hiloObjeto.join();
+    //hiloObjeto.join();
 
     std::cout << "La suma de aleatorios es:  " << suma << std::endl;
 
