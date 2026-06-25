@@ -1,5 +1,7 @@
 #include <crow.h>
 #include <optional>
+#include <thread>
+
 #include <nlohmann/json.hpp>
 
 #include "EmpleadoCrow.h"
@@ -26,7 +28,7 @@ void EmpleadoCrow::run()
 		}
 	});
 
-	app.port(8080).run();
+	app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency()).run();
 }
 
 EmpleadoCrow::~EmpleadoCrow()
