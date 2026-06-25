@@ -5,12 +5,17 @@
 #include <boost/beast/core.hpp>
 #include <boost/beast/websocket.hpp>
 #include <boost/asio.hpp>
+#include <boost/beast/ssl.hpp>
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
 namespace net = boost::asio;
 namespace http = boost::beast::http;
+namespace ssl = net::ssl;
+
 using tcp = net::ip::tcp;
+
+#define PUERTO 8443
 
 
 void do_session(tcp::socket socket) {
@@ -53,8 +58,14 @@ int main()
     // Crear el contexto de comunicación:
     net::io_context ioc;
 
+    // Definir el contexto SSL:
+    ssl::context ctx(ssl::context::tlsv12_server);
+
+    ctx.use_certificate_chain_file("..\\certificados\\cert.pem");
+    ctx.use_private_key_file("..\\certificados\\key.pem", ssl::context::file_format::pem);
+
     // Definir el endpoint
-    tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), 80));
+    tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), PUERTO));
 
     // Capturar el número de hilos máximo:
     unsigned int numHilos = std::thread::hardware_concurrency();
@@ -62,7 +73,7 @@ int main()
     // Definir el pool de hilos:
     boost::asio::thread_pool pool(numHilos);
 
-    std::cout << "Servidor ok, con " << numHilos << " hilos" << std::endl;
+    std::cout << "Servidor WSS ok, con " << numHilos << " hilos" << " puerto: " << PUERTO << std::endl;
 
     // Esperamos clientes dentro de un bucle inf.
     while (true) {
@@ -78,7 +89,7 @@ int main()
         // Lanzar un hilo para atender el cliente conectado:
         boost::asio::post(pool, [s = std::move(socket)]() mutable {
             // Llamar a la tarea (función) que realiza el thread.
-            do_session(std::move(s));
+            do_session(std::move(s), ctx);
             });
 
     }
