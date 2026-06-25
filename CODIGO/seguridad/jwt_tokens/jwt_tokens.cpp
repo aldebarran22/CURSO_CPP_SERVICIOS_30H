@@ -48,6 +48,28 @@ int main()
 
 	});
 
+	CROW_ROUTE(app, "/app").methods("GET"_method)([](const crow::request& request) {
+		try {
+			// Necesitamos extraer el token de las cabeceras: http
+			auto auth_header = request.get_header_value("Authorization");
+			std::cout << "Authorization: " << auth_header << std::endl;
+
+			// Verificar el encabezado y que comience con Bearer:
+			if (auth_header.substr(0, 7) != "Bearer") {
+				return crow::response(401, "Token no proporcionado o mal formado");
+			}
+
+			// Extraer el token:
+			std::string token = auth_header.substr(7);
+			std::cout << "Token: " << token << std::endl;
+
+			return crow::response("Token ok");
+
+		}catch (const std::exception& e) {
+			return crow::response(500, "Error: " + std::string(e.what()));
+		}
+	});
+
 	app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency()).run();
 }
 
