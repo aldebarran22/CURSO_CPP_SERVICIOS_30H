@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <chrono>
 #include <thread>
+#include <vector>
 
 void generarAleatorios(int n, int limite, int mili, int& suma) {
 
@@ -27,7 +28,7 @@ public:
 
     void operator()() {
         for (int i = 0; i < n; i++) {
-            std::cout << "Operador(): id: " << id << " " << i << ": " << std::endl;
+            std::cout << "Operador("<< id << ")" << " " << i << ": " << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(tiempo));
         }
     }
@@ -44,6 +45,7 @@ int main()
     int ml = 350;
     
     // Crear un hilo a partir de una función, pasando parámetros por copia y por referencia:
+    /*
     std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
     
 
@@ -52,20 +54,27 @@ int main()
             std::cout << "mensaje lambda: " << (i + 1) << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(ml));
         }
-    });
+    });*/
 
+    std::vector<std::thread> hilos;
 
     for (int i = 0; i < 3; i++) {
-        std::thread hiloObjeto(Hilo(i, i+5));
+        Hilo hilo(i, i + 5);
+        std::thread hiloObjeto(hilo);
+        hilos.emplace_back(hiloObjeto);
+    }
+
+    for (auto& h : hilos) {
+        h.join();
     }
 
 
     // Esperar a que terminen los hilos
-    hiloFuncion.join();
-    hiloLambda.join();
+    //hiloFuncion.join();
+    //hiloLambda.join();
     //hiloObjeto.join();
 
-    std::cout << "La suma de aleatorios es:  " << suma << std::endl;
+    //std::cout << "La suma de aleatorios es:  " << suma << std::endl;
 
     return 0;
 }
