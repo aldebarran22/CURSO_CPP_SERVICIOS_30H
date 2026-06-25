@@ -87,6 +87,10 @@ int main()
 		}
 	});
 
-	app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency()).run();
+	// Sin certificado:
+	//app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency()).run();
+
+	// Con certificado:
+	app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(8443).run();
 }
 
