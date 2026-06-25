@@ -29,7 +29,15 @@ int main()
 
 			if (USER == j.at("user") && PWD == j.at("pwd")) {
 				// Generamos el token:
-				return crow::response("token generado");
+				auto token = jwt::create().
+					set_issuer("Curso C++").
+					set_payload_claim("usuario", jwt::claim(std::string(USER))).
+					set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 30 }).
+					sign(jwt::algorithm::hs256{ PWD });
+
+				crow::json::wvalue respuesta;
+				respuesta["token"] = token;
+				return crow::response(respuesta);
 			}
 			else {
 				return crow::response(401, "No existe el usuario");
