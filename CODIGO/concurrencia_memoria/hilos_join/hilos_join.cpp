@@ -30,13 +30,22 @@ public:
     Hilo(int id, std::mutex& m, int n=5, int tiempo=1):id(id), m(m), n(n), tiempo(tiempo) {}
 
     void operator()() {
-        
+        {
+            std::lock_guard<std::mutex> lock(m);
+            std::cout << "Inicia el Operador(" << id << ")" << std::endl;
+        }
+
         for (int i = 0; i < n; i++) {
             {
                 std::lock_guard<std::mutex> lock(m);
                 std::cout << "Operador(" << id << ")" << " " << i << std::endl;
             }
             std::this_thread::sleep_for(std::chrono::seconds(tiempo));
+        }
+
+        {
+            std::lock_guard<std::mutex> lock(m);
+            std::cout << "Termina el Operador(" << id << ")" << std::endl;
         }
     }
 };
