@@ -26,6 +26,14 @@ int main()
         std::string token = j["token"];
         std::cout << "\nToken: " << token << std::endl;
 
+        // Peticion GET enviando el token en un campo de la cabecera:
+        std::string cadena = "Bearer " + token;
+        auto response2 = cpr::Get(cpr::Url{ "http://localhost:8080/app" }, 
+            cpr::Header{{"Authorization", cadena}}
+        );
+        std::string respuesta2 = response2.text;
+        std::cout << "\nSegunda respuesta: " << respuesta2 << std::endl;
+
     }
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
