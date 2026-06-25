@@ -88,7 +88,7 @@ int main()
         acceptor.accept(socket);
 
         // Lanzar un hilo para atender el cliente conectado:
-        boost::asio::post(pool, [s = std::move(socket)]() mutable {
+        boost::asio::post(pool, [s = std::move(socket), &ctx]() mutable {
             // Llamar a la tarea (función) que realiza el thread.
             do_session(std::move(s), ctx);
             });
