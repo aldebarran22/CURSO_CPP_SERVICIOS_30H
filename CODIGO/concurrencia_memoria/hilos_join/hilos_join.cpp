@@ -32,7 +32,7 @@ public:
     void operator()() {
         {
             std::lock_guard<std::mutex> lock(m);
-            std::cout << "Inicia el Operador(" << id << ")" << std::endl;
+            std::cout << "Inicia el Operador(" << id << ") con getId: " << std::this_thread::get_id() << std::endl;
         }
 
         for (int i = 0; i < n; i++) {
@@ -60,6 +60,8 @@ int main()
     int suma = 0;
     int nMensajes = 6;
     int ml = 350;
+
+    std::cout << "main con getId: " << std::this_thread::get_id() << std::endl;
     
     // Crear un hilo a partir de una función, pasando parámetros por copia y por referencia:
     /*

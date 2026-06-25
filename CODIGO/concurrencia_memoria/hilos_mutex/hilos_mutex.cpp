@@ -1,19 +1,53 @@
-// hilos_mutex.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
+#include <thread>
+#include <mutex>
 #include <iostream>
+
+#define IT 1000000
+
+int contador = 0;
+int contador_mutex = 0;
+
+
+void suma() {
+	for (int i = 0; i < IT; i++)
+		contador++;
+}
+
+void resta() {
+	for (int i = 0; i < IT; i++)
+		contador--;
+}
+
+void suma_mtx(std::mutex& mtx) {
+	for (int i = 0; i < IT; i++) {
+		mtx.lock();
+		contador_mutex++;
+		mtx.unlock();
+	}
+}
+
+void resta_mtx(std::mutex& mtx) {
+	for (int i = 0; i < IT; i++) {
+		std::lock_guard m{ mtx };
+		contador_mutex--;
+
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	std::mutex mtx;
+	std::thread h1{ suma };
+	std::thread h2{ resta };
+
+	std::thread h3{ suma_mtx, std::ref(mtx) };
+	std::thread h4{ resta_mtx, std::ref(mtx) };
+
+	h1.join();
+	h2.join();
+	h3.join();
+	h4.join();
+
+	std::cout << "Contador: " << contador << std::endl;
+	std::cout << "Contador mutex: " << contador_mutex << std::endl;
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln

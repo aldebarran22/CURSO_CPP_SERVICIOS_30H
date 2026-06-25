@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wss_servidor", "wss_servido
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wss_cliente", "wss_cliente\wss_cliente.vcxproj", "{0430EF24-6AFB-4FBB-98D8-2497034972DB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multicliente", "multicliente\multicliente.vcxproj", "{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{0430EF24-6AFB-4FBB-98D8-2497034972DB}.Release|x64.Build.0 = Release|x64
 		{0430EF24-6AFB-4FBB-98D8-2497034972DB}.Release|x86.ActiveCfg = Release|Win32
 		{0430EF24-6AFB-4FBB-98D8-2497034972DB}.Release|x86.Build.0 = Release|Win32
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Debug|x64.ActiveCfg = Debug|x64
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Debug|x64.Build.0 = Debug|x64
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Debug|x86.ActiveCfg = Debug|Win32
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Debug|x86.Build.0 = Debug|Win32
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Release|x64.ActiveCfg = Release|x64
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Release|x64.Build.0 = Release|x64
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Release|x86.ActiveCfg = Release|Win32
+		{9ECEB5A9-927F-49BA-ADCC-07B19A24D15F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
