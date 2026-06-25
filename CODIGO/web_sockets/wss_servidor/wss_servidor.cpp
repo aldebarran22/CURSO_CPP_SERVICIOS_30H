@@ -18,12 +18,13 @@ using tcp = net::ip::tcp;
 #define PUERTO 8443
 
 
-void do_session(tcp::socket socket) {
+void do_session(tcp::socket socket, ssl::context& ctx) {
 
     try {
 
         // Definir el Websocket:
-        websocket::stream<tcp::socket> ws(std::move(socket));
+        websocket::stream<beast::ssl_stream<tcp::socket>> ws(std::move(socket), ctx);
+        ws.next_layer().handshake(ssl::stream_base::server);
         ws.accept();
 
         for (;;) {
