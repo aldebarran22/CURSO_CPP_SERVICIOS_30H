@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <vector>
 
 void conPunteros() {
     int** ptr = nullptr;
@@ -37,9 +39,16 @@ void conSmartPointers() {
 }
 
 
+void conVector() {
+    std::vector<std::vector<int>> matriz(10, std::vector<int>(10));
+
+    matriz[3][4] = 99;
+}
+
 int main()
 {
     //conPunteros();
-    conSmartPointers();
+    //conSmartPointers();
+    conVector();
 }
 
