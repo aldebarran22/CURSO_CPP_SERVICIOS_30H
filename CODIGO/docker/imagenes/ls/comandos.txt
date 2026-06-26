@@ -1,0 +1,8 @@
+# Anular el comando especificado en CMD en el Dockerfile
+
+docker build -t ubuntu_ls .
+
+Tiene un echo
+
+docker run --rm ubuntu_ls ls -l /
+docker run --rm ubuntu_ls
