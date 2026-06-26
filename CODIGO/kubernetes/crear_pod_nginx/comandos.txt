@@ -1,0 +1,4 @@
+ kubectl port-forward pod/pod-nginx-2 8080:80
+
+
+En un navegador: http://localhost:8080
