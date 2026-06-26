@@ -13,7 +13,7 @@ services:
       MYSQL_USER: antonio
       MYSQL_PASSWORD: antonio
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./empresa3_mysql.sql:/docker-entrypoint-initdb.d/empresa3_mysql.sql
       
   redis:
