@@ -1,0 +1,5 @@
+docker build -t flask-saludo .
+docker run --rm -d -p 5000:5000 flask-saludo
+
+
+Desde postman GET: http://localhost:5000/saludo
