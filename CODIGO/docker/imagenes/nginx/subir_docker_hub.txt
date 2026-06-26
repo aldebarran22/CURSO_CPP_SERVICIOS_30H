@@ -4,11 +4,20 @@ docker build -t mi_nginx:v2 .
 docker run -d --name nginx1 -p 82:80 mi_nginx:v2
 
 # Etiquetar con el user del Docker hub
-docker tag <id_imagen> piri12345/mi_nginx:v2
+docker tag <id_imagen> <user Docker hub>/mi_nginx:v2
+
+Ejemplo:
+docker tag 6019 piri12345/mi_nginx:v2
 
 
 docker login
 
+docker push <user Docker hub>/mi_nginx:v2
+
+Ejemplo:
 docker push piri12345/mi_nginx:v2
 
+docker pull <user Docker hub>/mi_nginx:v2
+
+Ejemplo:
 docker pull piri12345/mi_nginx:v2
