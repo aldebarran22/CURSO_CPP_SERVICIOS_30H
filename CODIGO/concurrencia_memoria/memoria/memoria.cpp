@@ -6,11 +6,20 @@
 void conPunteros() {
     int** ptr = nullptr;
 
+    // Reservar 1) para 10 filas:
     ptr = new int* [10];
     for (int i = 0; i < 10; i++) {
+        // Reservar para 10 cols en cada fila
         ptr[i] = new int[10];
+       
     }
 
+    // Se libera al revés:
+    for (int i = 0; i < 10; i++) {
+        // Liberar cada fila de 10 cols
+        delete[] ptr[i];
+    }
+    // Liberar los punteros de las filas:
     delete[] ptr;
 }
 
