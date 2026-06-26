@@ -23,9 +23,23 @@ void conPunteros() {
     delete[] ptr;
 }
 
+void conSmartPointers() {
+    std::unique_ptr<std::unique_ptr<int[]>[]> ptr = std::make_unique<std::unique_ptr<int[]>[]>(10);
+    // Equivale a: ptr = new int* [10];
+
+    // Crear cada una de las filas:
+    for (int i = 0; i < 10; i++) {
+        ptr[i] = std::make_unique<int[]>(10);
+        // Equivale a:  ptr[i] = new int[10];
+    }
+
+    // NO hay que liberar, se libera automáticamente
+}
+
 
 int main()
 {
-    conPunteros();
+    //conPunteros();
+    conSmartPointers();
 }
 
