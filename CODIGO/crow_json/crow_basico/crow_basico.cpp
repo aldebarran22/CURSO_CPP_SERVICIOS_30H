@@ -19,6 +19,17 @@ int main()
         return "Hello World";
     });
 
+    CROW_ROUTE(app, "/info")([]() {
+
+        crow::json::wvalue resp;
+
+        resp["mensaje"] = "todo ok";
+        resp["codigo"] = 200;
+
+        // Devolver la resp al cliente:
+        return crow::response{ resp }; // por defecto es 200!
+    });
+
     // Activar logs:
 
 
