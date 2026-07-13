@@ -11,7 +11,7 @@ void CrowCRUD::run()
 {
 	crow::SimpleApp app;
 
-	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req)) {
+	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
 		
 		// Recoger el json de la petición:
 		auto body = crow::json::load(req.body);
