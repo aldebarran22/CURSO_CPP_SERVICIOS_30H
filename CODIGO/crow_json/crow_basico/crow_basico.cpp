@@ -55,6 +55,7 @@ int main()
 
             // Validar si viene o no un campo en el json:
             if (!j.contains("idpedido")) {
+                CROW_LOG_WARNING << "No se encuentra el campo idpedido";
                 return crow::response(400, "Falta el idpedido");
             }
 
@@ -64,6 +65,7 @@ int main()
             return crow::response(j2.dump());
         }
         catch (const std::exception& e) {
+            CROW_LOG_ERROR << e.what();
             return crow::response(500, "ERROR: " + std::string(e.what()));
         }
     });
@@ -73,7 +75,7 @@ int main()
 
     // Poner en marcha el servidor:
     app.port(18000).multithreaded().
-        loglevel(crow::LogLevel::Debug).
+        loglevel(crow::LogLevel::Warning).
         concurrency(std::thread::hardware_concurrency());
     app.run();
 }
