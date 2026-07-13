@@ -19,6 +19,10 @@ int main()
         return "Hello World";
     });
 
+    // Activar logs:
+
 
     // Poner en marcha el servidor:
+    app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
+    app.run();
 }
