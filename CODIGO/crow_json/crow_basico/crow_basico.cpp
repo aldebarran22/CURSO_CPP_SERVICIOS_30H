@@ -5,6 +5,9 @@
 #include <crow.h>
 #include <thread>
 #include <string>
+#include <nlohmann/json.hpp>   
+
+#include "Pedido.h"
 
 int main()
 {
@@ -41,6 +44,22 @@ int main()
         resp["suma"] = suma;
 
         return crow::response{ resp };
+    });
+
+    CROW_ROUTE(app, "/pedidos").methods(crow::HTTPMethod::POST)([](const crow::request& req) {
+        // Recoger un pedido, validar un campo y devolver algún dato
+
+        try {
+            // Parsear el pedido con nlohmman:
+            nlohmann::json j = nlohmann::json::parse(req.body);
+
+            // Validar si viene o no un campo en el json:
+            if (!j.contains("idpedido")) {
+                return crow::response(400, "Falta el idpedido");
+            }
+
+            Pedido p = j.get<Pedido>();
+        }
     });
 
     // Activar logs:
