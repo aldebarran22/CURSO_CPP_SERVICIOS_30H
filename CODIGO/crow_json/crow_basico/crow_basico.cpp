@@ -58,7 +58,13 @@ int main()
                 return crow::response(400, "Falta el idpedido");
             }
 
-            Pedido p = j.get<Pedido>();
+            Pedido p = j.get<Pedido>(); // lanza from_json (para el Pedido)
+            nlohmann::json j2 = p;  // Lanza to_json
+
+            return crow::response(j2.dump());
+        }
+        catch (const std::exception& e) {
+            return crow::response(500, "ERROR: " + std::string(e.what()));
         }
     });
 
