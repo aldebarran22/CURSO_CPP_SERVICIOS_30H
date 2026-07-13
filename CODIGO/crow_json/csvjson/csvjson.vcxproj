@@ -124,7 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="csvjson.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Pedido.cpp" />
     <ClCompile Include="Utilidades.cpp" />
   </ItemGroup>
