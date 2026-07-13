@@ -30,6 +30,19 @@ int main()
         return crow::response{ resp }; // por defecto es 200!
     });
 
+    // Ejemplo con parametros:
+    CROW_ROUTE(app, "/operacion/<int>/<int>").methods(crow::HTTPMethod::GET)([](int a, int b) {
+        crow::json::wvalue resp;
+
+        int suma = a + b;
+
+        resp["a"] = a;
+        resp["b"] = b;
+        resp["suma"] = suma;
+
+        return crow::response{ resp };
+    });
+
     // Activar logs:
 
 
