@@ -137,7 +137,18 @@ std::string ServidorREST::peticionPOST(const std::string& body)
 
 std::string ServidorREST::peticionDELETE(int id)
 {
-    return std::string();
+    // Comprobar si existe el id en el mapa: con un iterator
+    if (this->items.find(id) != this->items.end()) {
+        this->items.erase(id);
+
+        json resp = { {"id", id}, { "mensaje", "Item eliminado"} };
+        return resp.dump();
+    }
+    else {
+        // No existe el elemento:
+        json resp = { {"id", id}, { "mensaje", "No existe el item"} };
+        return resp.dump();
+    }
 }
 
 ServidorREST::~ServidorREST()
