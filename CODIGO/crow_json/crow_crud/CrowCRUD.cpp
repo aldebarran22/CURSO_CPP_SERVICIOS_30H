@@ -33,6 +33,34 @@ void CrowCRUD::run()
 
 	});
 
+	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
+		// Definir una lista para volcar los usuarios:
+		crow::json::wvalue lista = crow::json::wvalue::list();
+		int i = 0;
+
+		for (const auto& [id, usuario] : this->usuarios) {
+			crow::json::wvalue item;
+			item["id"] = id;
+
+			if (usuario.has("nombre"))
+				item["nombre"] = usuario["nombre"].s();
+			else
+				item["nombre"] = "";
+
+			item["edad"] = usuario["edad"].i();
+
+			// Cargar el item a la lista:
+			lista[i++] = std::move(item);
+		}
+
+		// Montar la resp al cliente:
+		crow::json::wvalue resp;
+		resp["usuarios"] = std::move(lista);
+		return crow::response(resp);
+
+
+	});
+
 	app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency()).run();
 }
 
