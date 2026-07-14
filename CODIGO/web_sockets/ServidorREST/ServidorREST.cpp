@@ -57,7 +57,15 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
         response.keep_alive(request.keep_alive());
 
         // Analizar el target y el metodo!!
-        ///////////////////////////////////
+
+        // http://localhost:8080/items POST
+        if (request.method() == http::verb::post && target == "/items") {
+            response.body() = this->peticionPOST(request.body());
+        }
+        else {
+            response.result(http::status::not_found);
+            response.body() = "Ruta no encontrada";
+        }
 
         // Calcular el tamaño de la resp: content_length
         response.prepare_payload();
