@@ -47,9 +47,27 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
 
         std::cout << "Peticion: " << target << " metodo: " << metodo << std::endl;
 
+        // Respuesta al cliente:
+        http::response<http::string_body> response{ http::status::ok, request.version() };
+        response.set(http::field::server, "REST API/1.0");
+        response.set(http::field::content_type, "application/json");
+        response.body() = "Respuesta del servidor " + mensaje;
+
+        // Conexion persistente;
+        response.keep_alive(request.keep_alive());
+
+        // Analizar el target y el metodo!!
+        ///////////////////////////////////
+
+        // Calcular el tamaño de la resp: content_length
+        response.prepare_payload();
+
+        // Escribir la resp:
+        http::write(socket, response);
+        
     }
     catch (const std::exception& e) {
-
+        std::cerr << "ERROR: " << e.what() << std::endl;
     }
 }
 
