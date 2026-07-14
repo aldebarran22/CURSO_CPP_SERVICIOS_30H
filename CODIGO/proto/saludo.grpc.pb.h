@@ -43,13 +43,13 @@ class Saludo final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::saludo::Respuesta>> PrepareAsyncDiHola(::grpc::ClientContext* context, const ::saludo::Solicitud& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::saludo::Respuesta>>(PrepareAsyncDiHolaRaw(context, request, cq));
     }
-    // Metodo RPC
+    // Método RPC
     class async_interface {
      public:
       virtual ~async_interface() {}
       virtual void DiHola(::grpc::ClientContext* context, const ::saludo::Solicitud* request, ::saludo::Respuesta* response, std::function<void(::grpc::Status)>) = 0;
       virtual void DiHola(::grpc::ClientContext* context, const ::saludo::Solicitud* request, ::saludo::Respuesta* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      // Metodo RPC
+      // Método RPC
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -95,7 +95,7 @@ class Saludo final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status DiHola(::grpc::ServerContext* context, const ::saludo::Solicitud* request, ::saludo::Respuesta* response);
-    // Metodo RPC
+    // Método RPC
   };
   template <class BaseClass>
   class WithAsyncMethod_DiHola : public BaseClass {
@@ -237,7 +237,7 @@ class Saludo final {
   typedef Service SplitStreamedService;
   typedef WithStreamedUnaryMethod_DiHola<Service > StreamedService;
 };
-// Definicion del servicio gRPC
+// Definición del servicio gRPC
 
 }  // namespace saludo
 

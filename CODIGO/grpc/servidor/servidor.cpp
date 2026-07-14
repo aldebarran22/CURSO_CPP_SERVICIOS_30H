@@ -14,7 +14,7 @@
 #pragma warning(pop)*/
 
 
-#include "saludo.grpc.pb.h"
+#include "..\saludo.grpc.pb.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
