@@ -64,7 +64,8 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
         }
         else {
             response.result(http::status::not_found);
-            response.body() = "Ruta no encontrada";
+            json resp = { {"error", "url no mapeada o verbo no implementado"} };
+            response.body() = resp.dump();
         }
 
         // Calcular el tamaño de la resp: content_length
