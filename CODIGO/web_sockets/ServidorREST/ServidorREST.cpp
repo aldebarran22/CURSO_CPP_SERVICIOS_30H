@@ -85,9 +85,28 @@ std::string ServidorREST::peticionGET()
     return std::string();
 }
 
-std::string ServidorREST::peticionPOST(const std::string&)
+std::string ServidorREST::peticionPOST(const std::string& body)
 {
-    return std::string();
+    json req = json::parse(body);
+
+    // Validacion del json recibido:
+    if (!req.contains("value") || !req["value"].is_string()) {
+        json resp = {
+            {"error", "Campo value obligatorio y debe ser un string"}
+        };
+
+        return resp.dump();
+    }
+
+    // Recuperar el value y cargarlo en la colección con la clave id generada:
+    std::string value = req["value"];
+    int id = this->id++;
+
+    // Lo almacenamos en el mapa:
+    this->items[id] = value;
+    json resp = { {"id", id}, {"value", value} };
+
+    return resp.dump();
 }
 
 std::string ServidorREST::peticionDELETE(int)
