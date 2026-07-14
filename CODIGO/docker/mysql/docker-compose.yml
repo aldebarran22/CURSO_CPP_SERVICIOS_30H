@@ -5,7 +5,7 @@ services:
     restart: always
     ports:
       - "3307:3306"
-    enviroment:
+    environment:
       MYSQL_ROOT_PASSWORD: antonio
       MYSQL_DATABASE: empresa3
       MYSQL_USER: antonio
