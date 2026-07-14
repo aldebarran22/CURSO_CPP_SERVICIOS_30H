@@ -77,6 +77,25 @@ void CrowCRUD::run()
 		return crow::response(resp);
 	});
 
+	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
+		std::lock_guard<std::mutex> lock(this->mtx);
+
+		// Recoger el json de la petición:
+		auto body = crow::json::load(req.body);
+
+		if (!body) {
+			return crow::response(400, "json incorrecto");
+		}
+
+		if (this->usuarios.count(id) == 0) {
+			return crow::response(404, "Usuario id: " + std::to_string(id) + " no existe");
+		}
+
+		// Actualizar el usuario:
+		usuarios[id] = std::move(body);
+		return crow::response(200, "Usuario actualizado");
+	});
+
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::Delete)([this](int id) {
 
 		std::lock_guard<std::mutex> lock(this->mtx);
