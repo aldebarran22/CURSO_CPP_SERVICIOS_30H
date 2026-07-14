@@ -62,6 +62,11 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
         if (request.method() == http::verb::post && target == "/items") {
             response.body() = this->peticionPOST(request.body());
         }
+
+        else if (request.method() == http::verb::get && target == "/items") {
+            response.body() = this->peticionGET();
+
+        }
         else {
             response.result(http::status::not_found);
             json resp = { {"error", "url no mapeada o verbo no implementado"} };
@@ -82,7 +87,14 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
 
 std::string ServidorREST::peticionGET()
 {
-    return std::string();
+    json resp;
+
+    for (const auto& [id, value] : this->items) {
+        json aux = { {"id", id}, {"value", value} };
+        resp.push_back(aux);
+    }
+
+    return resp.dump();
 }
 
 std::string ServidorREST::peticionPOST(const std::string& body)
