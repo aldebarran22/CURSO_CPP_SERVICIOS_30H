@@ -67,6 +67,20 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
             response.body() = this->peticionGET();
 
         }
+        else if (request.method() == http::verb::delete_ && request.target().starts_with("/items/")) {
+            std::string id_str = target.substr(std::string("/items/").size());
+
+            try {
+                int id = std::stoi(id_str);
+                response.body() = this->peticionDELETE(id);
+            }
+            catch (...) {
+                response.result(http::status::bad_request);
+                json resp = { {"error", "Falta id a borrar"} };
+                response.body() = resp.dump();
+            }
+        }
+
         else {
             response.result(http::status::not_found);
             json resp = { {"error", "url no mapeada o verbo no implementado"} };
@@ -121,7 +135,7 @@ std::string ServidorREST::peticionPOST(const std::string& body)
     return resp.dump();
 }
 
-std::string ServidorREST::peticionDELETE(int)
+std::string ServidorREST::peticionDELETE(int id)
 {
     return std::string();
 }
