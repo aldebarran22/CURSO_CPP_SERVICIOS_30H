@@ -13,7 +13,18 @@ ServidorREST::ServidorREST(net::io_context& ioc, unsigned int port):
 
 void ServidorREST::run()
 {
+    std::cout << "Servidor REST escuchando en el puerto: " << acceptor.local_endpoint().port() << std::endl;
 
+    for (;;) {
+        // Crear un socket:
+        tcp::socket socket(ioc);
+
+        // Aceptar peticion:
+        acceptor.accept(socket);
+
+        // Procesar la peticion:
+        procesarPeticion(socket);
+    }
 }
 
 
