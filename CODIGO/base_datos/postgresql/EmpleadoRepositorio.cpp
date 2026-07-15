@@ -70,6 +70,22 @@ void EmpleadoRepository::actualizar(const Empleado& emp) {
 	PQclear(res);
 }
 
+
+void EmpleadoRepository::insertar(const Empleado& emp) {
+	std::string query = "INSERT INTO tbempleados(id, nombre, cargo) VALUES(" + std::to_string(emp.id) + ", '" +
+		emp.nombre + "', '" + emp.cargo + "')";
+	PGresult* res = PQexec(conn_, query.c_str());
+
+	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+		PQclear(res);
+		std::string errorMsg = PQerrorMessage(conn_);
+		throw std::runtime_error("Error al insertar empleado: " + errorMsg);
+	}
+
+	PQclear(res);
+}
+
+
 EmpleadoRepository::~EmpleadoRepository()
 {
 	PQfinish(this->conn_);
