@@ -28,7 +28,12 @@ std::optional<Empleado> EmpleadoService::read(int id)
 
 bool EmpleadoService::create(const Empleado& e)
 {
+	// Se crea en el repositorio y se guarda en la cache
+	bool ok = this->repositorio.create(e);
 
+	if (ok) {
+		this->cache.saveEmpleado(e);
+	}
 }
 
 
