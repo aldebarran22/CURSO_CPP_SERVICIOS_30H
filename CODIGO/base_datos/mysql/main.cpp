@@ -28,7 +28,7 @@ void testRepositorio() {
         EmpleadoRepositorio repo(sql);
 
         // Operacion READ:
-        int id = 18;
+        int id = 1;
 
         std::optional<Empleado> emp = repo.read(id);
         if (emp) {
@@ -36,6 +36,15 @@ void testRepositorio() {
         }
         else {
             std::cout << "No existe el empleado con " << id << std::endl;
+        }
+
+        // Operacion CREATE:
+        Empleado e{ 10, "Laura", "Comercial" };
+        if (repo.create(e)) {
+            std::cout << "Se ha creado el empleado" << std::endl;
+        }
+        else {
+            std::cout << "No se ha creado" << std::endl;
         }
 
     }
