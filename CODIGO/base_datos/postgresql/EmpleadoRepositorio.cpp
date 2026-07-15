@@ -17,6 +17,30 @@ EmpleadoRepository::EmpleadoRepository(const char* cadConex)
 
 }
 
+std::vector<Empleado> EmpleadoRepository::listarTodos()
+{
+	std::vector<Empleado> empleados;
+	PGresult* res = PQexec(this->conn_, "select id, nombre, cargo from tbempleados");
+
+	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+		std::string mensaje = PQresultErrorMessage(res);
+		PQclear(res);
+		throw std::runtime_error(mensaje);
+	}
+
+	int n = PQntuples(res);
+	for (int i = 0; i < n; i++) {
+		Empleado emp;
+		emp.id = std::stoi(PQgetvalue(res, i, 0));
+		emp.nombre = PQgetvalue(res, i, 1);
+		emp.cargo = PQgetvalue(res, i, 2);
+		empleados.push_back(emp);
+	}
+
+	PQclear(res);
+	return empleados;
+}
+
 EmpleadoRepository::~EmpleadoRepository()
 {
 	PQfinish(this->conn_);

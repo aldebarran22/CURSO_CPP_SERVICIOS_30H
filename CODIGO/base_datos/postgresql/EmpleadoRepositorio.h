@@ -10,9 +10,9 @@ public:
     EmpleadoRepository(const char* cadConex);
     //std::optional<Empleado> recuperarEmpleado(int id);
     //void insertar(const Empleado& emp);
-    void actualizar(const Empleado& emp);
+    //void actualizar(const Empleado& emp);
     //void eliminar(int id);
-    //std::vector<Empleado> listarTodos();
+    std::vector<Empleado> listarTodos();
     ~EmpleadoRepository();
 
 private:

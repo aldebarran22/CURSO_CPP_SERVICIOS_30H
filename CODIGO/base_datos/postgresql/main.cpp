@@ -10,7 +10,7 @@
 int main()
 {
     try {
-        const char* cadConex = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio2 password=antonio";
+        const char* cadConex = "host=127.0.0.1 port=5433 dbname=empresa user=antonio password=antonio";
         EmpleadoRepository repo(cadConex);
         std::cout << "Conexion ok" << std::endl;
 
