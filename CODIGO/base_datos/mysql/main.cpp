@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <soci/soci.h>
+#include <soci/mysql/soci-mysql.h>
 
 int main()
 {
