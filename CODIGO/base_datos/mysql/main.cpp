@@ -65,6 +65,14 @@ void testRepositorio() {
             std::cout << "No se ha actualizado" << std::endl;
         }
 
+        // Operacion SELECT:
+        std::cout << "\nListado:\n";
+        std::vector<Empleado> empleados = repo.select();
+        for (const auto& e : empleados) {
+            std::cout << e.nombre << " " << e.cargo << std::endl;
+        }
+
+
     }
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
