@@ -32,7 +32,7 @@ void testFinal() {
         EmpleadoService service(cache, repo);
 
         // Intentar recuperar un empleado:
-        int id = 1;
+        int id = 11;
 
         std::optional<Empleado> e = service.read(id);
         if (e) {
@@ -40,6 +40,15 @@ void testFinal() {
         }
         else {
             std::cout << "No existe el empleado: " << id << std::endl;
+        }
+
+        // Intentar grabar un empleado:
+        Empleado e{ 10, "Laura", "Comercial" };
+        if (service.create(e)) {
+            std::cout << "Se ha creado el empleado" << std::endl;
+        }
+        else {
+            std::cout << "No se ha creado" << std::endl;
         }
 
 
