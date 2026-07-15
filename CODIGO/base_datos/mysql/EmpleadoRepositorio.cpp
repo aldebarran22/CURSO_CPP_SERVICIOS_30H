@@ -1,4 +1,5 @@
 #include "EmpleadoRepositorio.h"
+#include "EmpleadoService.h"
 
 EmpleadoRepositorio::EmpleadoRepositorio(soci::session& sql):sql(sql)
 {
@@ -27,6 +28,7 @@ bool EmpleadoRepositorio::create(const Empleado& emp)
 	st.execute(true);
 	return st.get_affected_rows() == 1;
 }
+
 
 bool EmpleadoRepositorio::_delete(int id)
 {
