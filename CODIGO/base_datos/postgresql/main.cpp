@@ -15,6 +15,10 @@ int main()
         EmpleadoRepository repo(cadConex);
         std::cout << "Conexion ok" << std::endl;
 
+        // Crear un empleado:
+        Empleado e{ 10, "Laura", "Representante de ventas" };
+        repo.insertar(e);
+
         std::vector<Empleado> empleados = repo.listarTodos();
         for (auto e : empleados) {
             std::cout << e.nombre << " " << e.cargo << std::endl;
