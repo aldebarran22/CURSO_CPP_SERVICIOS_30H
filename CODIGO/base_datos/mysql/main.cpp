@@ -47,6 +47,16 @@ void testRepositorio() {
             std::cout << "No se ha creado" << std::endl;
         }
 
+        // Operacion UPDATE:
+        e.nombre = "Laura Gracia";
+        e.cargo = "Representante de ventas";
+        if (repo.update(e)) {
+            std::cout << "Se ha actualizado el empleado" << std::endl;
+        }
+        else {
+            std::cout << "No se ha actualizado" << std::endl;
+        }
+
     }
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
