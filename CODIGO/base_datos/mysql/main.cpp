@@ -28,7 +28,7 @@ void testRepositorio() {
         EmpleadoRepositorio repo(sql);
 
         // Operacion READ:
-        int id = 1;
+        int id = 18;
 
         std::optional<Empleado> emp = repo.read(id);
         if (emp) {
