@@ -48,6 +48,8 @@ void EmpleadoCache::saveEmpleado(const Empleado& e)
 	json j = e;
 	std::string strEmp = j.dump();
 
+	std::cout << "Graba " << e.id << " en la cache" << std::endl;
+
 	redisReply* reply = (redisReply*)redisCommand(this->contexto, "SET %s %s", key.c_str(), strEmp.c_str());
 	freeReplyObject(reply);
 }
