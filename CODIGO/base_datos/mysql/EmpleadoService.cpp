@@ -34,6 +34,8 @@ bool EmpleadoService::create(const Empleado& e)
 	if (ok) {
 		this->cache.saveEmpleado(e);
 	}
+
+	return ok;
 }
 
 
