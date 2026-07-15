@@ -44,6 +44,12 @@ std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 
 void EmpleadoCache::saveEmpleado(const Empleado& e)
 {
+	std::string key = "empleado" + std::to_string(e.id);
+	json j = e;
+	std::string strEmp = j.dump();
+
+	redisReply* reply = (redisReply*)redisCommand(this->contexto, "SET %s %s", key.c_str(), strEmp.c_str());
+	freeReplyObject(reply);
 }
 
 EmpleadoCache::~EmpleadoCache()
