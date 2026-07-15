@@ -48,7 +48,7 @@ void ServicioCrow::run()
 			}
 		}
 		catch (const std::exception& e) {
-			return crow::response(500, std::string(e.what());
+			return crow::response(500, std::string(e.what()));
 		}
 	});
 
