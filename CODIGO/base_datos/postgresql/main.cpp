@@ -2,6 +2,7 @@
 //
 
 #include <libpq-fe.h>
+#include <vector>
 #include <iostream>
 
 #include "Empleado.h"
@@ -13,6 +14,11 @@ int main()
         const char* cadConex = "host=127.0.0.1 port=5433 dbname=empresa user=antonio password=antonio";
         EmpleadoRepository repo(cadConex);
         std::cout << "Conexion ok" << std::endl;
+
+        std::vector<Empleado> empleados = repo.listarTodos();
+        for (auto e : empleados) {
+            std::cout << e.nombre << " " << e.cargo << std::endl;
+        }
 
     }
     catch (const std::exception& e) {
