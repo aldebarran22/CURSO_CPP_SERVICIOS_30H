@@ -12,7 +12,7 @@ EmpleadoRepository::EmpleadoRepository(const char* cadConex)
 		std::string mensaje = PQerrorMessage(this->conn_);
 		PQfinish(this->conn_);
 
-		throw std::runtime_error("Error al conectar: " + mensaje;
+		throw std::runtime_error(mensaje);
 	}
 
 }
