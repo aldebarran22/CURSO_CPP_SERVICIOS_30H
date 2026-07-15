@@ -12,6 +12,5 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
       - ./empresa3_pg.sql:/empresa3_pg.sql      
-      
  volumes:
    pg_data:
