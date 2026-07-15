@@ -38,6 +38,14 @@ void testRepositorio() {
             std::cout << "No existe el empleado con " << id << std::endl;
         }
 
+        // Operacion DELETE:
+        if (repo._delete(10)) {
+            std::cout << "Se ha borrado el empleado" << std::endl;
+        }
+        else {
+            std::cout << "No se ha borrado" << std::endl;
+        }
+
         // Operacion CREATE:
         Empleado e{ 10, "Laura", "Comercial" };
         if (repo.create(e)) {
