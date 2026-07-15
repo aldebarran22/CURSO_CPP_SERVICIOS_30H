@@ -45,7 +45,20 @@ bool EmpleadoRepositorio::update(const Empleado& emp)
 
 std::vector<Empleado> EmpleadoRepositorio::select()
 {
-	return std::vector<Empleado>();
+	std::vector<Empleado> empleados;
+	soci::rowset<soci::row> rs = sql.prepare << "select id, nombre, cargo from empleados";
+
+	for (const auto& r : rs) {
+		Empleado e;
+
+		e.id = r.get<int>(0);
+		e.nombre = r.get<std::string>(1);
+		e.cargo = r.get<std::string>(2);
+
+		empleados.push_back(e);
+	}
+
+	return empleados;
 }
 
 EmpleadoRepositorio::~EmpleadoRepositorio()
