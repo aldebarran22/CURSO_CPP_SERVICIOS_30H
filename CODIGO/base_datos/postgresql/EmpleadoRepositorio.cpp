@@ -41,6 +41,35 @@ std::vector<Empleado> EmpleadoRepository::listarTodos()
 	return empleados;
 }
 
+void EmpleadoRepository::actualizar(const Empleado& emp) {
+	const char* query = "UPDATE tbempleados SET nombre = $1, cargo = $2 WHERE id = $3";
+
+	const char* paramValues[3];
+	paramValues[0] = emp.nombre.c_str();
+	paramValues[1] = emp.cargo.c_str();
+	std::string idStr = std::to_string(emp.id);
+	paramValues[2] = idStr.c_str();
+
+	PGresult* res = PQexecParams(
+		conn_,
+		query,
+		3,              // número de parámetros
+		nullptr,        // tipos de parámetros (NULL = inferidos)
+		paramValues,    // valores
+		nullptr,        // longitudes (NULL para texto)
+		nullptr,        // formatos (NULL = texto)
+		0               // resultado en texto (0) o binario (1)
+	);
+
+	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+		std::string errorMsg = PQerrorMessage(conn_);
+		PQclear(res);
+		throw std::runtime_error("Error al actualizar empleado: " + errorMsg);
+	}
+
+	PQclear(res);
+}
+
 EmpleadoRepository::~EmpleadoRepository()
 {
 	PQfinish(this->conn_);
