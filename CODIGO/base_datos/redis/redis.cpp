@@ -19,6 +19,18 @@ int main()
 		return 1;
 	}
 
+	// Crear una clave en redis:
+	redisReply* reply = (redisReply*)redisCommand(context, "SET %s %s", "k8", "prueba");
+	std::cout << "Respuesta: " << reply->str << std::endl;
+	freeReplyObject(reply);
 
+	// Recuperar la clave:
+	reply = (redisReply*)redisCommand(context, "GET %s", "k8");
+	std::cout << "Respuesta: " << reply->str << std::endl;
+	freeReplyObject(reply);
+
+	// Liberar el contexto:
+	redisFree(context);
+	return 0;
 }
 
