@@ -6,6 +6,8 @@
 #include <chrono>
 #include <vector>
 #include <mutex>
+#include <cstdlib>
+#include <ctime>
 
 
 void generarAleatorios(int n, int limite, int mili, int& suma) {
@@ -53,6 +55,7 @@ public:
 int main()
 {
     int suma = 0;
+    std::srand(std::time(nullptr));
 
     // Crear el hilo con una funcion:
     /*
