@@ -55,22 +55,24 @@ public:
 int main()
 {
     int suma = 0;
-    std::srand(std::time(nullptr));
-
-    // Crear el hilo con una funcion:
-    /*
-    std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
-    
     int nMensajes = 6;
     int ml = 350;
 
+    std::srand(std::time(nullptr));
+
+    // Crear el hilo con una funcion:    
+    std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
+    hiloFuncion.join();
+
     std::thread hiloLambda([nMensajes, ml]() {
         for (int i = 0; i < nMensajes; i++) {
-            std::cout << "mensaje lambda: " << (n + 1) << std::endl;
+            std::cout << "mensaje lambda: " << (i + 1) << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(ml));
         }
-     });*/
+     });
+    hiloLambda.join();
 
+    /*
     std::mutex m;
     std::vector<std::thread> hilos;
 
@@ -81,5 +83,5 @@ int main()
 
     for (auto& h : hilos) {
         h.join();
-    }
+    }*/
 }
