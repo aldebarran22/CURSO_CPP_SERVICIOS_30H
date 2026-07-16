@@ -24,10 +24,25 @@ int main()
 				return crow::response(400, "json incorrecto, se esperaban las credenciales");
 			}
 
+			// Simular la validacion del usuario:
+			if (USER == j.at("user") && PASS == j.at("pass")) {
+				// Generar el token:
+				return crow::response("token");
+			}
+			else {
+				return crow::response(403, "Usuario no autorizado");
+			}
+
 		}
 		catch (const std::exception& e) {
 			return crow::response(500, e.what());
 		}
 	});
+
+	app.port(8080).multithreaded().run();
+
+	// Con certificados:
+	// Activar la macro: CROW_ENABLE_SSL dentro del preprocesador C/C++
+	// app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(443).run();
 }
 
