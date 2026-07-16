@@ -70,6 +70,11 @@ int main()
         }
      });
 
+    // Para ejecutar en background y desvincular del hilo main
+    //hiloFuncion.detach();
+    //hiloLambda.detach();
+
+    // Para esperar desde main que terminen los hilos
     hiloFuncion.join();
     hiloLambda.join();
 
