@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.37411.7 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hilos_mutex", "hilos_mutex\hilos_mutex.vcxproj", "{5CDB02F7-33BB-4958-AE39-8D0851E018F6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crear_hilos", "crear_hilos\crear_hilos.vcxproj", "{537743E6-3636-4AD0-ABF3-4693C5686A98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{5CDB02F7-33BB-4958-AE39-8D0851E018F6}.Release|x64.Build.0 = Release|x64
 		{5CDB02F7-33BB-4958-AE39-8D0851E018F6}.Release|x86.ActiveCfg = Release|Win32
 		{5CDB02F7-33BB-4958-AE39-8D0851E018F6}.Release|x86.Build.0 = Release|Win32
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Debug|x64.ActiveCfg = Debug|x64
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Debug|x64.Build.0 = Debug|x64
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Debug|x86.ActiveCfg = Debug|Win32
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Debug|x86.Build.0 = Debug|Win32
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Release|x64.ActiveCfg = Release|x64
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Release|x64.Build.0 = Release|x64
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Release|x86.ActiveCfg = Release|Win32
+		{537743E6-3636-4AD0-ABF3-4693C5686A98}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
