@@ -62,14 +62,15 @@ int main()
 
     // Crear el hilo con una funcion:    
     std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
-    hiloFuncion.join();
-
+    
     std::thread hiloLambda([nMensajes, ml]() {
         for (int i = 0; i < nMensajes; i++) {
             std::cout << "mensaje lambda: " << (i + 1) << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(ml));
         }
      });
+
+    hiloFuncion.join();
     hiloLambda.join();
 
     /*
