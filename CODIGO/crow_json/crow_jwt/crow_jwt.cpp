@@ -4,6 +4,7 @@
 #include <iostream>
 #include <crow.h>
 #include <nlohmann/json.hpp>
+#include <jwt-cpp/jwt.h>
 
 #define USER "admin"
 #define PASS "1234"
@@ -26,8 +27,18 @@ int main()
 
 			// Simular la validacion del usuario:
 			if (USER == j.at("user") && PASS == j.at("pass")) {
+
 				// Generar el token:
-				return crow::response("token");
+				auto token = jwt::create().
+					set_issuer("Curso C++").
+					set_payload_claim("usuario", jwt::claim(std::string(USER))).
+					set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 1 }).
+					sign(jwt::algorithm::hs256{ PASS });
+
+				// Generar la respuesta al cliente:
+				crow::json::wvalue respuesta;
+				respuesta["token"] = token;
+				return crow::response(respuesta);
 			}
 			else {
 				return crow::response(403, "Usuario no autorizado");
