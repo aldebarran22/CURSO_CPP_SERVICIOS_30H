@@ -1,6 +1,7 @@
 #include <crow.h>
 #include <optional>
 #include <thread>
+#include <vector>
 #include <nlohmann/json.hpp>
 
 #include "ServicioCrow.h"
@@ -27,6 +28,23 @@ void ServicioCrow::run()
 			return crow::response(404, std::string("El empleado con id: " + std::to_string(id)));
 		}
 	});
+
+
+	CROW_ROUTE(app, "/empleados").methods(crow::HTTPMethod::GET)([this]() {
+		std::vector<Empleado> empleados;
+		json doc;
+
+		try {
+			empleados = this->service.select();
+			doc = empleados;
+
+			return crow::response(doc.dump());
+		}
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
+		}
+	});
+
 
 	CROW_ROUTE(app, "/empleados").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
 

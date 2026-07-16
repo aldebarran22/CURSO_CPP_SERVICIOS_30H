@@ -38,6 +38,11 @@ bool EmpleadoService::create(const Empleado& e)
 	return ok;
 }
 
+std::vector<Empleado> EmpleadoService::select()
+{
+	return this->repositorio.select();
+}
+
 
 EmpleadoService::~EmpleadoService()
 {
