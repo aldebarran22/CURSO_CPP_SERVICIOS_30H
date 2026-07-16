@@ -38,7 +38,7 @@ void ServicioCrow::run()
 			empleados = this->service.select();
 			doc = empleados;
 
-			return crow::response(doc.dump());
+			return crow::response(doc.dump(4));
 		}
 		catch (const std::exception& e) {
 			return crow::response(500, std::string(e.what()));
