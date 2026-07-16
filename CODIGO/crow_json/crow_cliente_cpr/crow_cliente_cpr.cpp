@@ -25,10 +25,10 @@ int main()
     std::string sUrl2 = "http://localhost:8080/empleados";
     cpr::Url url2{ sUrl2 };
 
-    std::cout << "Peticion POST: " << sUrl2 << std::endl;   
+    std::cout << "\nPeticion POST: " << sUrl2 << std::endl;   
     nlohmann::json j{ 
-                       { "id", 12 }, 
-                       { "nombre","Juan" }, 
+                       { "id", 13 }, 
+                       { "nombre","Andres" }, 
                        { "cargo","Gerente" } 
     };
 
@@ -40,4 +40,14 @@ int main()
 
     std::cout << "Status: " << resp2.status_code << std::endl;
     std::cout << "Body: " << resp2.text << std::endl;
+
+
+    std::string sUrl3 = "http://localhost:8080/empleados";
+    cpr::Url url3{ sUrl3 };
+
+    std::cout << "\nPeticion GET: " << sUrl3 << std::endl;
+    cpr::Response resp3 = cpr::Get(url3);
+
+    std::cout << "Status: " << resp3.status_code << std::endl;
+    std::cout << "Body: " << resp3.text << std::endl;
 }
