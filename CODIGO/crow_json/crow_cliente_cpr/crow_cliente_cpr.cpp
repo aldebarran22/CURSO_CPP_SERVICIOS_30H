@@ -29,12 +29,14 @@ int main()
     nlohmann::json j{ 
                        { "id", 12 }, 
                        { "nombre","Juan" }, 
-                       { "cargo","Gerente" } };
-}
+                       { "cargo","Gerente" } 
+    };
 
-    cpr::Response resp2 = cpr::Post(url2,
+    cpr::Response resp2 = cpr::Post(
+        url2,
         cpr::Header{ {"Content-type", "application/json"} },
-        cpr::Body{j.dump()});
+        cpr::Body{j.dump()}
+    );
 
     std::cout << "Status: " << resp2.status_code << std::endl;
     std::cout << "Body: " << resp2.text << std::endl;
