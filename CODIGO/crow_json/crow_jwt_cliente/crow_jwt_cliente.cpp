@@ -27,7 +27,7 @@ int main()
 		// Pasear la respuesta a json:
 		json jresp = json::parse(respuesta);
 		std::string token = jresp.at("token");
-		std::cout << "Token: " << token << std::endl;
+		std::cout << "\n\nToken: " << token << std::endl;
 
 	}
 	catch (const std::exception& e) {
