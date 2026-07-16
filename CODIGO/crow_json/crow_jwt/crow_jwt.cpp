@@ -50,6 +50,44 @@ int main()
 		}
 	});
 
+	CROW_ROUTE(app, "/app").methods(crow::HTTPMethod::GET)([](const crow::request& request) {
+
+		try {
+			// Extraer el token de la cabecera http:
+			auto auth_header = request.get_header_value("Authorization");
+			std::cout << "Autorization: " << auth_header << std::endl;
+
+			// Extraer el token
+			if (auth_header.substr(0, 7) != "Bearer ") {
+				return crow::response(401, "Token mal formado, no autorizado");
+			}
+
+			std::string token = auth_header.substr(7);
+			std::cout << "Token: " << token << std::endl;
+
+			// Decodificar el token:
+			auto token_decodificado = jwt::decode(token);
+			
+			// Verificacion del token:
+			auto token_verificado = jwt::verify().allow_algorithm(jwt::algorithm::hs256{ PASS }).with_issuer("Curso C++");
+			token_verificado.verify(token_decodificado);
+
+			// Extraer campos del token:
+			std::string usuario = token_decodificado.get_payload_claim("usuario").as_string();
+			std::cout << "usuario:" << usuario << std::endl;
+
+			// Montamos la resp al cliente:
+			crow::json::wvalue respuesta;
+			respuesta["usuario"] = usuario;
+
+			return crow::response(respuesta);
+
+		}
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
+		}
+	});
+
 	app.port(8080).multithreaded().run();
 
 	// Con certificados:
