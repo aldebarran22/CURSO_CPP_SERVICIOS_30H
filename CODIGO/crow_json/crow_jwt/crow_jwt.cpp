@@ -30,9 +30,9 @@ int main()
 
 				// Generar el token:
 				auto token = jwt::create().
-					set_issuer("Curso C++").
+					set_issuer("Curso C").
 					set_payload_claim("usuario", jwt::claim(std::string(USER))).
-					set_expires_at(std::chrono::system_clock::now() + std::chrono::minutes{ 1 }).
+					set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{ 30 }).
 					sign(jwt::algorithm::hs256{ PASS });
 
 				// Generar la respuesta al cliente:
@@ -55,7 +55,7 @@ int main()
 		try {
 			// Extraer el token de la cabecera http:
 			auto auth_header = request.get_header_value("Authorization");
-			std::cout << "\n\nAutorization: " << auth_header << std::endl;
+			std::cout << "\n\nAuthorization: " << auth_header << std::endl;
 
 			// Extraer el token
 			if (auth_header.substr(0, 7) != "Bearer ") {

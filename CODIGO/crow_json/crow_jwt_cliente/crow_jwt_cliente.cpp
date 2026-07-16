@@ -30,8 +30,8 @@ int main()
 		std::cout << "\n\nToken: " << token << std::endl;
 
 
-		// Detenerlo 2 minutos:
-		//std::this_thread::sleep_for(std::chrono::minutes{ 2 });
+		// Detenerlo 40 sg:
+		std::this_thread::sleep_for(std::chrono::seconds{ 40 });
 
 
 		// Hacer una segunda peticion al Servidor: enviando el token a un recurso protegido:
