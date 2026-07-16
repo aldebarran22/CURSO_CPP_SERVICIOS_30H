@@ -29,6 +29,22 @@ int main()
 		std::string token = jresp.at("token");
 		std::cout << "\n\nToken: " << token << std::endl;
 
+
+		// Detenerlo 2 minutos:
+		std::this_thread::sleep_for(std::chrono::minutes{ 2 });
+
+
+		// Hacer una segunda peticion al Servidor: enviando el token a un recurso protegido:
+		std::string cadena = "Bearer " + token;
+
+		auto response2 = cpr::Get(
+			cpr::Url{ "http://localhost:8080/app" },
+			cpr::Header{{"Authorization", cadena}}
+		);
+
+		std::string respuesta2 = response2.text;
+		std::cout << "\nPeticion: app " << respuesta2 << std::endl;
+
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
