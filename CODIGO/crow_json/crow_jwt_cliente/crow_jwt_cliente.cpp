@@ -17,7 +17,7 @@ int main()
 		auto response = cpr::Post(
 			cpr::Url{ "http://localhost:8080/login" },
 			cpr::Header{ {"Accept", "application/json"} },
-			cpr::Body{ j.dump() }
+			cpr::Body{ j.dump() }		
 		);
 
 		// Recoger respuesta:
@@ -31,11 +31,11 @@ int main()
 
 
 		// Detenerlo 40 sg:
-		std::this_thread::sleep_for(std::chrono::seconds{ 40 });
+		//std::this_thread::sleep_for(std::chrono::seconds{ 40 });
 
 
 		// Hacer una segunda peticion al Servidor: enviando el token a un recurso protegido:
-		std::string cadena = "Bearer " + token;
+		std::string cadena = "Bearer "+token;
 
 		auto response2 = cpr::Get(
 			cpr::Url{ "http://localhost:8080/app" },

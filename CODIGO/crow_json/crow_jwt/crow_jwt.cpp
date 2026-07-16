@@ -30,7 +30,7 @@ int main()
 
 				// Generar el token:
 				auto token = jwt::create().
-					set_issuer("Curso C").
+					set_issuer("Curso C++").
 					set_payload_claim("usuario", jwt::claim(std::string(USER))).
 					set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{ 30 }).
 					sign(jwt::algorithm::hs256{ PASS });
@@ -69,7 +69,7 @@ int main()
 			auto token_decodificado = jwt::decode(token);
 			
 			// Verificacion del token:
-			auto token_verificado = jwt::verify().allow_algorithm(jwt::algorithm::hs256{ PASS }).with_issuer("Curso C++");
+			auto token_verificado = jwt::verify().allow_algorithm(jwt::algorithm::hs256{PASS}).with_issuer("Curso C++");
 			token_verificado.verify(token_decodificado);
 
 			// Extraer campos del token:
@@ -92,6 +92,6 @@ int main()
 
 	// Con certificados:
 	// Activar la macro: CROW_ENABLE_SSL dentro del preprocesador C/C++
-	// app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(443).run();
+	//app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(443).run();
 }
 
