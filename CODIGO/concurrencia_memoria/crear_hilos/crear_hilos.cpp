@@ -55,6 +55,7 @@ int main()
     int suma = 0;
 
     // Crear el hilo con una funcion:
+    /*
     std::thread hiloFuncion{ generarAleatorios, 10, 250, 500, std::ref(suma) };
     
     int nMensajes = 6;
@@ -65,6 +66,17 @@ int main()
             std::cout << "mensaje lambda: " << (n + 1) << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(ml));
         }
-        });
+     });*/
 
+    std::mutex m;
+    std::vector<std::thread> hilos;
+
+    for (int i = 0; i < 3; i++) {
+        std::thread hiloObjeto(Hilo(i, std::ref(m), 1 + std::rand() % 10, std::rand() % 3));
+        hilos.push_back(std::move(hiloObjeto));
+    }
+
+    for (auto& h : hilos) {
+        h.join();
+    }
 }
