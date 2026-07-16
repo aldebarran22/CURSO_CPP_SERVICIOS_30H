@@ -27,10 +27,16 @@ void do_session(tcp::socket socket) {
             beast::flat_buffer buffer;
 
             ws.read(buffer);
-            ws.text(ws.got_text());
+            if (!ws.binary()) {
+                std::cout << "El cliente envia texto " << beast::buffers_to_string(buffer.data()) << std::endl;
+                ws.text(ws.got_text());
 
-            // Devolver al cliente el mismo mensaje:
-            ws.write(buffer.data());
+                // Devolver al cliente el mismo mensaje:
+                ws.write(buffer.data());
+            }
+            else {
+                std::cout << "datos en binario" << std::endl;
+            }
         }
 
     }
