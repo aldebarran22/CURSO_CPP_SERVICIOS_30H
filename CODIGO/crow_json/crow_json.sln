@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_empleados", "crow_empl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_cliente_cpr", "crow_cliente_cpr\crow_cliente_cpr.vcxproj", "{F8C98088-2AA6-4A58-9D34-A679CF21794A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_https", "crow_https\crow_https.vcxproj", "{8934C663-3179-4C15-BAFB-461D6F56CD12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{F8C98088-2AA6-4A58-9D34-A679CF21794A}.Release|x64.Build.0 = Release|x64
 		{F8C98088-2AA6-4A58-9D34-A679CF21794A}.Release|x86.ActiveCfg = Release|Win32
 		{F8C98088-2AA6-4A58-9D34-A679CF21794A}.Release|x86.Build.0 = Release|Win32
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Debug|x64.ActiveCfg = Debug|x64
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Debug|x64.Build.0 = Debug|x64
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Debug|x86.ActiveCfg = Debug|Win32
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Debug|x86.Build.0 = Debug|Win32
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Release|x64.ActiveCfg = Release|x64
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Release|x64.Build.0 = Release|x64
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Release|x86.ActiveCfg = Release|Win32
+		{8934C663-3179-4C15-BAFB-461D6F56CD12}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
