@@ -55,7 +55,7 @@ int main()
 		try {
 			// Extraer el token de la cabecera http:
 			auto auth_header = request.get_header_value("Authorization");
-			std::cout << "Autorization: " << auth_header << std::endl;
+			std::cout << "\n\nAutorization: " << auth_header << std::endl;
 
 			// Extraer el token
 			if (auth_header.substr(0, 7) != "Bearer ") {
@@ -63,7 +63,7 @@ int main()
 			}
 
 			std::string token = auth_header.substr(7);
-			std::cout << "Token: " << token << std::endl;
+			std::cout << "\n\nToken: " << token << std::endl;
 
 			// Decodificar el token:
 			auto token_decodificado = jwt::decode(token);
@@ -74,7 +74,7 @@ int main()
 
 			// Extraer campos del token:
 			std::string usuario = token_decodificado.get_payload_claim("usuario").as_string();
-			std::cout << "usuario:" << usuario << std::endl;
+			std::cout << "\n\nusuario:" << usuario << std::endl;
 
 			// Montamos la resp al cliente:
 			crow::json::wvalue respuesta;
