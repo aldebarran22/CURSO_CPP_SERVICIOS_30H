@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cpr/cpr.h>
+#include <nlohmann/json.hpp>
 
 int main()
 {
@@ -19,4 +20,22 @@ int main()
     
     std::cout << "Status: " << resp.status_code << std::endl;
     std::cout << "Body: " << resp.text << std::endl;
+
+    // Peticion POST:
+    std::string sUrl2 = "http://localhost:8080/empleados";
+    cpr::Url url2{ sUrl2 };
+
+    std::cout << "Peticion POST: " << sUrl2 << std::endl;   
+    nlohmann::json j{ 
+                       { "id", 12 }, 
+                       { "nombre","Juan" }, 
+                       { "cargo","Gerente" } };
+}
+
+    cpr::Response resp2 = cpr::Post(url2,
+        cpr::Header{ {"Content-type", "application/json"} },
+        cpr::Body{j.dump()});
+
+    std::cout << "Status: " << resp2.status_code << std::endl;
+    std::cout << "Body: " << resp2.text << std::endl;
 }
