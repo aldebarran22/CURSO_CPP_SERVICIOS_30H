@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ws_server", "ws_server\ws_s
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ws_client", "ws_client\ws_client.vcxproj", "{EC09A9AB-DDE3-4ABC-A183-87F894F3855B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wss_server", "wss_server\wss_server.vcxproj", "{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{EC09A9AB-DDE3-4ABC-A183-87F894F3855B}.Release|x64.Build.0 = Release|x64
 		{EC09A9AB-DDE3-4ABC-A183-87F894F3855B}.Release|x86.ActiveCfg = Release|Win32
 		{EC09A9AB-DDE3-4ABC-A183-87F894F3855B}.Release|x86.Build.0 = Release|Win32
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Debug|x64.ActiveCfg = Debug|x64
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Debug|x64.Build.0 = Debug|x64
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Debug|x86.ActiveCfg = Debug|Win32
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Debug|x86.Build.0 = Debug|Win32
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Release|x64.ActiveCfg = Release|x64
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Release|x64.Build.0 = Release|x64
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Release|x86.ActiveCfg = Release|Win32
+		{8BD1E9D4-D8BF-4BB3-B514-44BCCE9F835F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
