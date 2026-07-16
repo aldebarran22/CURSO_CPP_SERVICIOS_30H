@@ -14,6 +14,40 @@ namespace net = boost::asio;
 namespace http = boost::beast::http;
 using tcp = net::ip::tcp;
 
+void do_session(tcp::socket socket) {
+
+    try {
+
+        // Definir el websocket: sera un stream de tipo tcp:
+        websocket::stream<tcp::socket> ws(std::move(socket));
+        ws.accept();
+
+        for (;;) {
+            // Definir el buffer de L/E;
+            beast::flat_buffer buffer;
+
+            ws.read(buffer);
+            ws.text(ws.got_text());
+
+            // Devolver al cliente el mismo mensaje:
+            ws.write(buffer.data());
+        }
+
+    }
+    catch (const beast::system_error& se) {
+        if (se.code() != websocket::error::closed) {
+            std::cerr << "Error en la session: " << se.what() << std::endl;
+
+        }
+        else {
+            std::cout << "Cliente desconectado " << std::endl;
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Otro error:" << e.what() << std::endl;
+    }
+}
+
 int main()
 {
     // Crear el contexto de comunicacion;
