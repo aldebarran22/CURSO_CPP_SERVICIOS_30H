@@ -29,7 +29,16 @@ void conPunteros()
 
 void conSmartPointers()
 {
+	// ptr = new int* [10];
+	std::unique_ptr<std::unique_ptr<int[]>[]> ptr = std::make_unique<std::unique_ptr<int[]>[]>(10);
 
+	
+	// Crear la filas:
+	for (int i = 0; i < 10; i++) {
+		// ptr[i] = new int[10];
+		ptr[i] = std::make_unique<int[]>(10);
+
+	}
 }
 
 void conVector()
