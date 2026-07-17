@@ -24,7 +24,7 @@ services:
     command: redis-server --appendonly yes  # Utiliza un fichero de respaldo para volver a generar las claves en el arranque      
     
   pedidos:
-    image: crow5
+    image: img_crow5
     container_name: pedidos
     depends_on:
       - mysql
