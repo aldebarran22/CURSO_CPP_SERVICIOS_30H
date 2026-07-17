@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wss_server", "wss_server\ws
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wss_client", "wss_client\wss_client.vcxproj", "{83277685-482B-4C29-B6FD-79FDCFD9FADA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multicliente", "multicliente\multicliente.vcxproj", "{8237C639-9777-4E8A-892A-67A2B865499B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{83277685-482B-4C29-B6FD-79FDCFD9FADA}.Release|x64.Build.0 = Release|x64
 		{83277685-482B-4C29-B6FD-79FDCFD9FADA}.Release|x86.ActiveCfg = Release|Win32
 		{83277685-482B-4C29-B6FD-79FDCFD9FADA}.Release|x86.Build.0 = Release|Win32
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Debug|x64.ActiveCfg = Debug|x64
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Debug|x64.Build.0 = Debug|x64
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Debug|x86.ActiveCfg = Debug|Win32
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Debug|x86.Build.0 = Debug|Win32
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Release|x64.ActiveCfg = Release|x64
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Release|x64.Build.0 = Release|x64
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Release|x86.ActiveCfg = Release|Win32
+		{8237C639-9777-4E8A-892A-67A2B865499B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
