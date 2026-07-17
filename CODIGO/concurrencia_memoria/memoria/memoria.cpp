@@ -2,10 +2,29 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <vector>
+
+void conPunteros()
+{
+
+}
+
+void conSmartPointers()
+{
+
+}
+
+void conVector()
+{
+
+}
 
 int main()
 {
-    int* p = new int[10];
-    delete[] p;
+	// Reservar para una matriz:
+	conPunteros();
+	conSmartPointers();
+	conVector();
 }
 
