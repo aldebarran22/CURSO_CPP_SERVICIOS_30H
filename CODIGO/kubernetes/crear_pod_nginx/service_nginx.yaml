@@ -1,0 +1,14 @@
+# Servicio para exponer el pod de nginx:
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: NodePort
+  selector:
+    zone: prod
+    version: v1
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
