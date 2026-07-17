@@ -50,7 +50,31 @@ private:
     }
 
 
-    void handler_request(){}
+    void handler_request(){
+        // Analizar la peticion del cliente:
+        std::string respuesta;
+
+        // Url de la peticion y el metodo HTTP:
+        respuesta = "URL: " + std::string(request.target()) + " Method: " + std::string(request.method_string());
+
+        // Montar la respuesta:
+        response.version(request.version());
+        response.keep_alive(request.keep_alive());
+        response.result(http::status::ok);
+
+        // Configurar las cabeceras de la respuesta:
+        response.set(http::field::server, "Boost.asio");
+        response.set(http::field::content_type, "text/plain");
+
+        // Cargar la respuesta;
+        response.body() = respuesta;
+
+        // Calcular el tamaños de la respuesta:
+        response.prepare_payload();
+
+        // Escribir en el cliente;
+        this->write_response();
+    }
 
 
     void write_response(){}
