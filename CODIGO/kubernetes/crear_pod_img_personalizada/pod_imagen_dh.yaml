@@ -1,0 +1,13 @@
+# Crear un POD con una imagen personaliza que hemos
+# previamente al docker hub
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx1
+  labels:
+    zone: prod
+    version: v1
+spec:
+  containers:
+   - name: nginx-c
+     image: piri12345/mi_imagen_nginx:v1
