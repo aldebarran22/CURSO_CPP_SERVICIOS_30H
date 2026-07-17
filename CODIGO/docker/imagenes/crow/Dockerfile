@@ -26,3 +26,17 @@ RUN cmake --build build --config Release
 
 # Stage 2: Runtime (para ejecutar el servicio)
 FROM ubuntu:22.04
+
+# Instalar librerias para el entorno de ejecucion:
+RUN apt-get update && apt-get install -y \
+   libboost-system1.74.0 \
+   libboost-thread1.74.0 \
+   libssl3 \
+   && rm -rf /var/lib/apt/lists/*
+
+# Copiar el binario del builder al runtime
+COPY --from=builder /src/build/practica4crow .
+
+EXPOSE 8080
+CMD ["./practica4crow"]
+
