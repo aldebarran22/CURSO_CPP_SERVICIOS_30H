@@ -52,8 +52,8 @@ void conVector()
 int main()
 {
 	// Reservar para una matriz:
-	conPunteros();
+	//conPunteros();
 	conSmartPointers();
-	conVector();
+	//conVector();
 }
 
