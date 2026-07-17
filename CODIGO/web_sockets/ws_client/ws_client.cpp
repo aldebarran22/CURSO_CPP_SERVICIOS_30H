@@ -26,7 +26,7 @@ int main()
 		websocket::stream<tcp::socket> ws(ioc);
 
 		// Localizar el servidor:
-		auto const results = resolver.resolve("localhost", "80");
+		auto const results = resolver.resolve("localhost", "8080");
 
 		// Intentar conectar con algún endpoint del servidor;
 		net::connect(ws.next_layer(), results.begin(), results.end());

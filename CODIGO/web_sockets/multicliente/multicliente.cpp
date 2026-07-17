@@ -133,6 +133,7 @@ int main()
     for (auto& h : hilos) {
         h.join();
     }
+    // Fin varios hilos:
 
     // Un unico hilo:
     //ioc.run();
