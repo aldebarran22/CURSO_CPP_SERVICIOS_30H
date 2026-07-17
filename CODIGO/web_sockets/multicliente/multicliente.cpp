@@ -33,8 +33,26 @@ public:
     void start() { read_request();  }
 
 private:
-    void read_request(){}
+    void read_request(){
+        // Utilizamos lectura asincrona:
+
+        // Coger un shared_ptr que apunta a la clase actual:
+        auto self = shared_from_this();
+
+        // Leer la peticion:
+        http::async_read(socket_, buffer, request, [self](beast::error_code ec, std::size_t) {
+
+            if (!ec) {
+                // Si no hay error, se analiza la peticion:
+                self->handler_request();
+            }
+        })
+    }
+
+
     void handler_request(){}
+
+
     void write_response(){}
 };
 
