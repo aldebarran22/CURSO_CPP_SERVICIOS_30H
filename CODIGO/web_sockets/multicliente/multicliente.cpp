@@ -77,7 +77,19 @@ private:
     }
 
 
-    void write_response(){}
+    void write_response(){
+        // Escribir la respuesta al cliente de forma asincrona y cerrar el socket de la conexion:
+
+        // Coger un shared_ptr que apunta a la clase actual:
+        auto self = shared_from_this();
+
+        // Escribir de forma asincrona
+        http::async_write(socket_, response, [self](beast::error_code ec, size_t) {
+
+            // Cerrar la conexion (del socket)
+            self->socket_.shutdown(tcp::socket::shutdown_send, ec);
+        });
+    }
 };
 
 void do_accept(tcp::acceptor& acceptor) {
