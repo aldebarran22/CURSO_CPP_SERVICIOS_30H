@@ -93,6 +93,8 @@ private:
 };
 
 void do_accept(tcp::acceptor& acceptor) {
+
+    std::cout << "Aceptando clientes ..." << std::endl;
     
     // Aceptar un cliente de forma asincrona:
     acceptor.async_accept([&acceptor](beast::error_code ec, tcp::socket socket) {
@@ -100,6 +102,7 @@ void do_accept(tcp::acceptor& acceptor) {
         // Comprobar si se han producido errores en la conexion:
         if (!ec) {
             // Crear e iniciar una nueva session:
+            std::cout << "Nueva sesion " << std::endl;
             std::make_shared<session>(std::move(socket))->start();
         }
 
@@ -125,6 +128,10 @@ int main()
     for (int i = 0; i < numhilos; i++) {
         // Lanzar un contexto io por cada uno de los hilos
         hilos.emplace_back([&ioc] { ioc.run();  });
+    }
+
+    for (auto& h : hilos) {
+        h.join();
     }
 
     // Un unico hilo:
