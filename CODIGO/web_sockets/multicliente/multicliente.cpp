@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <memory>
 
 #include <boost/beast/core.hpp>
 #include <boost/beast/websocket.hpp>
@@ -16,6 +17,22 @@ namespace websocket = beast::websocket;
 namespace net = boost::asio;
 namespace http = boost::beast::http;
 using tcp = net::ip::tcp;
+
+void do_accept(tcp::acceptor& acceptor) {
+    
+    // Aceptar un cliente de forma asincrona:
+    acceptor.async_accept([&acceptor](beast::error_code ec, tcp::socket socket) {
+
+        // Comprobar si se han producido errores en la conexion:
+        if (!ec) {
+            // Crear e iniciar una nueva session:
+            std::make_shared<session>(std::move(socket))->start();
+        }
+
+        // Llamada recursiva para seguir recibiendo clientes:
+        do_accept(acceptor);
+    });
+}
 
 int main()
 {
