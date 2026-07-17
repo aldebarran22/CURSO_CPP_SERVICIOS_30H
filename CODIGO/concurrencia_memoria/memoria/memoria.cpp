@@ -7,6 +7,23 @@
 
 void conPunteros()
 {
+	int** ptr = nullptr;
+
+	// 1) Puntero exterior
+	ptr = new int* [10];
+
+	// 2) Punteros interiores:
+	for (int i = 0; i < 10; i++) {
+		ptr[i] = new int[10];
+	}
+	
+	// 1) liberar punteros interiores
+	for (int i = 0; i < 10; i++) {
+		delete[] ptr[i];
+	}
+
+	// 2) liberar puntero exterior
+	delete[] ptr;
 
 }
 
