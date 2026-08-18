@@ -1,5 +1,0 @@
-docker build -t servicio_py .
-docker run --rm --name servicio1 -d -p 5000:5000 servicio_py
-
-
-Desde postman GET: http://localhost:5000/saludo
