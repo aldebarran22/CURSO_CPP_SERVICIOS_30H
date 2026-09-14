@@ -27,7 +27,7 @@ void test_crow_basico() {
 
     std::cout << "Peticion POST: " << sUrl2 << std::endl;
     nlohmann::json j{
-        {"idpedido", "12345"},
+        {"id_pedido", "12345"},
         {"cliente" , "NCH"},
         {"empleado" , "Jorge"},
         {"empresa" , "Indra"},
