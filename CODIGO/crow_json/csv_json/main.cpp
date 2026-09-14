@@ -19,12 +19,25 @@ int main()
 
 	std::vector<nlohmann::json> array;
 	nlohmann::json doc;
+
 	bool cabs = true;
 	std::string linea;
 
 	while (std::getline(fin, linea)) {
-		std::cout << linea << std::endl;
+		if (cabs) {
+			cabs = false;
+		}
+		else {
+			Pedido p(linea);
+			array.push_back(p.to_json());
+		}
 	}
+
+	// Convertir el array a json:
+	doc = array;
+
+	std::cout << doc.dump(4);
+	fout << doc.dump(4);
 
 	fin.close();
 	fout.close();
