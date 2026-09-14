@@ -2,9 +2,24 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <nlohmann/json.hpp>
+
+#include "Pedido.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	std::string pathIn = "";
+	std::string pathOut = "";
+
+	std::ifstream fin(pathIn);
+	std::ofstream fin(pathOut);
+
+	std::vector<nlohmann::json> array;
+	nlohmann::json doc;
+
+
 }
 
