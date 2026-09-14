@@ -5,6 +5,7 @@
 #include <crow.h>
 #include <thread>
 #include <string>
+#include <nlohmann/json.hpp>
 
 int main()
 {
@@ -52,8 +53,17 @@ int main()
         crow::json::wvalue resp;
 
         try {
+            // Parsear el json con la lib. nlohmman: valida la sintaxis
+            nlohmann::json j = nlohmann::json::parse(req.body);
+
+            // Validación de los campos:
+            if (!j.contains("idpedido") || !j.contains("cliente")) {
+                return crow::response(400, "Faltan etiquetas obligatorias");
+            }
 
 
+
+            return crow::response("ok");
         }
         catch (const std::exception& e) {
             return crow::response(500, "ERROR: " + std::string(e.what()));
