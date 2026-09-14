@@ -4,6 +4,7 @@
 #include <iostream>
 #include <crow.h>
 #include <thread>
+#include <string>
 
 int main()
 {
@@ -44,6 +45,21 @@ int main()
         resp["resul"] = suma;
         return crow::response{ resp };
         });
+
+    // Recoger un pedido con una operación post, conversión automática  entre JSON -> Pedido
+    // Validar etiquetas en el Json:
+    CROW_ROUTE(app, "/pedidos").methods(crow::HTTPMethod::POST)([](const crow::request& req) {
+        crow::json::wvalue resp;
+
+        try {
+
+
+        }
+        catch (const std::exception& e) {
+            return crow::response(500, "ERROR: " + std::string(e.what()));
+        }
+
+    });
 
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
     app.run();
