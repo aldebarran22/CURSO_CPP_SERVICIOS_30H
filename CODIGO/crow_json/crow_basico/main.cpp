@@ -7,6 +7,8 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
+#include "Pedido.h"
+
 int main()
 {
     // Objeto principal:
@@ -61,9 +63,13 @@ int main()
                 return crow::response(400, "Faltan etiquetas obligatorias");
             }
 
+            // Conversión de json a objeto Pedido:
+            Pedido p = j.get<Pedido>(); // lanza: to_json
 
+            // Conversión de objeto Pedido a json:
+            nlohmann::json j2 = p; // lanza from_json
 
-            return crow::response("ok");
+            return crow::response(j2.dump(4));
         }
         catch (const std::exception& e) {
             return crow::response(500, "ERROR: " + std::string(e.what()));
