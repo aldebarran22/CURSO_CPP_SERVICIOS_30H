@@ -11,14 +11,23 @@
 
 int main()
 {
-	std::string pathIn = "";
-	std::string pathOut = "";
+	std::string pathIn = "..\\..\\..\\practicas\\ficheros\\pedidos_final.csv";
+	std::string pathOut = "..\\..\\..\\practicas\\ficheros\\out\\pedidos.json";
 
 	std::ifstream fin(pathIn);
-	std::ofstream fin(pathOut);
+	std::ofstream fout(pathOut);
 
 	std::vector<nlohmann::json> array;
 	nlohmann::json doc;
+	bool cabs = true;
+	std::string linea;
+
+	while (std::getline(fin, linea)) {
+		std::cout << linea << std::endl;
+	}
+
+	fin.close();
+	fout.close();
 
 
 }
