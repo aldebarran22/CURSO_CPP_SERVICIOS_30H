@@ -28,6 +28,23 @@ int main()
         return crow::response{ resp };
     });
 
+    CROW_ROUTE(app, "/operacion").methods(crow::HTTPMethod::POST)([](const crow::request& req) {
+        crow::json::wvalue resp;
+
+        // Recoger lo que viene del cuerpo de la peticion:
+        auto datos = crow::json::load(req.body);
+
+        if (!datos) {
+            return crow::response(400); // Bad request, json incompleto!
+        }
+        int a = datos["a"].i(); // int
+        int b = datos["b"].i(); // int
+
+        int suma = a + b;       
+        resp["resul"] = suma;
+        return crow::response{ resp };
+        });
+
     app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
     app.run();
 }
