@@ -60,6 +60,7 @@ int main()
 
             // Validación de los campos:
             if (!j.contains("idpedido") || !j.contains("cliente")) {
+                CROW_LOG_ERROR << "Faltan etiquetas obligatorias";
                 return crow::response(400, "Faltan etiquetas obligatorias");
             }
 
@@ -69,9 +70,11 @@ int main()
             // Conversión de objeto Pedido a json:
             nlohmann::json j2 = p; // lanza to_json
 
+            CROW_LOG_INFO << j2.dump();
             return crow::response(j2.dump(4));
         }
         catch (const std::exception& e) {
+            CROW_LOG_ERROR << "Error: " << e.what();
             return crow::response(500, "ERROR: " + std::string(e.what()));
         }
 
