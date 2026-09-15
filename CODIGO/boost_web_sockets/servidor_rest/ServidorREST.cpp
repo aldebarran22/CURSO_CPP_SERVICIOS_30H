@@ -70,11 +70,12 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
 			// Control de errores:
 
 			if (target != "/items") {
-				// En este punto sabemos que la url / operacion no esta mapeada:
+				// En este punto sabemos que la url no esta mapeada:
 				response.result(http::status::not_found);
 				response.body() = "Recurso no encontrado";
 			}
 			else {
+				// No esta implementada la operacion:
 				response.result(http::status::method_not_allowed);
 				response.body() = "Método no implementado";
 			}
