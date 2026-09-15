@@ -33,8 +33,31 @@ void CrowCRUD::run()
 	});
 
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
-		// Recuperar todos los usuarios de la colección:
-		return "ok";
+		// Definir una lista para volcar los usuarios:
+		crow::json::wvalue lista = crow::json::wvalue::list();
+		int i = 0;
+
+		for (const auto& [id, usuario] : this->usuarios) {
+			crow::json::wvalue item;
+			item["id"] = id;
+
+			if (usuario.has("nombre"))
+				item["nombre"] = usuario["nombre"].s();
+			else
+				item["nombre"] = "";
+
+			item["edad"] = usuario["edad"].i();
+
+			// Cargar el item a la lista:
+			lista[i++] = std::move(item);
+		}
+
+		// Montar la resp al cliente:
+		crow::json::wvalue resp;
+		resp["usuarios"] = std::move(lista);
+		return crow::response(resp);
+
+
 	});
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
@@ -71,8 +94,22 @@ void CrowCRUD::run()
 	});
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
-		// Recibe un user, calcula el sig indice y lo coloca en la coleccion
-		return "ok";
+		std::lock_guard<std::mutex> lock(this->mtx);
+
+		// Recoger el json de la petición:
+		auto body = crow::json::load(req.body);
+
+		if (!body) {
+			return crow::response(400, "json incorrecto");
+		}
+
+		if (this->usuarios.count(id) == 0) {
+			return crow::response(404, "Usuario id: " + std::to_string(id) + " no existe");
+		}
+
+		// Actualizar el usuario:
+		usuarios[id] = std::move(body);
+		return crow::response(200, "Usuario actualizado");
 	});
 
 	app.port(8080).multithreaded().concurrency(std::thread::hardware_concurrency());
