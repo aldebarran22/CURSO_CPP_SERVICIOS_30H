@@ -56,7 +56,18 @@ void CrowCRUD::run()
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::Delete)([this](int id) {
 		// Borrar un usuario de la colección:
-		return "ok";
+		std::lock_guard<std::mutex> lock(this->mtx);
+
+		// Comprobar si existe el usuario;
+		if (this->usuarios.erase(id) == 0) {
+			// Recurso no encontrado!
+			return crow::response(404, "Usuario id = " + std::to_string(id) + " no existe");
+		}
+
+		crow::response respuesta;
+		respuesta.code = 204;
+		
+		return respuesta;		
 	});
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
