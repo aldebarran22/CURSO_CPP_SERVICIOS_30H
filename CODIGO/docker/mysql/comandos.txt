@@ -1,0 +1,23 @@
+# Crear el contenedor y arranca
+docker-compose up -d
+
+# Conectar con el contenedor de forma interactiva en un terminal y ejecutar
+bash (interprete de comandos):
+docker exec -it mysql_dev bash
+
+# Dentro del contenedor, conectar con mysql:
+mysql -u root -p
+antonio
+
+SHOW DATABASES;
+USE empresa3
+SHOW TABLES;
+SELECT * FROM pedidos LIMIT 5;
+
+
+# ojo si ya existe el volumen, dará error y no se creará la BD:
+docker-compose down      # Elimina contenedores pero NO borra el volumen
+docker-compose down -v   # elimina contenedores y volúmenes
+docker-compose up  -d    # vuelve a crear todo desde cero
+
+# Directamente: docker exec -it mysql_dev mysql -u root -p
