@@ -95,7 +95,14 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
         
     }
     catch (const std::exception& e) {
+        // Traza al servidor:
         std::cerr << "ERROR: " << e.what() << std::endl;
+
+        // Respuesta del error al cliente:
+        http::response<http::string_body> response2{ http::status::internal_server_error, request.version()};        
+        json resp = { {"error", e.what()}};
+        response2.body() = resp.dump();
+        http::write(socket, response2);
     }
 }
 
