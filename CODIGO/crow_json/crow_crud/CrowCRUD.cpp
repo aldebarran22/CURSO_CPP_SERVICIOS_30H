@@ -14,6 +14,22 @@ void CrowCRUD::run()
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
 		// Recibe un user, calcula el sig indice y lo coloca en la coleccion
 
+		auto body = crow::json::load(req.body);
+		if (!body) {
+			return crow::response(400, "json incorrecto");
+		}
+
+		// Gardar el user en la coleccion:
+		std::lock_guard<std::mutex> lock(this->mtx);
+		int id = this->siguiente_id++;
+		//this->usuarios[id] = body;  // OJO saca una copia!
+		this->usuarios[id] = std::move(body);
+
+		// Montar una respuesta al cliente:
+		crow::json::wvalue resp;
+		resp["id"] = id;
+		return crow::response(201, resp);
+
 	});
 
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
