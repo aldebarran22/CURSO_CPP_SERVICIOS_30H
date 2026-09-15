@@ -64,10 +64,10 @@ int main()
             }
 
             // Conversión de json a objeto Pedido:
-            Pedido p = j.get<Pedido>(); // lanza: to_json
+            Pedido p = j.get<Pedido>(); // lanza: from_json
 
             // Conversión de objeto Pedido a json:
-            nlohmann::json j2 = p; // lanza from_json
+            nlohmann::json j2 = p; // lanza to_json
 
             return crow::response(j2.dump(4));
         }
@@ -77,7 +77,14 @@ int main()
 
     });
 
-    app.port(18000).multithreaded().concurrency(std::thread::hardware_concurrency());
+    // Activar mensajes de log:
+    // crow::logger::setLogLevel(crow::LogLevel::Debug);
+
+    app.port(18000).
+        multithreaded().
+        concurrency(std::thread::hardware_concurrency()).
+        loglevel(crow::LogLevel::Debug);
+
     app.run();
 }
 
