@@ -2,9 +2,12 @@
 //
 
 #include <iostream>
+#include "CrowCRUD.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    CrowCRUD servicio;
+
+    servicio.run();
 }
 
