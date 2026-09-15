@@ -29,6 +29,8 @@ class ServidorREST
 	// Para aceptar los clientes:
 	tcp::acceptor acceptor;
 
+	void procesarPeticion(tcp::socket&);
+
 public:
 	ServidorREST(net::io_context& ioc, unsigned int port);
 	void run();
