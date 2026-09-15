@@ -86,7 +86,7 @@ int main()
     app.port(18000).
         multithreaded().
         concurrency(std::thread::hardware_concurrency()).
-        loglevel(crow::LogLevel::Debug);
+        loglevel(crow::LogLevel::Info);
 
     app.run();
 }
