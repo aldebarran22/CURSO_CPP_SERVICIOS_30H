@@ -56,8 +56,6 @@ void CrowCRUD::run()
 		crow::json::wvalue resp;
 		resp["usuarios"] = std::move(lista);
 		return crow::response(resp);
-
-
 	});
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
