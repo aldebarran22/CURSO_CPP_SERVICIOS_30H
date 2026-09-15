@@ -24,8 +24,27 @@ void ServidorREST::run()
 	}
 }
 
-void ServidorREST::procesarPeticion(tcp::socket&)
+void ServidorREST::procesarPeticion(tcp::socket& socket)
 {
+	beast::flat_buffer buffer;
+	http::request<http::string_body> request;
+	std::string metodo;
+	std::string target;
+
+	try {
+		// Leer la peticion del cliente:
+		http::read(socket, buffer, request);
+
+		// Extraer la URL y el metodo:
+		target = request.target();
+		metodo = request.method_string();
+
+		std::cout << "Target: " << target << " Metodo: " << metodo << std::endl;
+
+	}
+	catch (const std::exception& e) {
+		std::cerr << "error: " << e.what() << std::endl;
+	}
 }
 
 
