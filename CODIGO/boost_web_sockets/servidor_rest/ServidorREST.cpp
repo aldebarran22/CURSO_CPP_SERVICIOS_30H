@@ -67,9 +67,17 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
 		}
 
 		else {
-			// En este punto sabemos que la url / operacion no esta mapeada:
-			response.result(http::status::not_found);
-			response.body() = "Recurso no encontrado";
+			// Control de errores:
+
+			if (target != "/items") {
+				// En este punto sabemos que la url / operacion no esta mapeada:
+				response.result(http::status::not_found);
+				response.body() = "Recurso no encontrado";
+			}
+			else {
+				response.result(http::status::method_not_allowed);
+				response.body() = "Método no implementado";
+			}
 		}
 
 		// Calcular el tamaño de la respuesta:
