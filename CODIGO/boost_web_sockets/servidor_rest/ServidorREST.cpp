@@ -52,6 +52,26 @@ void ServidorREST::procesarPeticion(tcp::socket& socket)
 
 		// ANALIZAR EL TARGET Y EL METODO:
 
+		// Filtrar el target:
+		if (request.method() == http::verb::post && target == "/items") {
+			std::cout << "post /items" << std::endl;
+
+		}
+
+		else if (request.method() == http::verb::get && target == "/items") {
+			std::cout << "get /items" << std::endl;
+		}
+
+		else if (request.method() == http::verb::delete_ && target == "/items") {
+			std::cout << "delete /items" << std::endl;
+		}
+
+		else {
+			// En este punto sabemos que la url / operacion no esta mapeada:
+			response.result(http::status::not_found);
+			response.body() = "Recurso no encontrado";
+		}
+
 		// Calcular el tamaño de la respuesta:
 		response.prepare_payload();
 
