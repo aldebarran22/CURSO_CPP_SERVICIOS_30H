@@ -48,8 +48,8 @@ void CrowCRUD::run()
 		}
 		crow::json::wvalue resp;
 		resp["id"] = id;
-		resp["nombre"] = usuarios[id]["nombre"].s();
-		resp["edad"] = usuarios[id]["edad"].i();
+		resp["nombre"] = this->usuarios[id]["nombre"].s();
+		resp["edad"] = this->usuarios[id]["edad"].i();
 
 		return crow::response(resp);
 	});
