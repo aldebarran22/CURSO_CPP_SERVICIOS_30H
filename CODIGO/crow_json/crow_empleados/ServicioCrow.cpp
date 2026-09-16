@@ -17,7 +17,35 @@ void ServicioCrow::run()
 {
 	crow::SimpleApp app;
 
-	CROW_ROUTE(app, "/empleados").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {});
+	CROW_ROUTE(app, "/empleados").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
+		
+		try {
+			// Parsear el json:
+			json j = json::parse(req.body);
+
+			// Validacion de las etiquetas en el json:
+			if (!j.contains("id") || !j.contains("nombre") || !j.contains("cargo")) {
+				return crow::response(400, "Json incorrecto. Faltan etiquetas");
+			}
+
+			// Convertir el json en objeto Empleado:
+			Empleado e = j.get<Empleado>();
+			
+			// Crear el empleado utilizado el service:
+			if (this->service.create(e)) {
+				return crow::response("Empleado "+e.nombre+" creado");
+			}
+			else {
+				return crow::response(500, "No se ha podido crear el empleado");
+			}
+
+		}
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
+		}
+		
+	});
+
 
 	CROW_ROUTE(app, "/empleados/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
 	
