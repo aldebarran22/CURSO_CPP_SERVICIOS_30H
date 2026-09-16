@@ -1,6 +1,8 @@
 #pragma once
 #include <optional>
+#include <vector>
 
+#include "Empleado.h"
 #include "EmpleadoCache.h"
 #include "EmpleadoRepositorio.h"
 
@@ -14,5 +16,6 @@ public:
 	EmpleadoService(EmpleadoCache& cache, EmpleadoRepositorio& repositorio);
 	std::optional<Empleado> read(int id);
 	bool create(const Empleado& e);
+	std::vector<Empleado> select();
 	~EmpleadoService();
 };

@@ -25,6 +25,10 @@ std::optional<Empleado> EmpleadoService::read(int id)
 	}
 }
 
+std::vector<Empleado> EmpleadoService::select()
+{
+	return this->repositorio.select();
+}
 
 bool EmpleadoService::create(const Empleado& e)
 {
