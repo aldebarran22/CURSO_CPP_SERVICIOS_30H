@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mysql2", "mysql\mysql.vcxpr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "redis", "redis\redis.vcxproj", "{0284B4DB-5694-4D91-B0B2-8D64A97B2ECA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "postgresql", "postgresql\postgresql.vcxproj", "{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{0284B4DB-5694-4D91-B0B2-8D64A97B2ECA}.Release|x64.Build.0 = Release|x64
 		{0284B4DB-5694-4D91-B0B2-8D64A97B2ECA}.Release|x86.ActiveCfg = Release|Win32
 		{0284B4DB-5694-4D91-B0B2-8D64A97B2ECA}.Release|x86.Build.0 = Release|Win32
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Debug|x64.ActiveCfg = Debug|x64
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Debug|x64.Build.0 = Debug|x64
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Debug|x86.Build.0 = Debug|Win32
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Release|x64.ActiveCfg = Release|x64
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Release|x64.Build.0 = Release|x64
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Release|x86.ActiveCfg = Release|Win32
+		{11F00F6E-16CE-4D2E-A196-5EEE7AB165BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
