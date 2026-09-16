@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_dev
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: empresa3
+      POSTGRES_USER: antonio
+      POSTGRES_PASSWORD: antonio
+    volumes:
+      - pg_data:/var/lib/progresql/data
+      - ./empresa3_pg.sql:empresa3_pg.sql
+    
+volumes:
+  pg_data:
