@@ -8,6 +8,8 @@
 
 #include "Empleado.h"
 #include "EmpleadoRepositorio.h"
+#include "EmpleadoCache.h"
+#include "EmpleadoService.h"
 
 
 void testConexion() {
