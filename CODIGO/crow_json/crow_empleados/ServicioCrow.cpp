@@ -49,14 +49,31 @@ void ServicioCrow::run()
 
 	CROW_ROUTE(app, "/empleados/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
 	
-		auto empleado = this->service.read(id);
-		if (empleado) {
-			json doc = empleado;
-			return crow::response(doc.dump());
+		try {
+			auto empleado = this->service.read(id);
+			if (empleado) {
+				json doc = empleado;
+				return crow::response(doc.dump());
 
+			}
+			else {
+				return crow::response(404, std::string("El empleado: " + std::to_string(id) + " no existe"));
+			}
 		}
-		else {
-			return crow::response(404, std::string("El empleado: " + std::to_string(id) + " no existe"));
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
+		}
+	});
+
+	CROW_ROUTE(app, "/empleados").methods(crow::HTTPMethod::GET)([this]() {
+		try {
+			std::vector<Empleado> empleados = this->service.select();
+			json doc = empleados;
+
+			return crow::response(doc.dump(4));
+		}
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
 		}
 	});
 
