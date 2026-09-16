@@ -25,13 +25,14 @@ void testConexion() {
 			else {
 				// Imprimir los resultados:
 				int n = PQntuples(res);
+				std::cout << "Resultados : " << n << std::endl;
+
 				for (int i = 0; i < n; i++) {
 					std::cout <<
-						PQgetvalue(res, i, 0) <<
-						PQgetvalue(res, i, 1) <<
+						PQgetvalue(res, i, 0) << " " <<  
+						PQgetvalue(res, i, 1) << " " << 
 						PQgetvalue(res, i, 2) << std::endl;
 				}
-
 			}
 
 			PQclear(res);
