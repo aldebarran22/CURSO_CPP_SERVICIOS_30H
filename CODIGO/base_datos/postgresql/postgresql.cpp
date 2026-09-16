@@ -8,7 +8,13 @@ void testConexion() {
 	try {
 		const char* conninfo = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";
 		PGconn* conn = PQconnectdb(conninfo);
-		std::cout << "Conexion ok" << std::endl;
+
+		if (PQstatus(conn) == CONNECTION_BAD) {			
+			std::cout << "Falla conexion" << std::endl;
+		}
+		else {
+			std::cout << "Conexion ok" << std::endl;
+		}
 	}
 	catch (const std::exception& e) {
 		std::cout << "Error: " << e.what() << std::endl;
