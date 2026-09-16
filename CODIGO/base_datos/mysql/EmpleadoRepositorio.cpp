@@ -10,7 +10,7 @@ std::optional<Empleado> EmpleadoRepositorio::read(int id)
 	soci::indicator ind;
 
 	sql << "select id, nombre, cargo from empleados where id=:id", soci::use(id),
-		soci::into(emp.id), soci::into(emp.nombre), soci::into(emp.cargo);
+		soci::into(emp.id, ind), soci::into(emp.nombre), soci::into(emp.cargo);
 
 	if (ind == soci::i_null) {
 		return std::nullopt;
@@ -47,7 +47,20 @@ bool EmpleadoRepositorio::update(const Empleado& emp)
 
 std::vector<Empleado> EmpleadoRepositorio::select()
 {
-	return std::vector<Empleado>();
+	std::vector<Empleado> empleados;
+	soci::rowset<soci::row> rs = sql.prepare << "select id, nombre, cargo from empleados";
+
+	for (const auto& r : rs) {
+		Empleado e;
+
+		e.id = r.get<int>(0);
+		e.nombre = r.get<std::string>(1);
+		e.cargo = r.get<std::string>(2);
+
+		empleados.push_back(e);
+	}
+
+	return empleados;
 }
 
 EmpleadoRepositorio::~EmpleadoRepositorio()
