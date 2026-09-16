@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_cliente_cpr", "crow_cl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_crud", "crow_crud\crow_crud.vcxproj", "{B88CAF6D-356F-4109-9289-3EFE120A11BF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_empleados", "crow_empleados\crow_empleados.vcxproj", "{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{B88CAF6D-356F-4109-9289-3EFE120A11BF}.Release|x64.Build.0 = Release|x64
 		{B88CAF6D-356F-4109-9289-3EFE120A11BF}.Release|x86.ActiveCfg = Release|Win32
 		{B88CAF6D-356F-4109-9289-3EFE120A11BF}.Release|x86.Build.0 = Release|Win32
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Debug|x64.ActiveCfg = Debug|x64
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Debug|x64.Build.0 = Debug|x64
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Debug|x86.ActiveCfg = Debug|Win32
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Debug|x86.Build.0 = Debug|Win32
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Release|x64.ActiveCfg = Release|x64
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Release|x64.Build.0 = Release|x64
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Release|x86.ActiveCfg = Release|Win32
+		{F4A98005-71E8-4332-A1EC-A3DF6C35DBCB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
