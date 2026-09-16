@@ -16,10 +16,11 @@ void testConexion() {
 			std::cout << "Conexion ok" << std::endl;
 
 			// Listar los empleados:
-			PGresult* res = PQexec(conn, "select id, nombre, cargo from empleados");
+			PGresult* res = PQexec(conn, "select id, nombre, cargo from tbempleados");
 
 			if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-				std::string mensaje = PQresultErrorMessage(res);								
+				std::string mensaje = PQresultErrorMessage(res);	
+				std::cout << "Error: " << mensaje << std::endl;
 			}
 			else {
 				// Imprimir los resultados:
