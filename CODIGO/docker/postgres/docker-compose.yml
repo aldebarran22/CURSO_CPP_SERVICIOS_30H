@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: antonio
     volumes:
       - pg_data:/var/lib/progresql/data
-      - ./empresa3_pg.sql:empresa3_pg.sql
+      - ./empresa3_pg.sql:/empresa3_pg.sql
     
 volumes:
   pg_data:
