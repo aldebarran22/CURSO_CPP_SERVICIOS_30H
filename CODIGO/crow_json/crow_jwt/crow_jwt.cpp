@@ -29,11 +29,31 @@ int main()
 				return crow::response(400, "Json incorrecto. Faltan etiquetas");
 			}
 
+			// Validar user / pass:
+			if (USER == j.at("user") && PASS == j.at("pass")) {
 
+				// Generar esta el usuario validado se genera el token.
+				auto token = jwt::create().
+					set_issuer("curso c++").
+					set_payload_claim("usuario", jwt::claim(std::string(USER))).
+					set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{ 30 }).
+					sign(jwt::algorithm::hs256{ PASS });
+
+				// Generar la respuesta con el token al cliente:
+				crow::json::wvalue respuesta;
+				respuesta["token"] = token;
+				return crow::response(respuesta);
+
+			}
+			else {
+				return crow::response(403, "Se requieren credenciales");
+			}
 		}
 		catch (const std::exception& e) {
 			return crow::response(500, std::string(e.what()));
 		}
 	});
+
+	app.port(8080).multithreaded().run();
 }
 
