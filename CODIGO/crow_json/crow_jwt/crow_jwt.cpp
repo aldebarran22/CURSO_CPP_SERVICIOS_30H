@@ -36,7 +36,7 @@ int main()
 				auto token = jwt::create().
 					set_issuer("curso c++").
 					set_payload_claim("usuario", jwt::claim(std::string(USER))).
-					set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{ 30 }).
+					set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{ 10 }).
 					sign(jwt::algorithm::hs256{ PASS });
 
 				// Generar la respuesta con el token al cliente:
@@ -73,7 +73,7 @@ int main()
 			// Configurar las opciones para verificar el token:
 			auto verifier = jwt::verify()
 				.allow_algorithm(jwt::algorithm::hs256{ PASS })
-				.with_issuer("Antonio");
+				.with_issuer("curso c++");
 
 			verifier.verify(token_dec);
 

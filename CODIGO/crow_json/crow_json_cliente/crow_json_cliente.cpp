@@ -5,6 +5,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <cpr/cpr.h>
+#include <thread>
 
 // Creadenciales del usuarios:
 #define USER "admin"
@@ -29,9 +30,13 @@ int main()
 		std::string token = resp.at("token");
 		std::cout << "\n\nToken: " << token << std::endl;
 
+		std::string autorizacion = "Bearer " + token;
+
+		std::this_thread::sleep_for(std::chrono::seconds{ 12 });
+
 		auto response2 = cpr::Get(
 			cpr::Url{ "http://localhost:8080/app" },
-			cpr::Header{ {"Accept", "application/json"} }
+			cpr::Header{ {"Accept", "application/json"}, {"Authorization", autorizacion} }
 		);
 
 		std::cout << "Respuesta de app: " << response2.text << std::endl;
