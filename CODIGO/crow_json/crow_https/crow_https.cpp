@@ -3,8 +3,16 @@
 
 #include <iostream>
 
+#include <crow.h>
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    crow::SimpleApp app;
+
+    CROW_ROUTE(app, "/")([]() {
+        return "ok desde https";
+    });
+
+    app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(8443).multithreaded().run();
 }
 
