@@ -4,9 +4,25 @@
 #include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
+#include <cpr/cpr.h>
+
+// Creadenciales del usuarios:
+#define USER "admin"
+#define PASS "1234"
+
+
+using json = nlohmann::json;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	json j = { {"user", USER}, {"pass", PASS}};
+
+	auto response = cpr::Post(
+		cpr::Url {"http://localhost:8080/login"},
+		cpr::Header{{"Accept", "application/json"}},
+		cpr::Body{j.dump()}
+	);
+
+	std::cout << "Respuesta de login: " << response.text << std::endl;
 }
 
