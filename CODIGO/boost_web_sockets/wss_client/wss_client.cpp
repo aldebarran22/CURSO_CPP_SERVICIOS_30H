@@ -44,7 +44,7 @@ int main()
 
 
 		// Localizar el servidor:
-		auto const results = resolver.resolve("localhost", std::to_string(PORT);
+		auto const results = resolver.resolve("localhost", std::to_string(PORT));
 
 		// Intentar conectar con el endpoint del servidor:
 		net::connect(ws.next_layer().next_layer(), results.begin(), results.end());
