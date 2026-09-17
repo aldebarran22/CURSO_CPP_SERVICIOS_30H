@@ -15,14 +15,19 @@ using json = nlohmann::json;
 
 int main()
 {
-	json j = { {"user", USER}, {"pass", PASS}};
+	try {
+		json j = { {"user", USER}, {"pass", PASS} };
 
-	auto response = cpr::Post(
-		cpr::Url {"http://localhost:8080/login"},
-		cpr::Header{{"Accept", "application/json"}},
-		cpr::Body{j.dump()}
-	);
+		auto response = cpr::Post(
+			cpr::Url{ "http://localhost:8080/login" },
+			cpr::Header{ {"Accept", "application/json"} },
+			cpr::Body{ j.dump() }
+		);
 
-	std::cout << "Respuesta de login: " << response.text << std::endl;
+		std::cout << "Respuesta de login: " << response.text << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
+	}
 }
 
