@@ -29,6 +29,19 @@ int main()
     // Construir el pool de hilos:
     boost::asio::thread_pool pool(numHilos);
 
+    while (true) {
+        // Es un socket por cada conexion:
+        tcp::socket socket(ioc);
 
+        std::cout << "Servidor a la espera de clientes ..." << std::endl;
+
+        // Aceptar un nuevo cliente:
+        acceptor.accept(socket);
+
+        // Lanzar el hilo para atender al cliente que acaba de conectar:
+        boost::asio::post(pool, [s = std::move(socket)]() mutable {
+            do_session(std::move(s));
+        });
+    }
 }
 
