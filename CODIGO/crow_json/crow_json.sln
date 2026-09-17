@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_https", "crow_https\cr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_jwt", "crow_jwt\crow_jwt.vcxproj", "{AF90265C-DC52-43F0-8C46-98BF035445B7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crow_jwt_cliente", "crow_json_cliente\crow_json_cliente.vcxproj", "{F375985F-8530-4A71-A1C6-F830E0752EA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{AF90265C-DC52-43F0-8C46-98BF035445B7}.Release|x64.Build.0 = Release|x64
 		{AF90265C-DC52-43F0-8C46-98BF035445B7}.Release|x86.ActiveCfg = Release|Win32
 		{AF90265C-DC52-43F0-8C46-98BF035445B7}.Release|x86.Build.0 = Release|Win32
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Debug|x64.ActiveCfg = Debug|x64
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Debug|x64.Build.0 = Debug|x64
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Debug|x86.ActiveCfg = Debug|Win32
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Debug|x86.Build.0 = Debug|Win32
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Release|x64.ActiveCfg = Release|x64
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Release|x64.Build.0 = Release|x64
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Release|x86.ActiveCfg = Release|Win32
+		{F375985F-8530-4A71-A1C6-F830E0752EA8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
