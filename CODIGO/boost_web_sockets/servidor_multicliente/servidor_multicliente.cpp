@@ -54,6 +54,7 @@ private:
 
         // Url de la peticion y el metodo HTTP:
         respuesta = "URL: " + std::string(request.target()) + " Method: " + std::string(request.method_string());
+        std::cout << "Servidor recibe: " << respuesta << std::endl;
 
         // Montar la respuesta:
         response.version(request.version());
