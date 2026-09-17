@@ -19,13 +19,53 @@ namespace ssl = net::ssl;
 
 using tcp = net::ip::tcp;
 
+
+void do_session(tcp::socket socket, ssl::context& ctx)
+{
+    try {
+        // Definir el websocket: stream de tipo TCP:
+        websocket::stream<beast::ssl_stream<tcp::socket>> ws(std::move(socket), ctx);
+        ws.next_layer().handshake(ssl::stream_base::server);
+        ws.accept();
+
+        for (;;) {
+            // Buffer de E/S:
+            beast::flat_buffer buffer;
+
+            ws.read(buffer);
+            if (!ws.binary()) {
+                std::cout << "El cliente envia texto: " << beast::buffers_to_string(buffer.data()) << std::endl;
+                ws.text(ws.got_text());
+
+                // Devolver al cliente el mismo mensaje:
+                ws.write(buffer.data());
+            }
+            else {
+                std::cout << "datos en binario" << std::endl;
+            }
+        }
+    }
+    catch (const beast::system_error& se) {
+        if (se.code() != websocket::error::closed) {
+            std::cerr << "Error en la sesion: " << se.what() << std::endl;
+        }
+        else {
+            std::cout << "Cliente desconectado ... " << std::endl;
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Otro error : " << e.what() << std::endl;
+    }
+}
+
+
 int main()
 {
     // Definir el contexto de E/S:
     net::io_context ioc;
 
     // Definir el contexto SSL:
-    ssl::context ctx(ssl::context::tslv12_server);
+    ssl::context ctx(ssl::context::tlsv12_server);
 
     // Indicar cuales son los ficheros de los certificados:
     ctx.use_certificate_chain_file("..\\certificados\\cert.pem");
