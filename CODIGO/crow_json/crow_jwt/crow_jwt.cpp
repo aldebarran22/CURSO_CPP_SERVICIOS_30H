@@ -54,6 +54,43 @@ int main()
 		}
 	});
 
+	CROW_ROUTE(app, "/app").methods(crow::HTTPMethod::GET)([](const crow::request& req) {
+		try {
+			// Extraer el token de la cabecera:
+			auto auth_header = req.get_header_value("Authorization");
+			std::cout << "Authorization: " << auth_header << std::endl;
+
+			if (auth_header == "" || auth_header.substr(0, 7)!= "Bearer ") {
+				return crow::response(401, "No autorizado");
+			}
+
+			std::string token = auth_header.substr(7);
+			std::cout << "Token: " << token << std::endl;
+
+			// Decodificar el token
+			auto token_dec = jwt::decode(token);
+
+			// Configurar las opciones para verificar el token:
+			auto verifier = jwt::verify()
+				.allow_algorithm(jwt::algorithm::hs256{ PASS })
+				.with_issuer("Antonio");
+
+			verifier.verify(token_dec);
+
+			// Extraer campos:
+			std::string usuario = token_dec.get_payload_claim("usuario").as_string();
+			std::cout << "usuario: " << usuario << std::endl;
+
+			crow::json::wvalue resp;
+			resp["usuario"] = "peticion de " + usuario;
+			return crow::response(resp);
+
+		}
+		catch (const std::exception& e) {
+			return crow::response(500, std::string(e.what()));
+		}
+	});
+
 	app.port(8080).multithreaded().run();
 }
 
