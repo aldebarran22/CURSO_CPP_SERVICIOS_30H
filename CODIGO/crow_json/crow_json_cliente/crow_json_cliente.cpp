@@ -32,6 +32,7 @@ int main()
 
 		std::string autorizacion = "Bearer " + token;
 
+		std::cout << "Esperando ..." << std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds{ 12 });
 
 		auto response2 = cpr::Get(
