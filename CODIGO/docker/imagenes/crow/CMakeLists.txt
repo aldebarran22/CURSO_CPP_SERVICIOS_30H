@@ -23,7 +23,7 @@ target_link_libraries(practica4crow
    PRIVATE
       Boost::system
       Boost::thread
-      OpenSSL:SSL
+      OpenSSL::SSL
       OpenSSL::Crypto
 )
 
