@@ -5,3 +5,8 @@ docker build -t <<nombre_img>> .
 docker run --name <<nombre_cont>> <<nombre_img>>  # Ejecuta el comando por defecto
 docker run --name <<nombre_cont>> <<nombre_img>> ls -l /  # Machaca el comando por defecto y ejecuta: ls -l /
 
+Etiquetar y subir a Docker hub:
+docker tag id_img user/nombre_img:etiqueta
+
+docker login
+docker push user/nombre_img:etiqueta
