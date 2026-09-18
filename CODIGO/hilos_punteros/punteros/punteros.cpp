@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <vector>
 
 void testPunteros()
 {
@@ -32,10 +34,19 @@ void testSmartPointers()
     }
 }
 
+void testVector()
+{
+    std::vector<std::vector<int>> matriz(10, std::vector<int>(10));
+
+    matriz[3][4] = 0;
+    matriz.at(3).at(5) = 0;
+}
+
 
 int main()
 {
-    testPunteros();
-    testSmartPointers();
+    //testPunteros();
+    //testSmartPointers();
+    testVector();
 }
 
