@@ -46,10 +46,10 @@ void testVector()
 
 struct A {
     A(int a) {
-        std::cout << "Se crea el objeto…\n"; }
+        std::cout << "Se crea el objeto\n"; }
             
     ~A() {
-            std::cout << "Se elimina el objeto…\n"; }
+            std::cout << "Se elimina el objeto\n"; }
 };
 
 int main()
@@ -61,12 +61,12 @@ int main()
     // Equivalente a: std:: shared_ptr<A>(new A(10));
     auto a_ptr = std::make_shared<A >(10);
 
-    std::cout << a_ptr.use_count() << std::endl;
+    std::cout << "En main antes: " << a_ptr.use_count() << std::endl;
     {
         auto b_ptr = a_ptr;
-        std::cout << a_ptr.use_count() << std::endl;
+        std::cout << "Dentro del ambito:" << a_ptr.use_count() << std::endl;
     }
-    std::cout << "En el scope de main\n";
+    std::cout << "De nuevo en main\n";
     std::cout << a_ptr.use_count() << std::endl;
     return 0;
 }
