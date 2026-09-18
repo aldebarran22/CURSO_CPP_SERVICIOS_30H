@@ -12,4 +12,4 @@ COPY index.html /var/www/html/index.html
 EXPOSE 80
 
 # Lanzar un comando para arrancar el servidor nginx
-CMD ["nginx", "-g", "daemon off"]
+CMD ["nginx", "-g", "daemon off;"]
